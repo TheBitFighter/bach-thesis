@@ -1,0 +1,206 @@
+%%% Start of file with declaration of basic document class %%%
+\documentclass[a4paper,
+               oneside,
+               bibliography=totoc,
+               parskip=half]{scrbook}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english,ngerman]{babel}
+\selectlanguage{english}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL DECLARATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Add infos here
+%%% Title of the Thesis %%%
+\def\title{Best Title Ever!}
+
+%%% Author of the Thesis %%%
+\def\author{Fabian Philipp Posch}
+
+%%% Student ID (the one only containing numbers) %%%
+\def\studentnumber{01456625}
+
+%%% Thesis Supervisior %%%
+\def\supervisor{DDr. Brain Mouse, MSc}
+
+%%% Optional 2nd supervisior %%%
+%\def\secondsupervisor{Mag. Elmyra Duff}
+
+%%% Uncommon, but optional 3rd supervisior %%%
+%\def\thirdsupervisor{Jack L. Warner}
+
+%%% Place %%%
+\def\place{Vienna}
+
+%%% Image with signature %%%
+% Path
+\def\signaturepath{img/signature.png}
+% Position (default: 335,-18)
+\def\signaturex{335}
+\def\signaturey{-18}
+
+%%% Thesis Type %%%
+\def\type{BACHELOR THESIS}
+%\def\type{MASTER THESIS}
+
+%%% Degree %%%
+\def\degree{Bachelor of Science in Engineering}
+%\def\degree{Master of Science in Engineering}
+
+%%% Degree Program %%%
+\def\degreeprog{Bachelor Computer Engineering}
+%\def\degreeprog{Bachelor Information and Communication Systems and Services}
+
+
+%%%%% MISC %%%%%
+
+%%% Use "new" template cover (uncomment for "old" blue FH waves cover) %%%
+\def\covernew{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGES & OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add global style definitions
+\input{style/global.tex}
+
+%%% Package(s) containing sets of mathematical symbols %%%
+\usepackage{amsmath,amssymb,amsfonts,amstext}
+
+%%% Package to enable hyperrefs incl. color highlighting %%%
+% Refer to ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/hyperref/doc/options.pdf
+\usepackage[colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=twblue,
+    bookmarks=true,
+    bookmarksopen=true,
+    bookmarksopenlevel=3,
+    plainpages=false,
+    pdfpagelabels=true]{hyperref}
+
+%%% Package to maintain and use acronyms %%%
+\usepackage[printonlyused]{acronym}
+
+%%% Package to generate blindtext (for a preliminary "look and feel") %%%
+\usepackage{blindtext}
+
+%%% Package to (more or less) optimally place figures, tables, etc. %%%
+\usepackage{float}
+
+%%% Packages to support multi-rows/columns in tables %%%
+\usepackage{multirow}
+\usepackage{multicol}
+
+%%% Package to use helvetica fonts for text formatting %%%
+%\usepackage{helvet}
+
+%%% Package to define caption style of images, tables, etc. %%%
+\usepackage{caption}
+% Caption of tables should be left aligned (instead of centered)
+\captionsetup[table]{singlelinecheck=false}
+
+%%% Package to append pages of an existing PDF document %%%
+\usepackage{pdfpages}
+
+%%% Package for easier referencing (\cref{} & \Cref{}) %%%%
+% Alternatively, you can have a look at autoref
+\usepackage[english]{cleveref}
+% Define lables for listings
+\crefname{lstlisting}{listing}{listings}
+\Crefname{lstlisting}{Listing}{Listings}
+
+%%% Package to allow combining several images to own figure %%%
+\usepackage{subfig}
+%%% Package  for various text symbols such as degree, euro, etc. %%%
+\usepackage{textcomp}
+%%% Enhancement for footnote related stuff (e.g. footref) %%%
+\usepackage{footmisc}
+%%% Enhanced enumeration (e.g., inline, resume, etc.) %%%
+\usepackage[inline]{enumitem}
+
+%%% Additional (helpful) stuff %%%
+% Extended listing definitions (incl. syntax highlighting styles)
+\input{style/listings.tex}
+% Load global definitions (incl. e.g., own commands)
+\input{global_defines.tex}
+
+% Load subfile package at the end to enable per fiel compilation
+\graphicspath{{img/}}
+\usepackage{xr}
+\usepackage{subfiles}
+\externaldocument[]{\subfix{bachelor_paper.tex}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% START OF THE ACTUAL DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+    % Include cover page %
+    \input{style/cover_page.tex}
+    \newpage
+
+    % Include declaration of authority %
+    \input{style/declaration.tex}
+    \newpage
+
+    % Include German abstract (Kurzfassung) %
+    \subfile{abstract_german.tex}
+    \newpage
+
+    % Inglude English abstract %
+    \subfile{abstract_english.tex}
+    \newpage
+
+    % Include Acknowledgements %
+    \subfile{acknowledgements.tex}
+    \newpage
+
+    % Print table of contents %
+    \currentpdfbookmark{Contents}{chap:contents}
+    \label{chap:contents}
+    \addtocontents{toc}{\protect\thispagestyle{empty}}
+    \pagestyle{empty}
+    \tableofcontents\thispagestyle{empty}
+    \newpage
+
+    % Initiate header and footer (as defined above) %
+    \pagestyle{scrheadings}
+    % Start page counting here with 1 %
+    \setcounter{page}{1}
+
+    %%%%% MAIN CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Add content here
+    \subfile{content/00-transcript.tex}
+    \subfile{content/01-intro.tex}
+    %\input{content/02-theory.tex}
+    %\input{content/03-practical.tex}
+    %\input{content/04-results.tex}
+    %\input{content/05-conclusion.tex}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \newpage
+
+    % Include Bibliography ... %
+    \bibliographystyle{IEEEtran}
+    \bibliography{bibliography}
+
+    % Include List of Figures %
+    \addcontentsline{toc}{chapter}{\nonumberline List of Figures}
+    \listoffigures
+
+    % Include List of Tables %
+    \addcontentsline{toc}{chapter}{\nonumberline List of Tables}
+    \listoftables
+
+    % Include List of Listings %
+    \renewcommand\lstlistlistingname{List of Listings}
+    \addcontentsline{toc}{chapter}{\nonumberline List of Listings}
+    \lstlistoflistings
+
+    \subfile{abbreviations.tex}
+
+    %%%%% APPENDIX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Add content here
+    \appendix
+    \subfile{content/A-how_to.tex}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
