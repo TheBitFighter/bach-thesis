@@ -24,4 +24,5 @@
 **/*.glsdefs
 **/*.bak
 **/*~
+content/bibliography.bib
 bachelor_paper.pdf

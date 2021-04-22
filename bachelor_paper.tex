@@ -85,6 +85,9 @@
 %%% Package to generate blindtext (for a preliminary "look and feel") %%%
 \usepackage{blindtext}
 
+%%% Package to fix citing numeration
+\usepackage{cite}
+
 %%% Package to (more or less) optimally place figures, tables, etc. %%%
 \usepackage{float}
 
@@ -130,12 +133,20 @@
 \usepackage{xr}
 \usepackage{subfiles}
 \externaldocument[]{\subfix{bachelor_paper.tex}}
+\def\biblio{\bibliographystyle{IEEEtran}\bibliography{bibliography}}
+\def\abrimport{\subfile{abbreviations.tex}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% START OF THE ACTUAL DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+
+    % Fix bibliography stuff with subfiles
+    \def\biblio{}
+    \def\abrimport{}
+
     % Include cover page %
     \input{style/cover_page.tex}
     \newpage

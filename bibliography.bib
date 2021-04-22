@@ -1,14 +1,454 @@
-% Encoding: windows-1252
 
-@Book{adams2007hitchhiker,
-  title     = {{The Hitchhiker's Guide to the Galaxy}},
-  publisher = {{Random House Publishing Group}},
-  year      = {2007},
-  author    = {Adams, Douglas},
-  isbn      = {9780307417138},
+@misc{ARMEmbeddedTrace,
+  title = {{{ARM Embedded Trace Macrocell Architecture Specification ETMv4}}.0 to {{ETMv4}}.2},
+  file = {/home/fabian/Zotero/storage/66HYSIHL/ARM Embedded Trace Macrocell Architecture Specific.pdf},
+  language = {en}
 }
 
-@Comment{jabref-meta: databaseType:bibtex;}
+@inproceedings{barrosoMemorySystemCharacterization1998,
+  title = {Memory System Characterization of Commercial Workloads},
+  booktitle = {Proceedings. 25th {{Annual International Symposium}} on {{Computer Architecture}} ({{Cat}}. {{No}}.{{98CB36235}})},
+  author = {Barroso, L. A. and Gharachorloo, K. and Bugnion, E.},
+  year = {1998},
+  month = jul,
+  pages = {3--14},
+  issn = {1063-6897},
+  doi = {10.1109/ISCA.1998.694758},
+  abstract = {This paper presents a detailed performance study of three important classes of commercial workloads: online transaction processing (OLTP), decision support systems (DSS), and Web index search. We use the Oracle commercial database engine for our OLTP and DSS workloads, and the AltaVista search engine for our Web index search workload. This study characterizes the memory system behavior of these workloads through a large number of architectural experiments on Alpha multiprocessors augmented with full system simulations to determine the impact of architectural trends. We also identify a set of simplifications that make these workloads more amenable to monitoring and simulation without affecting representative memory system behavior. We observe that systems optimized for OLTP versus DSS and index search workloads may lead to diverging designs, specifically in the size and speed requirements for off-chip caches.},
+  file = {/home/fabian/Zotero/storage/SBZYLG93/Barroso et al_1998_Memory system characterization of commercial workloads.pdf;/home/fabian/Zotero/storage/V8RWET4E/694758.html},
+  keywords = {Alpha multiprocessors,AltaVista search engine,Application software,commercial workloads,database management systems,Databases,decision support systems,Decision support systems,Delay,Design engineering,Design optimization,Engines,full system simulations,Laboratories,memory system behavior,memory system characterization,monitoring,online transaction processing,Oracle commercial database engine,outdated,parallel architectures,performance study,representative memory system behavior,shared memory systems,simulation,Technological innovation,transaction processing,Web index search,Web server}
+}
 
-% This file was created with JabRef 2.10.
-% Encoding: Cp1252
+@inproceedings{bucekSPECCPU2017NextGeneration2018,
+  title = {{{SPEC CPU2017}}: {{Next}}-{{Generation Compute Benchmark}}},
+  shorttitle = {{{SPEC CPU2017}}},
+  booktitle = {Companion of the 2018 {{ACM}}/{{SPEC International Conference}} on {{Performance Engineering}}},
+  author = {Bucek, James and Lange, Klaus-Dieter and {v. Kistowski}, J{\'o}akim},
+  year = {2018},
+  month = apr,
+  pages = {41--42},
+  publisher = {{ACM}},
+  address = {{Berlin Germany}},
+  doi = {10.1145/3185768.3185771},
+  abstract = {Description of the new features of the SPEC CPU2017 industry standard benchmark and its metric calculations.},
+  file = {/home/fabian/Zotero/storage/H44QRAUE/Bucek et al. - 2018 - SPEC CPU2017 Next-Generation Compute Benchmark.pdf},
+  isbn = {978-1-4503-5629-9},
+  language = {en}
+}
+
+@inproceedings{deckerRapidlyAdjustableNonintrusive2017,
+  title = {Rapidly {{Adjustable Non}}-Intrusive {{Online Monitoring}} for {{Multi}}-Core {{Systems}}},
+  booktitle = {Formal {{Methods}}: {{Foundations}} and {{Applications}}},
+  author = {Decker, Normann and Gottschling, Philip and Hochberger, Christian and Leucker, Martin and Scheffel, Torben and Schmitz, Malte and Weiss, Alexander},
+  editor = {Cavalheiro, Simone and Fiadeiro, Jos{\'e}},
+  year = {2017},
+  pages = {179--196},
+  publisher = {{Springer International Publishing}},
+  address = {{Cham}},
+  doi = {10.1007/978-3-319-70848-5_12},
+  abstract = {This paper presents an approach for rapidly adjustable embedded trace online monitoring of multi-core systems, called RETOM. Today, most commercial multi-core SoCs provide accurate runtime information through an embedded trace unit without affecting program execution. Available debugging solutions can use it to reconstruct the run offline, but usually for up to a few seconds only. RETOM employs a novel online reconstruction technique that makes the program run available outside the SoC and allows for evaluating a specification formulated in the stream-based specification language TeSSLa in real time. The necessary computing performance is provided by an FPGA-based event processing system. In contrast to other hardware-based runtime verification techniques, changing the specification requires no circuit synthesis and thus seconds rather than minutes or hours. Therefore, iterated testing and property adjustment during development and debugging becomes feasible while preserving the option of arbitrarily extending observation time, which may be necessary to detect rarely occurring errors. Experiments show the feasibility of the approach.},
+  file = {/home/fabian/Zotero/storage/BMQDH3XK/Decker et al_2017_Rapidly Adjustable Non-intrusive Online Monitoring for Multi-core Systems.pdf},
+  isbn = {978-3-319-70848-5},
+  language = {en},
+  series = {Lecture {{Notes}} in {{Computer Science}}}
+}
+
+@inproceedings{dengFlexibleEfficientInstructionGrained2010,
+  title = {Flexible and {{Efficient Instruction}}-{{Grained Run}}-{{Time Monitoring Using On}}-{{Chip Reconfigurable Fabric}}},
+  booktitle = {2010 43rd {{Annual IEEE}}/{{ACM International Symposium}} on {{Microarchitecture}}},
+  author = {Deng, D. Y. and Lo, D. and Malysa, G. and Schneider, S. and Suh, G. E.},
+  year = {2010},
+  month = dec,
+  pages = {137--148},
+  issn = {2379-3155},
+  doi = {10.1109/MICRO.2010.17},
+  abstract = {This paper proposes Flex Core, a hybrid processor architecture where an on-chip reconfigurable fabric (FPGA) is tightly coupled with the main processing core. Flex Core provides an efficient platform that can support a broad range of run-time monitoring and bookkeeping techniques. Unlike using custom hardware, which is more efficient but often extremely difficult and expensive to incorporate into a modern microprocessor, the Flex Core architecture allows parallel monitoring and bookkeeping functions to be dynamically added to the processing core and adapt to application needs even after the chip has been fabricated. At the same time, Flex Core is far more efficient than software implementations because its fine-grained reconfigurable architecture closely matches bit level operations of typical monitoring schemes and allows monitoring schemes to operate in parallel to the monitored core. In fact, our experimental results show that monitoring on Flex Core can almost match the performance of full ASIC implementations. To evaluate the Flex Core architecture, we implemented an RTL prototype along with several extensions including uninitialized memory read checking, dynamic information flow tracking, array bound checking, and soft error checking. The prototypes demonstrate that the architecture can support a range of monitoring extensions with different characteristics in an efficient manner. Flex Core takes moderate silicon area and results in far better performance and energy efficiency than software.},
+  file = {/home/fabian/Zotero/storage/Z2MD4CIU/Deng et al_2010_Flexible and Efficient Instruction-Grained Run-Time Monitoring Using On-Chip.pdf;/home/fabian/Zotero/storage/PR87XFCV/5695532.html},
+  keywords = {application specific integrated circuits,ASIC,bit- level operations,bookkeeping techniques,chip fabrication,Computer architecture,Coprocessing Architecture,custom hardware,energy efficiency,Fabrics,field programmable gate arrays,fine-grained reconfigurable architecture,FlexCore architecture,FPGA,Hardware,hybrid processor architecture,instruction-grained run-time monitoring,main processing core,microprocessor chips,Monitoring,multiprocessing systems,on-chip reconfigurable fabric,Prototypes,Reconfigurability,reconfigurable architectures,Registers,Reliability,RTL prototype,Security,silicon area,Software,software implementations}
+}
+
+@article{dujmovicEvolutionEvaluationSPEC1998,
+  title = {Evolution and Evaluation of {{SPEC}} Benchmarks},
+  author = {Dujmovic, Jozo J. and Dujmovic, Ivo},
+  year = {1998},
+  month = dec,
+  volume = {26},
+  pages = {2--9},
+  issn = {0163-5999},
+  doi = {10.1145/306225.306228},
+  abstract = {We present a method for quantitative evaluation of SPEC benchmarks. The method is used for the analysis of three generations of SPEC component-level benchmarks: SPEC89, SPEC92, and SPEC95. Our approach is suitable for studying (1) the redundancy between individual benchmark programs, (2) the size, completeness, density and granularity of benchmark suites, (3) the distribution of benchmark programs in a program space, and (4) benchmark suite design and evolution strategies. The presented method can be used for designing a universal benchmark suite as the next generation of SPEC benchmarks.},
+  file = {/home/fabian/Zotero/storage/7Y3NICZX/Dujmovic_Dujmovic_1998_Evolution and evaluation of SPEC benchmarks.pdf},
+  journal = {ACM SIGMETRICS Performance Evaluation Review},
+  number = {3}
+}
+
+@article{eeckhoutDesigningComputerArchitecture2003,
+  title = {Designing Computer Architecture Research Workloads},
+  author = {Eeckhout, L. and Vandierendonck, H. and Bosschere, K. De},
+  year = {2003},
+  month = feb,
+  volume = {36},
+  pages = {65--71},
+  issn = {1558-0814},
+  doi = {10.1109/MC.2003.1178050},
+  abstract = {Although architectural simulators model microarchitectures at a high abstraction level, the increasing complexity of both the microarchitectures themselves and the applications that run on them make simulator use extremely time-consuming. Simulators must execute huge numbers of instructions to create a workload representative of real applications, creating an unreasonably long simulation time and stretching the time to market. Using reduced input sets instead of reference input sets helps to solve this problem. The authors have developed a methodology that reliably quantifies program behavior similarity to verify if reduced input sets result in program behavior similar to the reference inputs.},
+  file = {/home/fabian/Zotero/storage/KHFHDEFJ/Eeckhout et al_2003_Designing computer architecture research workloads.pdf;/home/fabian/Zotero/storage/RDASW2LC/1178050.html},
+  journal = {Computer},
+  keywords = {architectural simulators,Computational modeling,computer architecture,Computer architecture,computer architecture research workloads,Costs,Data analysis,Hardware,Microarchitecture,microarchitectures,microprocessor chips,microprocessor design,Microprocessors,MinneSPEC,Performance analysis,performance evaluation,principal component analysis,program behavior,reduced input sets,reference input sets,Thumb,time to market,Time to market,virtual machines},
+  number = {2}
+}
+
+@article{eeckhoutQuantifyingImpactInput,
+  title = {Quantifying the {{Impact}} of {{Input Data Sets}} on {{Program Behavior}} and Its {{Applications}}},
+  author = {Eeckhout, Lieven and Vandierendonck, Hans},
+  pages = {33},
+  abstract = {Having a representative workload of the target domain of a microprocessor is extremely important throughout its design. The composition of a workload involves two issues: (i) which benchmarks to select and (ii) which input data sets to select per benchmark. Unfortunately, it is impossible to select a huge number of benchmarks and respective input sets due to the large instruction counts per benchmark and due to limitations on the available simulation time. In this paper, we use statistical data analysis techniques such as principal components analysis (PCA) and cluster analysis to efficiently explore the workload space. Within this workload space, different input data sets for a given benchmark can be displayed, a distance can be measured between program-input pairs that gives us an idea about their mutual behavioral differences and representative input data sets can be selected for the given benchmark. This methodology is validated by showing that program-input pairs that are close to each other in this workload space indeed exhibit similar behavior. The final goal is to select a limited set of representative benchmark-input pairs that span the complete workload space. Next to workload composition, we discuss two other possible applications, namely getting insight in the impact of input data sets on program behavior and evaluating the representativeness of sampled traces.},
+  file = {/home/fabian/Zotero/storage/GUPMWTNT/Eeckhout and Vandierendonck - Quantifying the Impact of Input Data Sets on Progr.pdf},
+  language = {en}
+}
+
+@article{fogartyOnchipSupportSoftware2013,
+  title = {On-Chip Support for Software Verification and Debug in Multi-Core Embedded Systems},
+  author = {Fogarty, Padraig and MacNamee, Ciaran and Heffernan, Donal},
+  year = {2013},
+  volume = {7},
+  pages = {56--64},
+  issn = {1751-8814},
+  doi = {10.1049/iet-sen.2011.0212},
+  abstract = {The challenges in silicon testing and debug of complex integrated circuits are well understood. Where these circuits include multiple processor cores there is also a dramatic increase in the complexity of verifying and debugging the associated software; with much of this complexity being because of the inherent lack of visibility over internal signals which integration brings. The trend to-date has been to rely upon silicon test interfaces to provide access to internal signals required for software verification and debug. However, it is questionable whether this is sufficient for real-time systems or future designs with increasing processor cores. This study examines the on-chip technology supporting software verification and debug in current designs and proposes enhancements in this area. As much of this technology is primarily intended for silicon test it is lacking in terms of I/O bandwidth, which is a significant limitation for software verification and debug. The authors propose their alternative approach of using an on-chip coprocessor and debug circuitry to address this principal limitation; and describe an embedded application where this approach was successfully applied to monitor timing requirements and detect failures. The authors also outline how this approach could be applied as an architectural solution for formal runtime verification.},
+  annotation = {\_eprint: https://ietresearch.onlinelibrary.wiley.com/doi/pdf/10.1049/iet-sen.2011.0212},
+  copyright = {\textcopyright{} 2013 The Institution of Engineering and Technology},
+  file = {/home/fabian/Zotero/storage/UCPWUXUU/Fogarty et al_2013_On-chip support for software verification and debug in multi-core embedded.pdf;/home/fabian/Zotero/storage/CCGPNG4H/iet-sen.2011.html},
+  journal = {IET Software},
+  keywords = {complex integrated circuit debugging,coprocessors,debug circuitry,embedded systems,failure detection,fault tolerant computing,formal runtime verification,integrated circuit testing,multicore embedded systems,multiple processor cores,multiprocessing systems,on-chip coprocessor,program debugging,program verification,real-time systems,silicon test interfaces,software debugging complexity,software verification,system-on-chip,timing,timing requirement monitoring},
+  language = {en},
+  number = {1}
+}
+
+@inproceedings{gajFairComprehensiveMethodology2010,
+  title = {Fair and {{Comprehensive Methodology}} for {{Comparing Hardware Performance}} of {{Fourteen Round Two SHA}}-3 {{Candidates Using FPGAs}}},
+  booktitle = {Cryptographic {{Hardware}} and {{Embedded Systems}}, {{CHES}} 2010},
+  author = {Gaj, Kris and Homsirikamol, Ekawat and Rogawski, Marcin},
+  editor = {Mangard, Stefan and Standaert, Fran{\c c}ois-Xavier},
+  year = {2010},
+  pages = {264--278},
+  publisher = {{Springer}},
+  address = {{Berlin, Heidelberg}},
+  doi = {10.1007/978-3-642-15031-9_18},
+  abstract = {Performance in hardware has been demonstrated to be an important factor in the evaluation of candidates for cryptographic standards. Up to now, no consensus exists on how such an evaluation should be performed in order to make it fair, transparent, practical, and acceptable for the majority of the cryptographic community. In this paper, we formulate a proposal for a fair and comprehensive evaluation methodology, and apply it to the comparison of hardware performance of 14 Round 2 SHA-3 candidates. The most important aspects of our methodology include the definition of clear performance metrics, the development of a uniform and practical interface, generation of multiple sets of results for several representative FPGA families from two major vendors, and the application of a simple procedure to convert multiple sets of results into a single ranking.},
+  file = {/home/fabian/Zotero/storage/N5LD6AWX/Gaj et al_2010_Fair and Comprehensive Methodology for Comparing Hardware Performance of.pdf},
+  isbn = {978-3-642-15031-9},
+  keywords = {benchmarking,FPGA,hash functions,SHA-3},
+  language = {en},
+  series = {Lecture {{Notes}} in {{Computer Science}}}
+}
+
+@article{gal-onExploringCoremarkBenchmark2012,
+  title = {Exploring Coremark a Benchmark Maximizing Simplicity and Efficacy},
+  author = {{Gal-On}, Shay and Levy, Markus},
+  year = {2012},
+  file = {/home/fabian/Zotero/storage/NCHWB2IZ/Gal-On and Levy - 2012 - Exploring coremark a benchmark maximizing simplici.pdf},
+  journal = {The Embedded Microprocessor Benchmark Consortium}
+}
+
+@article{gouldNotePerformanceProfiles2016,
+  title = {A {{Note}} on {{Performance Profiles}} for {{Benchmarking Software}}},
+  author = {Gould, Nicholas and Scott, Jennifer},
+  year = {2016},
+  month = aug,
+  volume = {43},
+  pages = {15:1--15:5},
+  issn = {0098-3500},
+  doi = {10.1145/2950048},
+  abstract = {In recent years, performance profiles have become a popular and widely used tool for benchmarking and evaluating the performance of several solvers when run on a large test set. Here we use data from a real application as well as a simple artificial example to illustrate that caution should be exercised when trying to interpret performance profiles to assess the relative performance of the solvers.},
+  file = {/home/fabian/Zotero/storage/TVEV8LFM/Gould_Scott_2016_A Note on Performance Profiles for Benchmarking Software.pdf},
+  journal = {ACM Transactions on Mathematical Software},
+  keywords = {benchmarking,Performance profiles,testing},
+  number = {2}
+}
+
+@inproceedings{hauserGarpMIPSProcessor1997,
+  title = {Garp: A {{MIPS}} Processor with a Reconfigurable Coprocessor},
+  shorttitle = {Garp},
+  booktitle = {Proceedings. {{The}} 5th {{Annual IEEE Symposium}} on {{Field}}-{{Programmable Custom Computing Machines Cat}}. {{No}}.{{97TB100186}})},
+  author = {Hauser, J. R. and Wawrzynek, J.},
+  year = {1997},
+  month = apr,
+  pages = {12--21},
+  doi = {10.1109/FPGA.1997.624600},
+  abstract = {Typical reconfigurable machines exhibit shortcomings that make them less than ideal for general-purpose computing. The Garp Architecture combines reconfigurable hardware with a standard MIPS processor on the same die to retain the better features of both. Novel aspects of the architecture are presented, as well as a prototype software environment and preliminary performance results. Compared to an UltraSPARC, a Garp of similar technology could achieve speedups ranging from a factor of 2 to as high as a factor of 24 for some useful applications.},
+  file = {/home/fabian/Zotero/storage/YZCD4763/Hauser_Wawrzynek_1997_Garp.pdf;/home/fabian/Zotero/storage/YHKY5ERM/624600.html},
+  keywords = {Application software,Circuits,Computer architecture,coprocessors,Coprocessors,field programmable gate arrays,Field programmable gate arrays,FPGA,Garp Architecture,general purpose computers,general-purpose computing,Hardware,instruction sets,microprocessor chips,MIPS processor,performance,performance evaluation,prototype software environment,reconfigurable architectures,reconfigurable coprocessor,Reconfigurable logic,reconfigurable machines,Software performance,Software prototyping,speedups,Switches,UltraSPARC}
+}
+
+@article{henningSPECCPU2000Measuring2000,
+  title = {{{SPEC CPU2000}}: Measuring {{CPU}} Performance in the {{New Millennium}}},
+  shorttitle = {{{SPEC CPU2000}}},
+  author = {Henning, J. L.},
+  year = {2000},
+  month = jul,
+  volume = {33},
+  pages = {28--35},
+  issn = {1558-0814},
+  doi = {10.1109/2.869367},
+  abstract = {As computers and software have become more powerful, it seems almost human nature to want the biggest and fastest toy you can afford. But how do you know if your toy is tops? Even if your application never does any I/O, it's not just the speed of the CPU that dictates performance. Cache, main memory, and compilers also play a role. Software applications also have differing performance requirements. So whom do you trust to provide this information? The Standard Performance Evaluation Corporation (SPEC) is a nonprofit consortium whose members include hardware vendors, software vendors, universities, customers, and consultants. SPEC's mission is to develop technically credible and objective component- and system-level benchmarks for multiple operating systems and environments, including high-performance numeric computing, Web servers, and graphical subsystems. On 30 June 2000, SPEC retired the CPU95 benchmark suite. Its replacement is CPU2000, a new CPU benchmark suite with 19 applications that have never before been in a SPEC CPU suite. The article discusses how SPEC developed this benchmark suite and what the benchmarks do.},
+  file = {/home/fabian/Zotero/storage/CNA9DDV7/Henning_2000_SPEC CPU2000.pdf;/home/fabian/Zotero/storage/U6LSZDYE/869367.html},
+  journal = {Computer},
+  keywords = {Application software,Benchmark testing,computer evaluation,CPU benchmark suite,CPU performance measurement,CPU95 benchmark suite,DP industry,Educational institutions,graphical subsystems,Hardware,high-performance numeric computing,Humans,multiple operating systems,nonprofit consortium,Operating systems,performance evaluation,performance requirements,program testing,Software performance,Software standards,SPEC CPU2000,Standard Performance Evaluation Corporation,system-level benchmarks,Web server,Web servers,Workstations},
+  number = {7}
+}
+
+@article{jararwehHardwarePerformanceEvaluation2012,
+  title = {Hardware {{Performance Evaluation}} of {{SHA}}-3 {{Candidate Algorithms}}},
+  author = {Jararweh, Yaser and Tawalbeh, Lo'ai and Tawalbeh, Hala and Moh'd, Abidalrahman},
+  year = {2012},
+  month = apr,
+  volume = {2012},
+  publisher = {{Scientific Research Publishing}},
+  doi = {10.4236/jis.2012.32008},
+  abstract = {Secure Hashing Algorithms (SHA) showed a significant importance in today's information security applications. The National Institute of Standards and Technology (NIST), held a competition of three rounds to replace SHA1 and SHA2 with the new SHA-3, to ensure long term robustness of hash functions. In this paper, we present a comprehensive hardware evaluation for the final round SHA-3 candidates. The main goal of providing the hardware evaluation is to: find the best algorithm among them that will satisfy the new hashing algorithm standards defined by the NIST. This is based on a comparison made between each of the finalists in terms of security level, throughput, clock frequancey, area, power consumption, and the cost. We expect that the achived results of the comparisons will contribute in choosing the next hashing algorithm (SHA-3) that will support the security requirements of applications in todays ubiquitous and pervasive information infrastructure.},
+  file = {/home/fabian/Zotero/storage/PUUJ89CY/Jararweh et al_2012_Hardware Performance Evaluation of SHA-3 Candidate Algorithms.pdf;/home/fabian/Zotero/storage/ZYIFGEVQ/1-7800059_18767.html},
+  language = {en}
+}
+
+@inproceedings{jindalDHOOMReusingDesignforDebug2019,
+  title = {{{DHOOM}}: {{Reusing Design}}-for-{{Debug Hardware}} for {{Online Monitoring}}},
+  shorttitle = {{{DHOOM}}},
+  booktitle = {2019 56th {{ACM}}/{{IEEE Design Automation Conference}} ({{DAC}})},
+  author = {Jindal, N. and Chandran, S. and Panda, P. R. and Prasad, S. and Mitra, A. and Singhal, K. and Gupta, S. and Tuli, S.},
+  year = {2019},
+  month = jun,
+  pages = {1--6},
+  issn = {0738-100X},
+  abstract = {Runtime verification employs dedicated hardware or software monitors to check whether program properties hold at runtime. However, these monitors often incur high area and performance overheads depending on whether they are implemented in hardware or software. In this work, we propose DHOOM, an architectural framework for runtime monitoring of program assertions, which exploits the combination of a reconfigurable fabric present alongside a processor core with the vestigial on-chip Design-for-Debug hardware. This combination of hardware features allows DHOOM to minimize the overall performance overhead of runtime verification, even when subject to a given area constraint. We present an algorithm for dynamically selecting an effective subset of assertion monitors that can be accommodated in the available programmable fabric, while instrumenting the remaining assertions in software. We show that our proposed strategy, while respecting area constraints, reduces the performance overhead of runtime verification by up to 32\% when compared with a baseline of software-only monitors.},
+  file = {/home/fabian/Zotero/storage/PR3NUXL9/Jindal et al. - 2019 - DHOOM Reusing Design-for-Debug Hardware for Onlin.pdf;/home/fabian/Zotero/storage/EP3Z3VUH/8806785.html},
+  keywords = {Design-for-Debug Hardware,DH-HEMTs,DHOOM,Fabrics,Hardware,Monitoring,online monitoring,program debugging,program properties,program verification,reconfigurable architectures,reconfigurable fabric,Registers,Runtime,runtime monitoring,Runtime Monitoring,runtime verification,Software,vestigial on-chip design-for-debug hardware}
+}
+
+@article{kaoHardwareApproachRealTime2007,
+  title = {A {{Hardware Approach}} to {{Real}}-{{Time Program Trace Compression}} for {{Embedded Processors}}},
+  author = {Kao, C. and Huang, S. and Huang, I.},
+  year = {2007},
+  month = mar,
+  volume = {54},
+  pages = {530--543},
+  issn = {1558-0806},
+  doi = {10.1109/TCSI.2006.887613},
+  abstract = {Collecting the program execution traces at full speed is essential to the analysis and debugging of real-time software behavior of a complex system. However, the generation rate and the size of real-time program traces are so huge such that real-time program tracing is often infeasible without proper hardware support. This paper presents a hardware approach to compress program execution traces in real time in order to reduce the trace size. The approach consists of three modularized phases: 1) branch/target filtering; 2) branch/target address encoding; 3) Lempel-Ziv (LZ)-based data compression. A synthesizable RTL code for the proposed hardware is constructed to analyze the hardware cost and speed and typical multimedia benchmarks are used to measure the compression results. The results show that our hardware is capable of real-time compression and achieving compression ratio of 454:1, far better than 5:1 achieved by typical existing hardware approaches. Furthermore, our modularized approach makes it possible to trade off between the hardware cost (typically from 1 to 50K gates) and the achievable compression ratio (typically from 5:1 to 454:1)},
+  file = {/home/fabian/Zotero/storage/42S7DT2X/kao2007.pdf;/home/fabian/Zotero/storage/QR4M24R8/4126796.html},
+  journal = {IEEE Transactions on Circuits and Systems I: Regular Papers},
+  keywords = {Address trace,branch/target address encoding,branch/target filtering,compressor,Computer science,Costs,Data acquisition,data compression,Data compression,debugging,done,embedded processors,embedded systems,Encoding,Filtering,Hardware,hardware-software codesign,Lempel-Ziv-based data compression,microprocessor,microprocessor chips,Microprocessors,program execution traces,real time,Real time systems,real-time program trace compression,RTL code,Software debugging},
+  number = {3}
+}
+
+@inproceedings{liTracebasedMicroarchitecturelevelDiagnosis2008,
+  title = {Trace-Based Microarchitecture-Level Diagnosis of Permanent Hardware Faults},
+  booktitle = {2008 {{IEEE International Conference}} on {{Dependable Systems}} and {{Networks With FTCS}} and {{DCC}} ({{DSN}})},
+  author = {Li, M. and Ramachandran, P. and Sahoo, S. K. and Adve, S. V. and Adve, V. S. and {Yuanyuan Zhou}},
+  year = {2008},
+  month = jun,
+  pages = {22--31},
+  issn = {2158-3927},
+  doi = {10.1109/DSN.2008.4630067},
+  abstract = {As devices continue to scale, future shipped hardware will likely fail due to in-the-field hardware faults. As traditional redundancy-based hardware reliability solutions that tackle these faults will be too expensive to be broadly deployable, recent research has focused on low-overhead reliability solutions. One approach is to employ low-overhead (ldquoalways-onrdquo) detection techniques that catch high-level symptoms and pay a higher overhead for (rarely invoked) diagnosis. This paper presents trace-based fault diagnosis, a diagnosis strategy that identifies permanent faults in microarchitectural units by analyzing the faulty corepsilas instruction trace. Once a fault is detected, the faulty core is rolled back and re-executes from a previous checkpoint, generating a faulty instruction trace and recording the microarchitecture-level resource usage. A diagnosis process on another fault-free core then generates a fault-free trace which it compares with the faulty trace to identify the faulty unit. Our result shows that this approach successfully diagnoses 98\% of the faults studied and is a highly robust and flexible way for diagnosing permanent faults.},
+  file = {/home/fabian/Zotero/storage/MBIFEG86/Li et al. - 2008 - Trace-based microarchitecture-level diagnosis of p.pdf;/home/fabian/Zotero/storage/87EIQKQJ/4630067.html},
+  keywords = {checkpointing,Circuit faults,computer architecture,fault diagnosis,Fault diagnosis,fault tolerance,Hardware,instruction sets,instruction trace-based microarchitecture-level fault diagnosis,logic design,logic testing,Microarchitecture,microarchitecture-level resource usage,microprocessor chips,Microprogramming,permanent hardware fault,processor-level redundancy-based hardware reliability solution,Radiation detectors,Registers}
+}
+
+@article{macnameeEmergingOnshipDebugging2000,
+  title = {Emerging On-Ship Debugging Techniques for Real-Time Embedded Systems},
+  author = {MacNamee, C. and Heffernan, D.},
+  year = {2000},
+  month = dec,
+  volume = {11},
+  pages = {295--303},
+  publisher = {{IET Digital Library}},
+  issn = {1741-0460},
+  doi = {10.1049/cce:20000608},
+  abstract = {The increased clock frequencies and higher integration levels of today\&apos;s high-performance embedded microcontrollers have led to the widespread incorporation of on-chip debugging logic into new microcontroller chip designs. The newly defined standard for embedded system debugging, the IEEE-ISTO Nexus 5001 Forum Standard for a Global Embedded Debug Interface, is introduced and is related to the test and debugging requirements of development engineers.},
+  file = {/home/fabian/Zotero/storage/VIL2NKDN/MacNamee_Heffernan_2000_Emerging on-ship debugging techniques for real-time embedded systems.pdf;/home/fabian/Zotero/storage/CD39R2IH/cce_20000608.html},
+  journal = {Computing \&amp; Control Engineering Journal},
+  language = {en},
+  number = {6}
+}
+
+@inproceedings{mayerDebugSupportCalibration2005,
+  title = {Debug Support, Calibration and Emulation for Multiple Processor and Powertrain Control {{SoCs}} [Automotive Applications]},
+  booktitle = {Design, {{Automation}} and {{Test}} in {{Europe}}},
+  author = {Mayer, A. and Siebert, H. and {McDonald-Maier}, K. D.},
+  year = {2005},
+  month = mar,
+  pages = {148-152 Vol. 3},
+  issn = {1558-1101},
+  doi = {10.1109/DATE.2005.109},
+  abstract = {The introduction of complex SoCs with multiple processor cores presents new development challenges, such that development support is now a decisive factor when choosing a system-on-chip (SoC). The presented development support strategy addresses the challenges using both architecture and technology approaches. The multi-core debug support (MCDS) architecture provides flexible triggering using cross triggers and a multiple core break and suspend switch. Temporal trace ordering is guaranteed down to cycle level by on-chip time stamping. The package sized-ICE (PSI) approach is a novel method of including trace buffers, overlay memories, processing resources and communication interfaces without changing device behavior. PSI requires no external emulation box, as the debug host interfaces directly with the SoC using a standard interface.},
+  file = {/home/fabian/Zotero/storage/SNW3FSKR/Mayer et al_2005_Debug support, calibration and emulation for multiple processor and powertrain.pdf;/home/fabian/Zotero/storage/D3DZ5NPA/1395811.html},
+  keywords = {automotive electronic systems,automotive electronics,Automotive engineering,calibration,Calibration,circuit emulation,communication interfaces,Control systems,cross triggers,cycle level temporal trace ordering,debug host interface,development support,development systems,Emulation,flexible triggering,Ice,in-circuit emulators,logic testing,MCDS,Mechanical power transmission,multiple core break/suspend switch,multiple core debug support,multiple processor cores,multiprocessing systems,on-chip debug support circuits,on-chip time stamping,overlay memories,package sized-ICE,powertrain control SoC,Process control,processing resources,Production systems,program debugging,Switches,system calibration,System-on-a-chip,system-on-chip,trace buffers}
+}
+
+@misc{MPC555User2000,
+  title = {{{MPC}} 555 {{User}}'s {{Manual Section}} 21, {{Development Support}}},
+  year = {2000},
+  month = oct,
+  publisher = {{Freescale Semiconductor}},
+  file = {/home/fabian/Zotero/storage/LGHANBH3/MPC555UM.pdf},
+  language = {English}
+}
+
+@misc{NiosIIClassic2016,
+  title = {Nios {{II Classic Processor Reference Guide Section}} 2, {{Prozessor Architecture}}},
+  year = {2016},
+  month = oct,
+  publisher = {{Altera}},
+  file = {/home/fabian/Zotero/storage/VB3C9ULU/Nios II Classic Processor Reference Guide.pdf},
+  language = {English}
+}
+
+@inproceedings{pandaWaitDecadeDid2018,
+  title = {Wait of a {{Decade}}: {{Did SPEC CPU}} 2017 {{Broaden}} the {{Performance Horizon}}?},
+  shorttitle = {Wait of a {{Decade}}},
+  booktitle = {2018 {{IEEE International Symposium}} on {{High Performance Computer Architecture}} ({{HPCA}})},
+  author = {Panda, R. and Song, S. and Dean, J. and John, L. K.},
+  year = {2018},
+  month = feb,
+  pages = {271--282},
+  issn = {2378-203X},
+  doi = {10.1109/HPCA.2018.00032},
+  abstract = {The recently released SPEC CPU2017 benchmark suite has already started receiving a lot of attention from both industry and academic communities. However, due to the significantly high size and complexity of the benchmarks, simulating all the CPU2017 benchmarks for design trade-off evaluation is likely to become extremely difficult. Simulating a randomly selected subset, or a random input set, may result in misleading conclusions. This paper analyzes the SPEC CPU2017 benchmarks using performance counter based experimentation from seven commercial systems, and uses statistical techniques such as principal component analysis and clustering to identify similarities among benchmarks. Such analysis can reveal benchmark redundancies and identify subsets for researchers who cannot use all benchmarks in pre-silicon design trade-off evaluations. Many of the SPEC CPU2006 benchmarks have been replaced with larger and complex workloads in the SPEC CPU2017 suite. However, compared to CPU2006, it is unknown whether SPEC CPU2017 benchmarks have different performance demands or whether they stress machines differently. Additionally, to evaluate the balance of CPU2017 benchmarks, we analyze the performance characteristics of CPU2017 workloads and compare them with emerging database, graph analytics and electronic design automation (EDA) workloads. This paper provides the first detailed analysis of SPEC CPU2017 benchmark suite for the architecture community.},
+  file = {/home/fabian/Zotero/storage/IMKYFAYC/Panda et al_2018_Wait of a Decade.pdf;/home/fabian/Zotero/storage/73NW8BQQ/8327015.html},
+  keywords = {benchmark redundancies,Benchmark Redundancy Analysis,benchmark testing,Benchmark testing,C++ languages,CPU2017 workloads,EDA,electronic design automation,graph analytics,Industries,Measurement,microprocessor chips,performance evaluation,Performance Evaluation,principal component analysis,Principal component analysis,Redundancy,SPEC CPU 2017 broaden,SPEC CPU2006 benchmarks,SPEC CPU2017,SPEC CPU2017 benchmark suite,Stress}
+}
+
+@inproceedings{phansalkarMeasuringProgramSimilarity2005,
+  title = {Measuring {{Program Similarity}}: {{Experiments}} with {{SPEC CPU Benchmark Suites}}},
+  shorttitle = {Measuring {{Program Similarity}}},
+  booktitle = {{{IEEE International Symposium}} on {{Performance Analysis}} of {{Systems}} and {{Software}}, 2005. {{ISPASS}} 2005.},
+  author = {Phansalkar, A. and Joshi, A. and Eeckhout, L. and John, L. K.},
+  year = {2005},
+  month = mar,
+  pages = {10--20},
+  doi = {10.1109/ISPASS.2005.1430555},
+  abstract = {It is essential that a subset of benchmark programs used to evaluate an architectural enhancement, is well distributed within the target workload space rather than clustered in specific areas. Past efforts for identifying subsets have primarily relied on using microarchitecture-dependent metrics of program performance, such as cycles per instruction and cache miss-rate. The shortcoming of this technique is that the results could be biased by the idiosyncrasies of the chosen configurations. The objective of this paper is to present a methodology to measure similarity of programs based on their inherent microarchitecture-independent characteristics which will make the results applicable to any microarchitecture. We apply our methodology to the SPEC CPU2000 benchmark suite and demonstrate that a subset of 8 programs can be used to effectively represent the entire suite. We validate the usefulness of this subset by using it to estimate the average IPC and L1 data cache miss-rate of the entire suite. The average IPC of 8-way and 16-way issue superscalar processor configurations could be estimated with 3.9\% and 4.4\% error respectively. This methodology is applicable not only to find subsets from a benchmark suite, but also to identify programs for a benchmark suite from a list of potential candidates. Studying the four generations of SPEC CPU benchmark suites, we find that other than a dramatic increase in the dynamic instruction count and increasingly poor temporal data locality, the inherent program characteristics have more or less remained the same},
+  file = {/home/fabian/Zotero/storage/DU8ZZ39R/Phansalkar et al_2005_Measuring Program Similarity.pdf;/home/fabian/Zotero/storage/5B3KHIAD/1430555.html},
+  keywords = {Accuracy,Area measurement,benchmark testing,branch prediction,cache storage,Character generation,Data analysis,data locality,ILP,instruction level parallelism,instruction sets,L1 data cache miss-rate,Microarchitecture,microarchitecture-independent characteristics,microprocessor chips,Microprocessors,parallel architectures,Performance analysis,Process design,program similarity measurement,Space exploration,SPEC CPU benchmark suite,superscalar processor,Time measurement}
+}
+
+@book{rolstadasBenchmarkingTheoryPractice2013,
+  title = {Benchmarking \textemdash{} {{Theory}} and {{Practice}}},
+  author = {Rolstad{\aa}s, Asbj{\o}rn},
+  year = {2013},
+  month = jun,
+  publisher = {{Springer}},
+  abstract = {Lecturers and researchers in the areas of industrial engineering, quality management and business development, and middle and higher management in business or technology- oriented positions, will find this book invaluable.},
+  isbn = {978-0-387-34847-6},
+  keywords = {Business \& Economics / Management,Business \& Economics / Production \& Operations Management,Technology \& Engineering / Manufacturing,Technology \& Engineering / Mechanical},
+  language = {en}
+}
+
+@inproceedings{simUsingBenchmarkingAdvance2003,
+  title = {Using Benchmarking to Advance Research: A Challenge to Software Engineering},
+  shorttitle = {Using Benchmarking to Advance Research},
+  booktitle = {25th {{International Conference}} on {{Software Engineering}}, 2003. {{Proceedings}}.},
+  author = {Sim, S. E. and Easterbrook, S. and Holt, R. C.},
+  year = {2003},
+  month = may,
+  pages = {74--83},
+  issn = {0270-5257},
+  doi = {10.1109/ICSE.2003.1201189},
+  abstract = {Benchmarks have been used in computer science to compare the performance of computer systems, information retrieval algorithms, databases, and many other technologies. The creation and widespread use of a benchmark within a research area is frequently accompanied by rapid technical progress and community building. These observations have led us to formulate a theory of benchmarking within scientific disciplines. Based on this theory, we challenge software engineering research to become more scientific and cohesive by working as a community to define benchmarks. In support of this challenge, we present a case study of the reverse engineering community, where we have successfully used benchmarks to advance the state of research.},
+  file = {/home/fabian/Zotero/storage/G2XEFRE4/Sim et al_2003_Using benchmarking to advance research.pdf;/home/fabian/Zotero/storage/4SZGG8WB/1201189.html},
+  keywords = {benchmark testing,benchmarking,Books,Collaboration,community building,Computer languages,Computer science,computer system performance,Databases,Guidelines,Information retrieval,information retrieval algorithms,reverse engineering,Reverse engineering,reverse engineering community,Software algorithms,software engineering,Software engineering,software engineering research,technical progress}
+}
+
+@misc{TC1775TriCoreUser2002,
+  title = {{{TC1775 TriCore User}}'s {{Manual System Units Section}} 20, {{On}}-{{Chip Debug Support}}},
+  year = {2002},
+  month = may,
+  publisher = {{Infineon Technologies}},
+  file = {/home/fabian/Zotero/storage/PZQ8XLPN/TC1775.pdf},
+  language = {English}
+}
+
+@article{uhligTracedrivenMemorySimulation1997,
+  title = {Trace-Driven Memory Simulation: A Survey},
+  shorttitle = {Trace-Driven Memory Simulation},
+  author = {Uhlig, Richard A. and Mudge, Trevor N.},
+  year = {1997},
+  month = jun,
+  volume = {29},
+  pages = {128--170},
+  issn = {0360-0300},
+  doi = {10.1145/254180.254184},
+  abstract = {As the gap between processor and memory speeds continues to widen, methods for evaluating memory system designs before they are implemented in hardware are becoming increasingly important. One such method, trace-driven memory simulation, has been the subject of intense interest among researchers and has, as a result, enjoyed rapid development and substantial improvements during the past decade. This article surveys and analyzes these developments by establishing criteria for evaluating trace-driven methods, and then applies these criteria to describe, categorize, and compare over 50 trace-driven simulation tools. We discuss the strengths and weaknesses of different approaches and show that no single method is best when all criteria, including accuracy, speed, memory, flexibility, portability, expense, and ease of use are considered. In a concluding section, we examine fundamental limitations to trace-driven simulation, and survey some recent developments in memory simulation that may overcome these bottlenecks.},
+  file = {/home/fabian/Zotero/storage/YZ8MPDIB/Uhlig_Mudge_1997_Trace-driven memory simulation.pdf},
+  journal = {ACM Computing Surveys},
+  keywords = {caches,memory management,memory simulation,TLBs,trace-driven simulation},
+  number = {2}
+}
+
+@article{vandierendonckManyBenchmarksStress,
+  title = {Many {{Benchmarks Stress}} the {{Same Bottlenecks}}},
+  author = {Vandierendonck, Hans and Bosschere, Koen De},
+  pages = {9},
+  abstract = {The performance of a microprocessor is determined by many factors, including the memory hierarchy, clock frequency, organization, etc. A different trade-off between these factors is made in each microprocessor design. The performance is determined on the one hand by the bottlenecks of the machine (e.g., memory accesses, mispredicted branches, etc.) and their associated penalties and on the other hand by the frequency by which the bottlenecks occur, which is largely a property of the executed program. It is therefore important that a benchmark suite stresses all major bottlenecks in a microprocessor. If not, the benchmark suite gives a skewed view on performance. A method is presented to determine the most important bottlenecks stressed by benchmarks by analyzing their execution times. This method is applied to the SPEC CPU2000 benchmarks and it is shown that these benchmarks stress only about 4 important bottlenecks.},
+  file = {/home/fabian/Zotero/storage/ZM2B4E5J/Vandierendonck and Bosschere - Many Benchmarks Stress the Same Bottlenecks.pdf},
+  language = {en}
+}
+
+@inproceedings{vlaovicTAXITraceAnalysis2002,
+  title = {{{TAXI}}: {{Trace Analysis}} for X86 {{Interpretation}}},
+  shorttitle = {{{TAXI}}},
+  booktitle = {Proceedings. {{IEEE International Conference}} on {{Computer Design}}: {{VLSI}} in {{Computers}} and {{Processors}}},
+  author = {Vlaovic, S. and Davidson, E. S.},
+  year = {2002},
+  month = sep,
+  pages = {508--514},
+  issn = {1063-6404},
+  doi = {10.1109/ICCD.2002.1106821},
+  abstract = {Although x86 processors have been around for a long time and are the most ubiquitous processors in the world, the amount of academic research regarding details of their performance has been minimal. We introduce an x86 simulation environment, called TAXI (Trace Analysis for X86 Interpretation), and use it to present results for eight Win32 applications. In this paper, we explain the design and implementation of TAXI.},
+  file = {/home/fabian/Zotero/storage/TLJS3MAQ/Vlaovic and Davidson - 2002 - TAXI Trace Analysis for x86 Interpretation.pdf},
+  keywords = {Application software,Computational modeling,Computer architecture,Emulation,Hardware,Laboratories,Microarchitecture,performance evaluation,Software performance,Sun,TAXI,Timing,Trace Analysis for X86 Interpretation,virtual machines,Win32 applications,x86 processors,x86 simulation environment}
+}
+
+@inproceedings{williamsARMV8DebugTrace2012,
+  title = {{{ARMV8}} Debug and Trace Architectures},
+  booktitle = {Proceedings of the 2012 {{System}}, {{Software}}, {{SoC}} and {{Silicon Debug Conference}}},
+  author = {Williams, M.},
+  year = {2012},
+  month = sep,
+  pages = {1--6},
+  issn = {2114-3684},
+  abstract = {The ARM\textregistered{} processor family is the most widely used 32-bit processor family, and has consistently included debug features, starting from the ARM7TDMI\textregistered{} processor [1]. Embedded debug forms part of the ARMv7 architecture [2]. The most recent addition to the ARM architecture family is ARMv8 [3], which represents the biggest change in the architecture's history. This paper looks at the impact of the new architecture on debug and trace, and reviews some of the lessons learnt from previous architectures.},
+  file = {/home/fabian/Zotero/storage/WXQ2A5NZ/Williams - 2012 - ARMV8 debug and trace architectures.pdf;/home/fabian/Zotero/storage/4YCART7U/6338158.html},
+  keywords = {ARM processor family,ARM7TDMI processor,ARMV8 debug,Complexity theory,computer architecture,Computer architecture,debug feature,embedded debug,Hardware,microprocessor chips,program debugging,program diagnostics,Protocols,Registers,Software,software debugging,System-on-a-chip,trace architecture,word length 32 bit}
+}
+
+@inproceedings{yiStatisticallyRigorousApproach2003,
+  title = {A Statistically Rigorous Approach for Improving Simulation Methodology},
+  booktitle = {The {{Ninth International Symposium}} on {{High}}-{{Performance Computer Architecture}}, 2003. {{HPCA}}-9 2003. {{Proceedings}}.},
+  author = {Yi, J. J. and Lilja, D. J. and Hawkins, D. M.},
+  year = {2003},
+  month = feb,
+  pages = {281--291},
+  issn = {1530-0897},
+  doi = {10.1109/HPCA.2003.1183546},
+  abstract = {Due to cost, time, and flexibility constraints, simulators are often used to explore the design space when developing new processor architectures, as well as when evaluating the performance of new processor enhancements. However, despite this dependence on simulators, statistically rigorous simulation methodologies are not typically used in computer architecture research. A formal methodology can provide a sound basis for drawing conclusions gathered from simulation results by adding statistical rigor, and consequently, can increase confidence in the simulation results. This paper demonstrates the application of a rigorous statistical technique to the setup and analysis phases of the simulation process. Specifically, we apply a Plackett and Burman design to: (1) identify key processor parameters; (2) classify benchmarks based on how they affect the processor; and (3) analyze the effect of processor performance enhancements. Our technique expands on previous work by applying a statistical method to improve the simulation methodology instead of applying a statistical model to estimate the performance of the processor.},
+  file = {/home/fabian/Zotero/storage/85UTNVCD/Yi et al_2003_A statistically rigorous approach for improving simulation methodology.pdf;/home/fabian/Zotero/storage/MJT93HQG/1183546.html},
+  keywords = {Analytical models,Application software,benchmark classification,Computational modeling,computer architecture,Computer architecture,Computer simulation,Costs,key processor parameters,microprocessor chips,Performance analysis,performance evaluation,Plackett Burman design,processor performance enhancements,simulation methodology,Space exploration,statistical analysis,Statistical analysis,statistically rigorous approach,Time factors,virtual machines}
+}
+
+@inproceedings{zhangUsingHardwareFeatures2015,
+  title = {Using {{Hardware Features}} for {{Increased Debugging Transparency}}},
+  booktitle = {2015 {{IEEE Symposium}} on {{Security}} and {{Privacy}}},
+  author = {Zhang, F. and Leach, K. and Stavrou, A. and Wang, H. and Sun, K.},
+  year = {2015},
+  month = may,
+  pages = {55--69},
+  issn = {2375-1207},
+  doi = {10.1109/SP.2015.11},
+  abstract = {With the rapid proliferation of malware attacks on the Internet, understanding these malicious behaviors plays a critical role in crafting effective defense. Advanced malware analysis relies on virtualization or emulation technology to run samples in a confined environment, and to analyze malicious activities by instrumenting code execution. However, virtual machines and emulators inevitably create artifacts in the execution environment, making these approaches vulnerable to detection or subversion. In this paper, we present MALT, a debugging framework that employs System Management Mode, a CPU mode in the x86 architecture, to transparently study armored malware. MALT does not depend on virtualization or emulation and thus is immune to threats targeting such environments. Our approach reduces the attack surface at the software level, and advances state-of-the-art debugging transparency. MALT embodies various debugging functions, including register/memory accesses, breakpoints, and four stepping modes. We implemented a prototype of MALT on two physical machines, and we conducted experiments by testing an array of existing anti-virtualization, anti-emulation, and packing techniques against MALT. The experimental results show that our prototype remains transparent and undetected against the samples. Furthermore, our prototype of MALT introduces moderate but manageable overheads on both Windows and Linux platforms.},
+  file = {/home/fabian/Zotero/storage/RDHCJBK6/Zhang et al. - 2015 - Using Hardware Features for Increased Debugging Tr.pdf;/home/fabian/Zotero/storage/BJ9LIERR/7163018.html},
+  keywords = {Debugging,debugging transparency,emulation technology,Hardware,hardware features,Internet,invasive software,Kernel,Linux,Linux platforms,malicious behaviors,MALT,Malware,malware attacks,malware debugging,program debugging,rapid proliferation,Registers,Servers,SMM,software architecture,system management mode,transparency,virtual machines,virtualisation,Virtualization,virtualization technology,Windows platforms,x86 architecture}
+}
+
+
