@@ -133,8 +133,9 @@
 \usepackage{xr}
 \usepackage{subfiles}
 \externaldocument[]{\subfix{bachelor_paper.tex}}
-\def\biblio{\bibliographystyle{IEEEtran}\bibliography{bibliography}}
-\def\abrimport{\subfile{abbreviations.tex}}
+
+% Render parts of the subdocs based on standalone of combined render mode
+\def\isstandalone{\iftrue}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,8 +145,7 @@
 \begin{document}
 
     % Fix bibliography stuff with subfiles
-    \def\biblio{}
-    \def\abrimport{}
+    \def\isstandalone{\iffalse}
 
     % Include cover page %
     \input{style/cover_page.tex}
