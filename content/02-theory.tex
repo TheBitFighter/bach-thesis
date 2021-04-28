@@ -12,7 +12,18 @@ We will use the work \emph{benchmark} to refer to the latter, a (set of) program
 We will start this section by mentioning the two in scientific circles ost well known benchmark suits, the \emph{SPEC suit} and \emph{Coremark}.
 
 \subsection*{SPEC suite}
+The Standard Performance Evaluation Corporation is a non-profit corporation, founded in 1988 by Apollo, Hewlett Packard, MIPS and Sun Microsystems. \cite{dixitSPECBenchmarks1991} The idea was to provide uniform tools to evaluate performance of an artifact in a way where it could be compared to a architecturally different artifact. This however posed one of the greatest questions: What even is performance? And \todo{remove the joke} if yes, how does one measure it?\\
+The biggest problem at hand was the fundamental difference between the systems, \acs{SPEC} aims to provide. According to the official website of \acs{SPEC} CPU\rsym 2017, the current iteration of the CPU benchmark offered by \acs{SPEC}, toolsets for ARM, Power ISA, SPARC, and x86 are provided. It is possible to easily port the benchmarks for other \acs{ISA}s as well, should one need it. The benchmarks were specifically selected to be easily portable between different platforms. Modifications were added to make the code as platform agnostic, and the codepath as uniform as possible.
+
+This reveals the second issue SPEC has: The selection of benchmarks is more democratic than scientific. When a new iteration of SPEC CPU\rsym is created, SPEC puts out a call for programs representing real life workloads and meeting their portability criteria. Members of the board vote for the inclusion of a particular workload. \cite{henningSPECCPU2000Measuring2000} This means the representation of workloads is somewhat balanced, as no architecture shall be favored; however vendor interest is hardly a scientific criterion. 
+
+The SPEC suit stresses the toolchain as a whole as the programs are provided as source code. Different compiler settings thus may lead to vastly different results on a single platform. SPEC counters this by adding a full system report to the result of a benchmark run and encrypting them. \cite{bucekSPECCPU2017NextGeneration2018} Still, different toolchains may react differently to certain code patters. One of the criteria for inclusion is the predictability of the codepath, but while somewhat predictable, they are still not identical. 
+
+And finally, SPEC CPU\rsym requires the use of a Unix like \acs{OS} or Windows\footnote{For further information see \cite{SystemRequirementsCPU}} and at least 1Gbyte of \acs{RAM} for SPECrate per copy when compiled in 32 bit and up to 16Gbyte for SPECspeed. It is trivial to see how those two are knockout criteria for an \acs{MPU} focused core. Nevertheless, SPEC is easily the most well studied benchmark suit out there. It is a well put together suit of programs, meant to test the limit of high performance machines. It stresses the system as a whole in a rather extensive set of use cases. We will come back to SPEC in section \todo{blah}.
+
 \subsection*{Coremark}
+
+% Important commands: \todo{}, \acs{} for acronyms
 
 % Render bibliograhy and acronyms if rendered standalone
 \isstandalone
