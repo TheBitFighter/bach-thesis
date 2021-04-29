@@ -30,6 +30,14 @@ While Coremark takes steps to ensure portability of code between different artif
 
 We will use Coremark as a target to analyze, since it is the most used benchmark for the kind of platforms this paper is targeting.
 
+\section*{Similarity of programs}
+When looking at research done on the similarity of programs and how to measure it, two main approaches can be characterized. This distinction is not a clear one and very rough since most papers employ very different methods on the classification of \textit{difference}. 
+
+First, we feel the necessity to clarify that two programs being different does not mean they necessarily \textit{output} something different. Two different programs calculating the same result can output vastly different binaries depending on which algorithm was used. At the same time, algorithms used to calculate two different problems can produce similar binaries. So we define two programs $a,b$ to be \textit{similar}, if knowledge of the performance of $a$ on any artifact $\mathcal{A}$ allows inference of the performance of $b$ on $\mathcal{A}$ within margin of error. This is a rather strict definition and hard to actually achieve in the real world. It is however what we try to aim for with benchmarks, since the purpose is to gain knowledge about the performance of a program which, for some reason, cannot be run instead.
+
+The two main approaches to measuring the similarity of programs seen are what we refer to as \textit{hardware approach} and \textit{software approach}.\\
+The hardware approach is broad and represented by \cite{dujmovicEvolutionEvaluationSPEC1998,vandierendonckManyBenchmarksStress}.
+
 % Important commands: \todo{}, \ac{} for acronyms
 
 % Render bibliograhy and acronyms if rendered standalone
