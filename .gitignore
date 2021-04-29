@@ -25,4 +25,5 @@
 **/*.bak
 **/*~
 content/bibliography.bib
+content/*.pdf
 bachelor_paper.pdf
