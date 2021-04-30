@@ -34,13 +34,33 @@
 \usepackage{etoolbox}
 \AtBeginEnvironment{thebibliography}{\setstretch{1}\selectfont}
 
+
+%%%%%%%%% SANS SERIF %%%%%%%%%%
+
 % Enable for colored headlines
-\setkomafont{chapter}{\color{tuwblue}\mdseries\Huge}
-\setkomafont{section}{\color{tuwblue}\mdseries\huge}
-\setkomafont{subsection}{\color{tuwblue}\mdseries\Large}
-\setkomafont{subsubsection}{\bfseries\normalsize}
+%\setkomafont{chapter}{\color{tuwblue}\mdseries\Huge}
+%\setkomafont{section}{\color{tuwblue}\mdseries\huge}
+%\setkomafont{subsection}{\color{tuwblue}\mdseries\Large}
+%\setkomafont{subsubsection}{\bfseries\normalsize}
 % Define default font size and family
-\renewcommand*{\familydefault}{\sfdefault}\selectfont
+%\renewcommand*{\familydefault}{\sfdefault}\selectfont
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%   SERIF    %%%%%%%%%%
+
+% Enable for colored headlines
+\setkomafont{chapter}{\rmfamily\mdseries\Huge}
+\setkomafont{section}{\rmfamily\mdseries\huge}
+\setkomafont{subsection}{\rmfamily\mdseries\Large}
+\setkomafont{subsubsection}{\rmfamily\bfseries\normalsize}
+% Define default font size and family
+\renewcommand*{\familydefault}{\rmdefault}\selectfont
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \normalfont\selectfont
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
