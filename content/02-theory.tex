@@ -55,7 +55,30 @@ Both these papers lead to the conclusion that looking from the outside in withou
 
 \subsection{Software approach}
 	\label{ch:theory/similarity/software}
-We sort papers into the \emph{software approach} category, if they (almost)exclusively look at data gathered from analyzing program binaries. The two main publications to mention here are by Phansalkar et al. \cite{phansalkarMeasuringProgramSimilarity2005} and Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003}
+We sort papers into the \emph{software approach} category, if they (almost) exclusively look at data gathered from analyzing program binaries. The two main publications to mention here are by Phansalkar et al. \cite{phansalkarMeasuringProgramSimilarity2005} and Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003} The defining characteristic for this category is the focus on metrics inherent to the programs run on testing artifacts, instead of looking at what the hardware does. While quite similar in theory, the two papers have one key difference we will point out later. We want to focus on the metrics gathered.
+
+\subsubsection{Instruction mix} 
+This measures the relative frequency of different types of instructions appearing in a program. This splits up in computational operations (which is further split up into logical, integer, and byte manipulation and shift operations in \cite{eeckhoutDesigningComputerArchitecture2003}), memory access operations (loads and stores in case of RISC-V), and branching operations. We can use this information to infer certain possible bottlenecks in memory, computation or branching \cite{phansalkarMeasuringProgramSimilarity2005}.
+
+\subsubsection{Dynamic Basic Block Size} 
+describes a section in code with an entry (jump to) and exit point (jump from). We count the amount of instructions between those two points in code. This metric is called \textbf{sequential flow breaks} in \cite{eeckhoutDesigningComputerArchitecture2003}.
+
+\subsubsection{Branching} 
+This splits up into several different metrics, since \cite{phansalkarMeasuringProgramSimilarity2005} and \cite{eeckhoutDesigningComputerArchitecture2003} handle this quite differently. While \cite{phansalkarMeasuringProgramSimilarity2005} takes a purely software approach here, \cite{eeckhoutDesigningComputerArchitecture2003} takes something more akin to what we will describe in section \ref{ch:theory/similarity/hybrid}. The purely software based method measures \textbf{branch direction}, which refers to the amount of forward branches in context of all branch instructions (it is expected to encounter more backwards leading branch instructions), \textbf{taken branches}, which measures the percentage of branches taken to the total number of branch instructions encountered, and \textbf{forward-taken branches} which counts the percentage of forward branches under all taken branches.\\
+The more hybrid approach in \cite{eeckhoutDesigningComputerArchitecture2003} only measures \textbf{branch prediction accuracy} of their model.
+
+\subsubsection{Instruction level parallelism}
+Both papers measure \ac{ILP} in slightly different forms. \cite{eeckhoutDesigningComputerArchitecture2003} measures it directly, while \cite{phansalkarMeasuringProgramSimilarity2005} counts the average distance between instructions dependent on each other, a metric strongly related to \ac{ILP}.
+
+\subsubsection{Cache and data}
+Again, the two works handle this quite differently. Both do differentiate between instructions and data however the methods employed are either hardware or software focused. We will start with Phansalkar et al. \cite{phansalkarMeasuringProgramSimilarity2005}:
+
+For the data domain, \textbf{data temporal locality} and \textbf{data spatial locality} are measured. The former describes how many instructions pass on average between calls to the same address in memory while the latter measures often data close to a certain address is called. The equivalent metrics exist for instructions as \textbf{instruction temporal locality} and \textbf{instruction spacial locality}.
+
+
+Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003} uses a slightly more model based approach, where they map the memory usage of the measured programs to different cache configurations. They simulate, how the programs would perform on 8-, 16-, 32-, 64-, and 128-Kbyte cache, where 8- and 16-Kbyte arrangements are direct-mapped, 32- and 64-Kbyte arrangements are two-way-associative and the 128-Kbyte model is four-way-associative. The data gathered is the \textbf{miss rate} of the respective cache arrangement.
+
+
 
 \subsection{Hybrid approach}
 	\label{ch:theory/similarity/hybrid}
