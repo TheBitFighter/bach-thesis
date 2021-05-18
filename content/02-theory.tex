@@ -1,19 +1,20 @@
+%!TEX spellcheck
 \documentclass[../bachelor_paper.tex]{subfiles}
 \graphicspath{{\subfix{images/}}}
 \begin{document}
 
 \chapter{Theory}
-    \label{ch:theory}
+    \label{ch:theo}
 
 According to Wikipedia, a benchmark in computing is \emph{the act of running a computer program, a set of programs, or other operations, in order to assess the relative performance of an object, normally by running a number of standard tests and trials against it. The term benchmark is also commonly utilized for the purposes of elaborately designed benchmarking programs themselves.} \cite{BenchmarkComputing2021} \\
 We will use the work \emph{benchmark} to refer to the latter, a (set of) program(s) constructed or assembled to gage the performance of an artifact, in order to gain insight on how said artifact might perform in a real world application compared to other artifacts. It is important to note however, that interpolating hard performance numbers of a target program from the sole run of a benchmark is almost impossible since different programs have different characteristics. This problem will be the main focus of this paper.\\
 
 \section{Benchmarks}
-	\label{ch:theory/benchmarks}
+	\label{ch:theo/benc}
 We will start this section by mentioning the two in scientific circles ost well known benchmark suits, the \emph{SPEC suit} and \emph{Coremark}.
 
 \subsection{SPEC suite}
-	\label{ch:theory/benchmarks/spec}
+	\label{ch:theo/benc/spec}
 The \ac{SPEC} is a non-profit corporation, founded in 1988 by Apollo, Hewlett Packard, MIPS and Sun Microsystems. \cite{dixitSPECBenchmarks1991} The idea was to provide uniform tools to evaluate performance of an artifact in a way where it could be compared to a architecturally different artifact. This however posed one of the greatest questions: What even is performance? And \todo{remove the joke} if yes, how does one measure it?\\
 The biggest problem at hand was the fundamental difference between the systems, \ac{SPEC}\footnote{\ac{SPEC} is used for the institution and their benchmarking suite interchangeably} aims to provide. According to the official website of \ac{SPEC} CPU\rsym 2017, the current iteration of the CPU benchmark offered by \ac{SPEC}, toolsets for ARM, Power ISA, SPARC, and x86 are provided. It is possible to easily port the benchmarks for other \ac{ISA}s as well, should one need it. The benchmarks were specifically selected to be easily portable between different platforms. Modifications were added to make the code as platform agnostic, and the codepath as uniform as possible.
 
@@ -24,7 +25,7 @@ The \ac{SPEC} suit stresses the toolchain as a whole as the programs are provide
 And finally, \ac{SPEC} CPU\rsym requires the use of a Unix like \ac{OS} or Windows\footnote{For further information see \cite{SystemRequirementsCPU}} and at least 1Gbyte of \ac{RAM} for \ac{SPEC}rate per copy when compiled in 32 bit and up to 16Gbyte for \ac{SPEC}speed. It is trivial to see how those two are knockout criteria for an \ac{MPU} focused core. Nevertheless, \ac{SPEC} is easily the most well studied benchmark suit out there. It is a well put together suit of programs, meant to test the limit of high performance machines. It stresses the system as a whole in a rather extensive set of use cases. We will come back to \ac{SPEC} in section \todo{blah}.
 
 \subsection{Coremark}
-	\label{ch:theory/benchmarks/coremark}
+	\label{ch:theo/benc/core}
 While the idea of Coremark is similar to \ac{SPEC}, they approach the problem from the opposite angle. To our knowledge, not a lot of research papers have been published on Coremark, most of the information given here is from the whitepaper \cite{gal-onExploringCoremarkBenchmark2012}.
 
 Similar to \ac{SPEC}, Coremark tries to come up with a single performance number to characterize a given core. Where \ac{SPEC} consists of real world programs adapted to work as a benchmarking workload, Coremark consists of an artificially constructed workload engineered to stress different subsystems separately to the best of its abilities. The workload still stays the same for different artifacts so while a specific workload is still handled in cache on one artifact, it might be already stressing the memory system on another.
@@ -34,7 +35,7 @@ While Coremark takes steps to ensure portability of code between different artif
 We will use Coremark as a target to analyze, since it is the most used benchmark for the kind of platforms this paper is targeting.
 
 \section{Similarity of programs}
-	\label{ch:theory/similarity}
+	\label{ch:theo/simi}
 When looking at research done on the similarity of programs and how to measure it, three main approaches can be characterized. This distinction is not a clear one and very rough since most papers employ very different methods on the classification of \textit{difference}. 
 
 First, we feel the necessity to clarify that two programs being different does not mean they necessarily \textit{output} something different. Two different programs calculating the same result can generate vastly different binaries, depending on which algorithm was used. At the same time, algorithms used to calculate two different problems can produce similar binaries. So we define two programs $a,b$ to be \textit{similar}, if knowledge of the performance of $a$ on any artifact $\mathcal{A}$ allows inference of the performance of $b$ on $\mathcal{A}$ within margin of error. This is a rather strict definition and hard to actually achieve in the real world. It is however what we try to aim for with benchmarks, since their purpose is to gain knowledge about the performance of a program which, for some reason, cannot be run instead.
@@ -42,7 +43,7 @@ First, we feel the necessity to clarify that two programs being different does n
 The three main approaches to measuring the similarity of programs seen are what we refer to as \textit{hardware}, \textit{software}, and \textit{hybrid approach}. Note that these terms are rather artificial, since no paper found actually employs modified hardware. It is much rather the kind of data measured which defines the "line" between them. This distinction becomes even harder to make as the border of what can be analyzed from software beforehand and what needs to be simulated in hardware dilutes even further with hybrid approaches.
 
 \subsection{Hardware approach}
-	\label{ch:theory/similarity/hardware}
+	\label{ch:theo/simi/hard}
 We refer to these kinds of papers as \textit{hardware approach} since the data gathered mostly looks at what the hardware is doing. The two notable papers in this category are by Dujmovic, and Dujmovic \cite{dujmovicEvolutionEvaluationSPEC1998} and Vandierendonck and Bosschere \cite{vandierendonckManyBenchmarksStress}. The main idea between both of them is to measure how the hardware reacts to certain workloads. Both measure different forms of benchmark duration. 
 
 Dujmovic et.at. \cite{dujmovicEvolutionEvaluationSPEC1998} only measures the benchmark duration in time to gain insight on how different machines perform. Using this information, a set of machines is compared to each other. Two machines are seen as equal in computational power, if they outperform each other by the same ratio in two different benchmarks with equal weighting. This measuring method ignores all architectural differences of machines and just focuses on what can be measured from an outside perspective.\\
@@ -54,8 +55,8 @@ While abstracting the question at hand, they suffer from the exact same issue as
 Both these papers lead to the conclusion that looking from the outside in without any knowledge of hardware features or software composition is not sufficient for determining similarity of software.
 
 \subsection{Software approach}
-	\label{ch:theory/similarity/software}
-We sort papers into the \emph{software approach} category, if they (almost) exclusively look at data gathered from analyzing program binaries. The two main publications to mention here are by Phansalkar et al. \cite{phansalkarMeasuringProgramSimilarity2005} and Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003} The defining characteristic for this category is the focus on metrics inherent to the programs run on testing artifacts, instead of looking at what the hardware does. While quite similar in theory, the two papers have one key difference we will point out later. We want to focus on the metrics gathered.
+	\label{ch:theo/simi/soft}
+We sort papers into the \emph{software approach} category, if they (almost) exclusively look at data gathered from analyzing program binaries. The two main publications to mention here are by Phansalkar et al. \cite{phansalkarMeasuringProgramSimilarity2005} and Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003}. The defining characteristic for this category is the focus on metrics inherent to the programs run on testing artifacts, instead of looking at what the hardware does. While quite similar in theory, the two papers have one key difference in the philosophy of how to measure certain program characteristics, which will come up several times looking at what exactly is recorded.
 
 \subsubsection{Instruction mix} 
 This measures the relative frequency of different types of instructions appearing in a program. This splits up in computational operations (which is further split up into logical, integer, and byte manipulation and shift operations in \cite{eeckhoutDesigningComputerArchitecture2003}), memory access operations (loads and stores in case of RISC-V), and branching operations. We can use this information to infer certain possible bottlenecks in memory, computation or branching \cite{phansalkarMeasuringProgramSimilarity2005}.
@@ -64,7 +65,7 @@ This measures the relative frequency of different types of instructions appearin
 describes a section in code with an entry (jump to) and exit point (jump from). We count the amount of instructions between those two points in code. This metric is called \textbf{sequential flow breaks} in \cite{eeckhoutDesigningComputerArchitecture2003}.
 
 \subsubsection{Branching} 
-This splits up into several different metrics, since \cite{phansalkarMeasuringProgramSimilarity2005} and \cite{eeckhoutDesigningComputerArchitecture2003} handle this quite differently. While \cite{phansalkarMeasuringProgramSimilarity2005} takes a purely software approach here, \cite{eeckhoutDesigningComputerArchitecture2003} takes something more akin to what we will describe in section \ref{ch:theory/similarity/hybrid}. The purely software based method measures \textbf{branch direction}, which refers to the amount of forward branches in context of all branch instructions (it is expected to encounter more backwards leading branch instructions), \textbf{taken branches}, which measures the percentage of branches taken to the total number of branch instructions encountered, and \textbf{forward-taken branches} which counts the percentage of forward branches under all taken branches.\\
+This splits up into several different metrics, since \cite{phansalkarMeasuringProgramSimilarity2005} and \cite{eeckhoutDesigningComputerArchitecture2003} handle this quite differently. While \cite{phansalkarMeasuringProgramSimilarity2005} takes a purely software approach here, \cite{eeckhoutDesigningComputerArchitecture2003} takes something more akin to what we will describe in section \ref{ch:theo/simi/hybr}. The purely software based method measures \textbf{branch direction}, which refers to the amount of forward branches in context of all branch instructions (it is expected to encounter more backwards leading branch instructions), \textbf{taken branches}, which measures the percentage of branches taken to the total number of branch instructions encountered, and \textbf{forward-taken branches} which counts the percentage of forward branches under all taken branches.\\
 The more hybrid approach in \cite{eeckhoutDesigningComputerArchitecture2003} only measures \textbf{branch prediction accuracy} of their model.
 
 \subsubsection{Instruction level parallelism}
@@ -78,10 +79,27 @@ For the data domain, \textbf{data temporal locality} and \textbf{data spatial lo
 
 Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003} uses a slightly more model based approach, where they map the memory usage of the measured programs to different cache configurations. They simulate, how the programs would perform on 8-, 16-, 32-, 64-, and 128-Kbyte cache, where 8- and 16-Kbyte arrangements are direct-mapped, 32- and 64-Kbyte arrangements are two-way-associative and the 128-Kbyte model is four-way-associative. The data gathered is the \textbf{miss rate} of the respective cache arrangement.
 
+While the two papers presented here do have a lot in common, Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003} presents something a lot more application focused, something we will see a lot more of in the final category.
 
 
 \subsection{Hybrid approach}
-	\label{ch:theory/similarity/hybrid}
+	\label{ch:theo/simi/hybr}
+The most interesting approach in our opinion is taken in a paper published by Saavedera and Smith \cite{saavedraAnalysisBenchmarkCharacteristics1996}. Additionally to comparing the actual similarity of programs, they take the extra step of predicting performance of a specific workload on a specific artifact before said workload has ever been run. Their method employs a two step procedure consisting of analyzing workload and artifact separately and, as much as possible, exhaustively. For this reason, we consider this paper as its own category. Instead of looking at one half of the equation, both are considered to get a more complete image of what the hardware is going to perform like and why.
+
+For the software side, each line of Fortran code is broken up into a set of a set of sub-instructions called \ac{AbOp}. Then, a benchmark is performed, counting the executions of each line of unoptimized code. A workload is thus broken down into a vector $C_A$ which informs us about the number of occurrences of each \ac{AbOp}.
+
+For the hardware side, a \emph{machine characterizer} is run. It consists of a minimal benchmark, which measures the execution time for each \ac{AbOp} in order to determine a machine performance vector $P_M$. This tells us how fast a certain artifact can perform certain operations. The runtime for a certain workload $A$ on machine $M$ can thus be calculated:
+
+\begin{equation}
+\label{eq:theo/simi/hybr/mode}
+T_{A,M} = \sum^n_{i = 1}C_{A,i}P_{M,i} = C_A \cdot P_M
+\end{equation}
+
+However, as elegant as this approach seems, there are still shortcomings that need to be overcome: This paper mainly focuses on the Fortran language which can still be found in older programs, but has largely been replaced by more modern languages in newer projects. The model also only works with non optimized code. They have shown the possibility of predicting the runtime of optimized code as well, however the significant advancements in compiler theory in the last 25 years have lead us to not take this as given anymore. Lastly, the model completely ignores cache effects, since they were not able to observe significant influence of them. And lastly, this model falls short of modeling processors, which cannot be described using only a linear model. Superscalar processors are able to parallelize some of the given instructions making the accumulated runtime less than the sum of its parts, which defeats the linear combination assumption.
+
+\subsection{Verdict}
+	\label{ch:theo/simi/verd}
+We want to provide a model which is able to accurately predict the runtime of a certain workload only by knowing its similarity to a different workload and that workloads runtime. We want our construction to be as versatile as possible while accepting sensible tradeoffs. We feel it important to observe more than just runtime, we also know that a simple linear construction and brute force benchmarking will probably not garner the results we want on a modern processor. We will construct, what we consider, a useful combination of the mentioned approaches in section \ref{ch:prac/arch}
 
 
 % Important commands: \todo{}, \ac{} for acronyms
