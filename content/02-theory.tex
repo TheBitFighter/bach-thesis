@@ -97,8 +97,8 @@ T_{A,M} = \sum^n_{i = 1}C_{A,i}P_{M,i} = C_A \cdot P_M
 
 However, as elegant as this approach seems, there are still shortcomings that need to be overcome: This paper mainly focuses on the Fortran language which can still be found in older programs, but has largely been replaced by more modern languages in newer projects. The model also only works with non optimized code. They have shown the possibility of predicting the runtime of optimized code as well, however the significant advancements in compiler theory in the last 25 years have lead us to not take this as given anymore. Lastly, the model completely ignores cache effects, since they were not able to observe significant influence of them. And lastly, this model falls short of modeling processors, which cannot be described using only a linear model. Superscalar processors are able to parallelize some of the given instructions making the accumulated runtime less than the sum of its parts, which defeats the linear combination assumption.
 
-\subsection{Verdict}
-	\label{ch:theo/simi/verd}
+\subsection{Summary}
+	\label{ch:theo/simi/summ}
 We want to provide a model which is able to accurately predict the runtime of a certain workload only by knowing its similarity to a different workload and that workloads runtime. We want our construction to be as versatile as possible while accepting sensible tradeoffs. We feel it important to observe more than just runtime, we also know that a simple linear construction and brute force benchmarking will probably not garner the results we want on a modern processor. We will construct, what we consider, a useful combination of the mentioned approaches in section \ref{ch:prac/arch}
 
 
