@@ -20,6 +20,8 @@
 **/*.out
 **/*.toc
 **/*.ver
+**/*.fls
+**/*.fdb_latexmk
 **/*.synctex.gz
 **/*.glsdefs
 **/*.bak
@@ -27,3 +29,4 @@
 content/bibliography.bib
 content/*.pdf
 bachelor_paper.pdf
+content/old

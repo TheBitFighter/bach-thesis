@@ -1,0 +1,734 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"foo",
+				"\\footnote{text}                                   "
+			],
+			[
+				"sec",
+				"\\section{title}                                   "
+			],
+			[
+				"subse",
+				"\\subsection{title}                                "
+			],
+			[
+				"usepa",
+				"\\usepackage{package}                              "
+			],
+			[
+				"use",
+				"\\usepackage{package}                              "
+			],
+			[
+				"abstra",
+				"\\begin{abstract}                                  "
+			],
+			[
+				"subsub",
+				"\\subsubsection[short]{title}                      \tlatex-document"
+			],
+			[
+				"be",
+				"\\begin{center}                                    \tlatex-document"
+			],
+			[
+				"fist",
+				"\\firstname{}                                      \tlocal"
+			],
+			[
+				"math",
+				"\\mathit{text}                                     \tlatex-document"
+			],
+			[
+				"itemi",
+				"\\begin{itemize}                                   \tlatex-document"
+			],
+			[
+				"useap",
+				"\\usepackage{package}                              \tlatex-document"
+			],
+			[
+				"enddoc",
+				"\\end{document}                                    \tlatex-document"
+			],
+			[
+				"enddo",
+				"\\end{document}                                    \tlatex-document"
+			],
+			[
+				"local",
+				"local1"
+			],
+			[
+				"bool",
+				"booleanArrayToInt"
+			],
+			[
+				"dot",
+				"\\dot{a}                                           \tlatex-mathsymbols"
+			],
+			[
+				"beige",
+				"\\begin{equation}                                  \tlatex-document"
+			],
+			[
+				"inf",
+				"\\infty                                            \tlatex-mathsymbols"
+			],
+			[
+				"begin",
+				"\\begin{}                                          \tlatex-document"
+			],
+			[
+				"section",
+				"\\section*{title}                                  \tlatex-document"
+			],
+			[
+				"shoe",
+				"shoe_check"
+			],
+			[
+				"magic",
+				"magic_familiar"
+			],
+			[
+				"nora",
+				"nora_knows"
+			],
+			[
+				"char",
+				"char_fic"
+			],
+			[
+				"dra",
+				"drag_fic"
+			],
+			[
+				"inc",
+				"\\includegraphics[options]{name}                   \tlatex-document"
+			],
+			[
+				"mod",
+				"\\mod{value}                                       \tamsmath"
+			],
+			[
+				"divi",
+				"\\divideontimes                                    \tamssymb"
+			],
+			[
+				"beign",
+				"\\begin{enumerate}                                 \tlatex-document"
+			],
+			[
+				"ref",
+				"\\ref{key}                                         \tlatex-document"
+			],
+			[
+				"newth",
+				"\\newtheorem{envname}{caption}                     \tlatex-document"
+			],
+			[
+				"node",
+				"\\node[options%keyvals](node name)                 \ttikz"
+			],
+			[
+				"end",
+				"\\end{}                                            \tlatex-document"
+			],
+			[
+				"plus",
+				"\\oplus                                            \tlatex-mathsymbols"
+			],
+			[
+				"textr",
+				"\\textrm{text}                                     \tlatex-document"
+			],
+			[
+				"cdo",
+				"\\cdot                                             \tlatex-mathsymbols"
+			],
+			[
+				"ma",
+				"\\mathcal{text}                                    \tlatex-document"
+			],
+			[
+				"usepac",
+				"\\usepackage{package}                              \tlatex-document"
+			],
+			[
+				"cit",
+				"\\cite{keylist}                                    \tlatex-document"
+			],
+			[
+				"random",
+				"random_image"
+			],
+			[
+				"reque",
+				"requested"
+			],
+			[
+				"fiel",
+				"filename"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"im",
+				"img_cont"
+			],
+			[
+				"ran",
+				"rand_img_file"
+			],
+			[
+				"re",
+				"requests"
+			],
+			[
+				"comm",
+				"command"
+			],
+			[
+				"cl",
+				"client"
+			],
+			[
+				"int",
+				"interval"
+			],
+			[
+				"LED",
+				"LED_PIN"
+			],
+			[
+				"digi",
+				"digitalWrite\tDeviot digitalWrite"
+			],
+			[
+				"de",
+				"define"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				"Basic Builder - PdfLaTeX"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				"PdfLaTeX"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"comp",
+				"Compare with..."
+			],
+			[
+				"pre",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"previes",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"renpy",
+				"Set Syntax: RenpyLanguage"
+			],
+			[
+				"markdown",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"markdow",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"reinden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"bibtex",
+				"Build With: LaTeX - Basic Builder - PdfLaTeX"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"pio isntal",
+				"Package Control: Install Package"
+			],
+			[
+				"markdown ",
+				"MarkdownEditing: Change color scheme..."
+			],
+			[
+				"theme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"them",
+				"UI: Select Color Scheme"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"sideba",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"vmen",
+				"View: Toggle Menu"
+			],
+			[
+				"markd",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"term",
+				"Terminal: Open"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/mnt/bulk/git/ba-thesis/docs/bachelor_thesis/content/02-software_prequisites.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/bachelor_paper.tex",
+		"/mnt/bulk/git/ba-thesis/docs/bachelor_thesis/content/04-problem.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/content/bach-thesis.sublime-project",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/makefile",
+		"/mnt/bulk/git/fine_locked_tree/report/report.tex",
+		"/mnt/bulk/git/basic-latex-templates/report-template/ReportTemplate.tex",
+		"/home/fabian/Aero15Linux.conf",
+		"/home/fabian/aplay_after.txt",
+		"/home/fabian/after.txt",
+		"/tmp/mozilla_fabian0/after.txt",
+		"/home/fabian/after",
+		"/mnt/bulk/git/jumpcutter/requirements.txt",
+		"/mnt/bulk/git/jumpcutter/default.nix",
+		"/home/fabian/Desktop/pins",
+		"/home/fabian/.config/sublime-text-3/Packages/LaTeXTools/latex_cwl_completions.py",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/content/01-intro.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/content/05-practical.tex",
+		"/home/fabian/Desktop/superman lyrics",
+		"/mnt/bulk/bakk-thesis/theory_notes.md",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/bakk notes.md",
+		"/mnt/bulk/bakk-thesis/bakk notes.md",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/content/03-practical.tex",
+		"/home/fabian/.config/sublime-text-3/Packages/User/LaTeXTools.sublime-settings",
+		"/home/fabian/Downloads/test.tessla",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/content/02-theory.pdf",
+		"/mnt/bulk/git/basic-latex-templates/readme.md",
+		"/mnt/bulk/git/basic-latex-templates/ExerciseTemplate_new.tex",
+		"/mnt/bulk/git/basic-latex-templates/ExerciseTemplate.tex",
+		"/mnt/bulk/server portrait/testfit/Character notes.txt",
+		"/mnt/bulk/git/blatt1_template/solution_blatt1.tex",
+		"/mnt/bulk/git/ExerciseTemplate/ExerciseTemplate.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/acknowledgements.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/style/global.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/content/bibliography.bib",
+		"/home/fabian/.cache/kioexec/krun/173114_0/paper_rewrite.tex",
+		"/mnt/bulk/git/ExerciseTemplate/readme.md",
+		"/home/fabian/Documents/amp/b2/batch2.tex",
+		"/tmp/mozilla_fabian0/tk_reread_notes.txt",
+		"/home/fabian/Desktop/HLW14R-2C7LF-pcb-part-libraries/HLW14R-2C7LF-pcb-part-libraries.epw",
+		"/mnt/bulk/bakk-thesis/README.md",
+		"/home/fabian/Documents/bachelor_thesis/content/01-intro.tex",
+		"/home/fabian/Desktop/TODO Job.txt",
+		"/home/fabian/Desktop/log.txt",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/content/02-theory.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/content/00-transcript.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/README.md",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/abstract_english.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/abstract_german.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/abbreviations.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/style/listings.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/global_defines.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/bachelor_paper.tex",
+		"/usr/share/texmf-dist/tex/latex/base/ts1cmss.fd",
+		"/home/fabian/Documents/amp/ExerciseTemplate/ExerciseTemplate.tex",
+		"/home/fabian/Documents/amp/b1/batch1.tex",
+		"/home/fabian/Documents/amp/ExerciseTemplate/readme.md",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/.gitignore",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis/bibliography.bib",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/content/00-transcript.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/abbreviations.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/content/A-how_to.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/makefile",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/global_defines.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/style/global.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/abstract_english.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/abstract_german.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/acknowledgements.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/content/01-intro.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/bachelor_paper.pdf",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/style/listings.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/style/cover_page.tex",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/Makefile",
+		"/mnt/bulk/bakk-thesis/docs/bachelor_thesis_experimental/MAKEFILE",
+		"/mnt/bulk/bakk-thesis/Notizen für Bakk Lösungsansatz",
+		"/mnt/bulk/bakk-thesis/bakk-repository-template-master/docs/project_documentation/add_project_documentation_here",
+		"/mnt/bulk/bakk-thesis/bakk-repository-template-master/docs/bachelor_thesis/bachelor_paper.tex",
+		"/mnt/bulk/bakk-thesis/bakk-repository-template-master/docs/bachelor_thesis/style/global.tex",
+		"/mnt/bulk/bakk-thesis/bakk-repository-template-master/docs/bachelor_thesis/global_defines.tex",
+		"/mnt/bulk/bakk-thesis/fhtw-latex-document-master/demo.tex",
+		"/home/fabian/Documents/amp/amp_name_notes.md",
+		"/home/fabian/Documents/amp/b2/batch2.bib",
+		"/home/fabian/.cache/kioexec/krun/18566_0/paper_rewrite.tex",
+		"/home/fabian/.cache/kioexec/krun/17883_0/paper_rewrite.tex",
+		"/home/fabian/.cache/kioexec/krun/36710_0/P4.txt",
+		"/home/fabian/.cache/kioexec/krun/127693_0/9_Fabian_Posch_01456625.tex",
+		"/tmp/14.html",
+		"/home/fabian/Desktop/Accessibility/desktop.ini",
+		"/home/fabian/Documents/amp/b1/ExerciseTemplate.tex",
+		"/mnt/bulk/git/renpy/tk-high/game/character_models/char_reni.rpy",
+		"/mnt/bulk/git/renpy/tk-high/game/character_models/char_kat.rpy",
+		"/mnt/bulk/git/renpy/tk-high/game/character_models/char_laura.rpy",
+		"/home/fabian/Documents/amp/b1/ExerciseTemplate.log",
+		"/home/fabian/Documents/amp/b1/ExerciseTemplate.pyg",
+		"/home/fabian/Downloads/Xilinx_Unified_2020.2_1118_1232_Lin64.bin",
+		"/home/fabian/Desktop/Hetzner migration.csv",
+		"/mnt/bulk/git/renpy/tk-high/game/script.rpy",
+		"/mnt/bulk/git/renpy/tk-high/game/saves/navigation.json",
+		"/mnt/bulk/git/renpy/tk-high/game/char_kat.rpy",
+		"/mnt/bulk/git/renpy/tk-high/game/sc_intro_classroom.rpyc",
+		"/mnt/bulk/git/renpy/tk-high/game/sc_dorm_evening.rpyc",
+		"/mnt/bulk/git/renpy/tk-high/game/interfaces.rpy",
+		"/opt/questacore/questasim/vco",
+		"/mnt/bulk/git/renpy/tk-high/game/sc_dorm_evening.rpy",
+		"/home/fabian/bin/license_fuckery.sh",
+		"/tmp/mozilla_fabian0/message.txt",
+		"/home/fabian/Documents/questa/mentor/2017-18/RHELx86/README",
+		"/home/fabian/Documents/questa/README",
+		"/home/fabian/Documents/questa/mentor/README",
+		"/home/fabian/Documents/questa/mentor/2017-18/RHELx86/QUESTA-CORE-PRIME_10.6c-1/_msidata/DO_NOT_DELETE_OR_MODIFY.txt",
+		"/home/fabian/Documents/questa/mentor/2017-18/RHELx86/QUESTA-CORE-PRIME_10.6c-1/questasim/RELEASE_NOTES.txt",
+		"/home/fabian/Documents/questa/mentor/2017-18/RHELx86/QUESTA-CORE-PRIME_10.6c-1/questasim/modelsim.ini",
+		"/mnt/bulk/git/renpy/tk-high/readme.md",
+		"/home/fabian/Documents/wissab/rewrite/doc/paper_rewrite.tex",
+		"/mnt/bulk/git/renpy/tk-high/game/sc_intro_classroom.rpy",
+		"/mnt/bulk/bakk-thesis/bakk-prompt/bakk-prompt.tex",
+		"/mnt/bulk/git/renpy/tkhigh_test/game/script.rpy",
+		"/mnt/bulk/git/renpy/tkhigh_test/game/sc_intro_classroom.rpy",
+		"/mnt/bulk/git/renpy/tk-high/game/options.rpy",
+		"/mnt/bulk/git/renpy/tk-high/game/screens.rpy",
+		"/mnt/bulk/git/renpy/tk-high/game/gui.rpy",
+		"/mnt/bulk/bakk-thesis/bakk-repository-template-master/docs/bachelor_thesis/style/declaration.tex",
+		"/home/fabian/Zotero/storage/CEQM3B6R/iet-sen.2011.html",
+		"/mnt/bulk/bakk-thesis/Notizen für Bakk Lösungsansatz.md",
+		"/tmp/13.html",
+		"/tmp/39.html",
+		"/home/fabian/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/CMSIS/docs/NN/html/arm__convolve__HWC__q7__fast__nonsquare_8c.html",
+		"/home/fabian/Zotero/storage/6HPNMRU2/4126796.html"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.Terminus":
+	{
+		"height": 325.0
+	},
+	"output.deviot":
+	{
+		"height": 67.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.latextools":
+	{
+		"height": 256.0
+	},
+	"output.markdown":
+	{
+		"height": 104.0
+	},
+	"pinned_build_system": "",
+	"project": "bach-thesis.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 226.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,3 +1,11 @@
+Notizen nächstes Meeting
+========================
+Brauche FTDI um Programme auf RISC_v zu flashen
+known working USB blaster, digilent hs-2
+pulpissimo erfolgreich geflasht
+
+
+
 Notizen für Bakk Lösungsansatz
 ==============================
 
@@ -145,3 +153,15 @@ We should also be able to calculate miss rate from our locality measurements and
 For a model average delay for cache misses may make sense. In practice there are orders of magnitude difference between certain delays. (look for papers maybe) low priority
 model does not work for multicore!!!
 the more complex the machine, the more complex the model!! gets crazy
+
+
+IMPLEMENTATION
+==============
+
+If I do a rolling average over the last 2^n instructions, i don't need to divide cus i can replace the divide with shift
+At the end get final performance counter numbers and actually divide by the number of executed instructions. Does not need to be single cycle. Mark when final data is ready.
+Can we get it self timed? lol
+
+We use a shifter instead of a true divider for the final values
+The realistic data needs are no more than the second digit behind the comma -> with 16-Bit Integers we can only show two digits after the comma
+Assuming 750000 instructions executed as a worst case scenario, the circuit would either be able to calculate 0.015 (shifting for 1,000,000 instructions) or 0.0075 (shifting for 500,000 instructions) which is already beyond what we can show or would be relevant (talk to Stefan)

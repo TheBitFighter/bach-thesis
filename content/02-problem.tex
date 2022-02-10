@@ -1,0 +1,116 @@
+%!TEX spellcheck
+%!TEX root = ../bachelor_paper.tex
+\documentclass[../bachelor_paper.tex]{subfiles}
+\graphicspath{{\subfix{images/}}}
+\begin{document}
+
+\chapter{Problem}
+	\label{ch:prob}
+
+According to Wikipedia, a benchmark in computing is
+\begin{displayquote}
+the act of running a computer program, a set of programs, or other operations, in order to assess the relative performance of an object, normally by running a number of standard tests and trials against it. The term benchmark is also commonly utilized for the purposes of elaborately designed benchmarking programs themselves. \cite{BenchmarkComputing2021}
+\end{displayquote}
+We will use the word \emph{benchmark} to refer to the latter, a (set of) program(s) constructed or assembled to gauge the performance of an artifact $\mathcal{A}$, in order to gain insight into how said artifact $\mathcal{A}$ might perform in a real world environment compared to a different artifact $\mathcal{B}$. However, even though tempting, using one simple performance score measuring some metric like execution time of a program $\mu$ on artifact $\mathcal{A}$ will, due to the inherent complexity of any modern hardware design, always lead to information loss and thus to an inability of calculating accurate performance numbers for a yet unknown program $\phi$. Solving this issue will be the main focus of this paper.
+
+\section{Benchmark representativness}
+	\label{prob/repr}
+When selecting hardware platforms for a given application, knowing which platform is actually capable of handling the given task is crucial. For this reason, we employ the aforementioned benchmarks to measure certain characteristics of a particular hardware artifact. However, this requires the assumption of the final workload being similar enough to the benchmarks run. We say the benchmarks have to be representative of the final workload. In the past, there have been several attempts at characterizing the similarity of programs. Most of the papers presented here follow either a feature-agnostic or feature-aware methodology. In order to make this categorization, we use a slightly modified definition introduced by \cite{cammarotaOptimizingProgramPerformance2013} where each property of a program like instruction mix, working set, \ac{ISA}, ... is called a \emph{feature}. A set of features is called a \emph{signature}. An approach is called \emph{feature-agnostic}, iff the features composing the signature used cannot be directly mapped onto easily observable properties of the binary run or the system used. In other words, an approach to similarity looking exclusively at execution time would be feature-agnostic, where an approach investigating properties of the binary executed instead would be considered \emph{feature-aware}.
+
+We create our first simple definition of similarity: Two programs $\mu, \phi$ are similar, if knowledge about the performance of one on a given artifact $\mathcal{A}$ allows us to determine the performance of the other. This definition is rather strict and hard to guarantee given the complexity of modern systems as well as the many different bottlenecks they present. It is important to note that output does not dictate similarity. Two different implementations of the same problem may generate vastly differing binaries stressing very different subsystems of an artifact.
+
+We will lay out a selection of different approaches to program similarity and benchmark representativeness and then present a brief overview over our approach. More details are given in chapter \ref{ch:arch}.
+
+\section{Feature-agnostic approaches}
+	\label{prob/angno}
+The simplest feature-agnostic approach is to measure program execution time. This approach was taken by Dujmovic et.at. \cite{dujmovicEvolutionEvaluationSPEC1998} in order to gain insight into how different machines perform. Using this information, a set of machines is compared to each other. Two machines are recognized as equal in computational power, if they outperform each other by the same ratio in two different, equally weighted benchmarks. This method of measurement ignores all architectural differences of machines and just focuses on results visible from an outside perspective.\\
+A very similar methodology was also employed in the much newer paper by Cammerota et.al. \cite{cammarotaOptimizingProgramPerformance2013}, where in addition to measured values, machine learning was used to fill out unknowns.
+
+Vandierendonck et al. \cite{vandierendonckManyBenchmarksStress} measures execution cycles, rather than time. This hopes to compensate for generational clock speed improvements and focus on architectural changes only. However, like with \cite{dujmovicEvolutionEvaluationSPEC1998}, a black box approach is taken. A set of machines is measured and arranged as the $n$ dimensions of a performance vector of a benchmark set. These cycle counts are then transformed into principle components by applying \ac{PCA}, which the paper labels \emph{bottlenecks}. Different principal components contribute to the overall performance vector by different amounts, with only a small part of them contributing significantly. These are selected and titled \emph{usage modes}. Four different usage modes are found in the \ac{SPEC} benchmark suite they examined, which leads them to subset the suite into a set of 9 programs which exercise these usage modes representatively for the entire suite.
+
+These methods have one big advantage as well as one big disadvantage. Evaluating programs like this is simple as virtually no instrumentation is applied to the binary itself. The runtime of the program in question is not modified and no simulation effort is required. Even if the data resolution is low, it is still enough to make certain performance predictions. However, architectural features are completely ignored. Suppose we have a set of machines to determine benchmark similarity but none of these machines feature hardware support for floating point operations. Of the set of examined programs, one happens to be floating point operation heavy and also just so happens to perform similar to an integer based one. When adding a new machine introducing a hardware \ac{FPU}, performance models cannot predict performance anymore as \ac{FPU} operations in the binary were not considered as a characterization criterion. Worse still \cite{vandierendonckManyBenchmarksStress} might have marked the benchmark for removal, meaning there is a possibility we would have never found the improvement.
+
+We thus conclude that a pure outside-in perspective using a black box model is not sufficient to determine the similarity of two programs, if given the possibility.
+
+\section{Feature-aware approaches}
+In contrast to the papers presented in \ref{prob/angno}, we actually consider features exhibited by the programs run. 
+
+
+We sort papers into the \emph{software approach} category, if they (almost) exclusively look at data gathered from analyzing program binaries. The two main publications to mention here are by Phansalkar et al. \cite{phansalkarMeasuringProgramSimilarity2005} and Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003}. The defining characteristic for this category is the focus on metrics inherent to the programs run on testing artifacts, instead of looking at what the hardware does. While quite similar in theory, the two papers have one key difference in the philosophy of how to measure certain program characteristics, which will come up several times looking at what exactly is recorded.
+
+\subsubsection{Instruction mix}
+	\label{ch:theo/simi/soft/inst}
+Measures the relative frequency of different types of instructions appearing in a program. It splits up in computational operations (which is further split up into logical, integer, and byte manipulation and shift operations in \cite{eeckhoutDesigningComputerArchitecture2003}), memory access operations (loads and stores in case of RISC-V), and branching operations. We can use this information to infer certain possible bottlenecks in memory, computation or branching \cite{phansalkarMeasuringProgramSimilarity2005}.
+
+\subsubsection{Dynamic Basic Block Size}
+	\label{ch:theo/simi/soft/block}
+describes a section in code with an entry (jump to) and exit point (jump from). We count the amount of instructions between those two points in code. This metric is called \textbf{sequential flow breaks} in \cite{eeckhoutDesigningComputerArchitecture2003}.
+
+\subsubsection{Branching}
+	\label{ch:theo/simi/soft/bra}
+This splits up into several different metrics, since \cite{phansalkarMeasuringProgramSimilarity2005} and \cite{eeckhoutDesigningComputerArchitecture2003} handle this quite differently. While \cite{phansalkarMeasuringProgramSimilarity2005} takes a purely software approach here, \cite{eeckhoutDesigningComputerArchitecture2003} takes something more akin to what we will describe in section \ref{ch:theo/simi/hybr}. The purely software based method measures \textbf{branch direction}, which refers to the amount of forward branches in context of all branch instructions (it is expected to encounter more backwards leading branch instructions), \textbf{taken branches}, which measures the percentage of branches taken to the total number of branch instructions encountered, and \textbf{forward-taken branches} which counts the percentage of forward branches under all taken branches.\\
+The more hybrid approach in \cite{eeckhoutDesigningComputerArchitecture2003} only measures \textbf{branch prediction accuracy} of their model.
+
+\subsubsection{Instruction level parallelism}
+Both papers measure \ac{ILP} in slightly different forms. \cite{eeckhoutDesigningComputerArchitecture2003} measures it directly, while \cite{phansalkarMeasuringProgramSimilarity2005} counts the average distance between instructions dependent on each other, a metric strongly related to \ac{ILP}.
+
+\subsubsection{Cache and data}
+Again, the two works handle this quite differently. Both do differentiate between instructions and data however the methods employed are either hardware or software focused. We will start with Phansalkar et al. \cite{phansalkarMeasuringProgramSimilarity2005}:
+
+For the data domain, \textbf{data temporal locality} and \textbf{data spatial locality} are measured. The former describes how many instructions pass on average between calls to the same address in memory while the latter measures often data close to a certain address is called. The equivalent metrics exist for instructions as \textbf{instruction temporal locality} and \textbf{instruction spacial locality}.
+
+
+Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003} uses a slightly more model based approach, where they map the memory usage of the measured programs to different cache configurations. They simulate, how the programs would perform on 8-, 16-, 32-, 64-, and 128-Kbyte cache, where 8- and 16-Kbyte arrangements are direct-mapped, 32- and 64-Kbyte arrangements are two-way-associative and the 128-Kbyte model is four-way-associative. The data gathered is the \textbf{miss rate} of the respective cache arrangement.
+
+While the two papers presented here do have a lot in common, Eeckhout et al. \cite{eeckhoutDesigningComputerArchitecture2003} presents something a lot more application focused, something we will see a lot more of in the final category.
+
+
+\subsection{Hybrid approach}
+	\label{ch:theo/simi/hybr}
+The most interesting approach in our opinion is taken in a paper published by Saavedera and Smith \cite{saavedraAnalysisBenchmarkCharacteristics1996}. Additionally to comparing the actual similarity of programs, they take the extra step of predicting performance of a specific workload on a specific artifact before said workload has ever been run. Their method employs a two step procedure consisting of analyzing workload and artifact separately and, as much as possible, exhaustively. For this reason, we consider this paper as its own category. Instead of looking at one half of the equation, both are considered to get a more complete image of what the hardware is going to perform like and why.
+
+For the software side, each line of Fortran code is broken up into a set of a set of sub-instructions called \ac{AbOp}. Then, a benchmark is performed, counting the executions of each line of unoptimized code. A workload is thus broken down into a vector $C_\mathcal{A}$ which informs us about the number of occurrences of each \ac{AbOp}.
+
+For the hardware side, a \emph{machine characterizer} is run. It consists of a minimal benchmark, which measures the execution time for each \ac{AbOp} in order to determine a machine performance vector $P_M$. This tells us how fast a certain artifact can perform certain operations. The runtime for a certain workload $\mathcal{A}$ on machine $M$ can thus be calculated:
+
+\begin{equation}
+\label{eq:theo/simi/hybr/mode}
+T_{\mathcal{A},M} = \sum^n_{i = 1}C_{\mathcal{A},i}P_{M,i} = C_\mathcal{A} \cdot P_M
+\end{equation}
+
+However, as elegant as this approach seems, there are still shortcomings that need to be overcome: This paper mainly focuses on the Fortran language which can still be found in older programs, but has largely been replaced by more modern languages in newer projects. The model also only works with non optimized code. They have shown the possibility of predicting the runtime of optimized code as well, however the significant advancements in compiler theory in the last 25 years have lead us to not take this as given anymore. Lastly, the model completely ignores cache effects, since they were not able to observe significant influence of them. And lastly, this model falls short of modeling processors, which cannot be described using only a linear model. Superscalar processors are able to parallelize some of the given instructions making the accumulated runtime less than the sum of its parts, which defeats the linear combination assumption.
+
+\subsection{Summary}
+	\label{ch:theo/simi/summ}
+A perfect model would be able to predict runtime of a certain workload $\mathcal{A}$ only by knowing its similarity to a different workload $\mathcal{B}$ and the runtime metrics of $\mathcal{B}$. Such a construction should be as versatile as possible while accepting sensible tradeoffs. We feel it would be important to observe more than just runtime, we also know that a simple linear construction and brute force benchmarking will probably not garner the results we want on a modern processor. More problems arise with the inclusion of \ac{SMT} and \ac{SMP} in larger machines as well as interrupt behavior and other unpredictable influences. We fear a construction to faithfully represent those factors would be almost impossible and certainly unpractical. 
+We still believe that a simplified, yet more detailed model than presented in \cite{saavedraAnalysisBenchmarkCharacteristics1996}, is practical and certainly possible, while still being close to how the actual hardware would perform. However, the scope of this thesis is way to small to accommodate such an ambitious project, we will focus on a much more specific question and leave this much broader issue for future work.
+
+
+
+
+\section{from problem.tex}
+
+One metric which both papers \cite{phansalkarMeasuringProgramSimilarity2005,eeckhoutDesigningComputerArchitecture2003} classified as \emph{software approach} to measuring program similarity in section \ref{ch:theo/simi/soft} share, is called dynamic basic block size \cite{phansalkarMeasuringProgramSimilarity2005} (\emph{sequential flow breaks} in \cite{eeckhoutDesigningComputerArchitecture2003}). A dynamic basic block is a block of code which has an entry point and an exit point. We call a certain instruction \emph{entry point}, if it is the jump target of the last dynamic block. We call a certain instruction \emph{exit point}, if it is a branch instruction and causes the program counter to change other than an increment by one or, in other words, initiates a jump. The number of instructions between those two points is called \emph{dynamic basic block size}. Basic block size is especially interesting for hardware design purposes, such as deciding decoder instruction width for high performance micro processors \cite{johnsonSuperscalarMicroprocessorDesign1991}. 
+
+However, while measuring dynamic block size, both papers also measure the relative amount of jump instructions with respect to total instruction amount as well as either branch prediction accuracy or branches taken / not taken. With this information it should be possible to reconstruct dynamic block size rather easily. While measuring basic block size in hardware is rather simple, it would be interesting if the measurement could be eliminated in general. We thus construct an architecture which measures Instruction mix (\ref{ch:theo/simi/soft/inst}), Branching (\ref{ch:theo/simi/soft/bra}) and Dynamic Basic Block Size (\ref{ch:theo/simi/soft/block}) and then try to reconstruct the latter from the two former.
+
+\section{Model}
+The mathematical model behind this theory is surprisingly simple. We start to count the dynamic basic block size from the address jumped to and stop counting when jumping away. Thus the formula for calculating dynamic basic block size should in theory be
+
+\begin{equation}
+S = \frac{1}{(B \cdot b_T)}
+\end{equation}
+
+where $S$ denotes dynamic basic block size, $B$ denotes the relative amount of branch instructions over all instructions, and $b_T$ refers to percentage of branches taken. Our architecture modifies a CV32E40P core \cite{PulpplatformPulpissimo2021} to export the needed data points for later analysis. There are many different ways to extract information from a physical \ac{MPU} for examination purposes \cite{dengFlexibleEfficientInstructionGrained2010,jindalDHOOMReusingDesignforDebug2019,mayerDebugSupportCalibration2005}, mainly for debug usage, which this paper will not go into for the sake of complexity. There are also several works about data compression for real time transfer of trance information, which should also be mentioned when talking about data from a physical core. Future works might go into depth about physical integration as well as real time data compression, given the broader scope of actually comparing the similarity of different workloads. For this application it will be enough to implement the data to be gathered as simple performance counters and export them after execution has finished.\unsure{This could change depending on how the actual implementation goes.}
+
+
+
+
+% Render bibliograhy and acronyms if rendered standalone
+\isstandalone
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+\subfile{abbreviations.tex}
+\fi
+
+\end{document}

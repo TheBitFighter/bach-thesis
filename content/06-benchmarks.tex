@@ -1,0 +1,43 @@
+%!TEX spellcheck
+\documentclass[../bachelor_paper.tex]{subfiles}
+\graphicspath{{\subfix{images/}}}
+\begin{document}
+
+\chapter{Benchmarks}
+    \label{ch:bench}
+    
+
+\section{Benchmarks}
+    \label{ch:theo/benc}
+We will start this section by mentioning the two in scientific circles ost well known benchmark suits, the \emph{SPEC suit} and \emph{Coremark}.
+
+\subsection{SPEC suite}
+    \label{ch:theo/benc/spec}
+The \ac{SPEC} is a non-profit corporation, founded in 1988 by Apollo, Hewlett Packard, MIPS and Sun Microsystems. \cite{dixitSPECBenchmarks1991} The idea was to provide uniform tools to evaluate performance of an artifact in a way where it could be compared to a architecturally different artifact. This however posed one of the greatest questions: What even is performance? And \todo{remove the joke} if yes, how does one measure it?\\
+The biggest problem at hand was the fundamental difference between the systems, \ac{SPEC}\footnote{\ac{SPEC} is used for the institution and their benchmarking suite interchangeably} aims to provide. According to the official website of \ac{SPEC} CPU\rsym 2017, the current iteration of the CPU benchmark offered by \ac{SPEC}, toolsets for ARM, Power ISA, SPARC, and x86 are provided. It is possible to easily port the benchmarks for other \ac{ISA}s as well, should one need it. The benchmarks were specifically selected to be easily portable between different platforms. Modifications were added to make the code as platform agnostic, and the codepath as uniform as possible.
+
+This reveals the second issue \ac{SPEC} has: The selection of benchmarks is more democratic than scientific. When a new iteration of \ac{SPEC} CPU\rsym is created, \ac{SPEC} puts out a call for programs representing real life workloads and meeting their portability criteria. Members of the board vote for the inclusion of a particular workload. \cite{henningSPECCPU2000Measuring2000} This means the representation of workloads is somewhat balanced, as no architecture shall be favored; however vendor interest is hardly a scientific criterion. 
+
+The \ac{SPEC} suit stresses the toolchain as a whole as the programs are provided as source code. Different compiler settings thus may lead to vastly different results on a single platform. \ac{SPEC} counters this by adding a full system report to the result of a benchmark run and encrypting them. \cite{bucekSPECCPU2017NextGeneration2018} Still, different toolchains may react differently to certain code patters. One of the criteria for inclusion is the predictability of the codepath, but while somewhat predictable, they are still not identical. 
+
+And finally, \ac{SPEC} CPU\rsym requires the use of a Unix like \ac{OS} or Windows\footnote{For further information see \cite{SystemRequirementsCPU}} and at least 1Gbyte of \ac{RAM} for \ac{SPEC}rate per copy when compiled in 32 bit and up to 16Gbyte for \ac{SPEC}speed. It is trivial to see how those two are knockout criteria for an \ac{MPU} focused core. Nevertheless, \ac{SPEC} is easily the most well studied benchmark suit out there. It is a well put together suit of programs, meant to test the limit of high performance machines. It stresses the system as a whole in a rather extensive set of use cases. We will come back to \ac{SPEC} in section \todo{blah}.
+
+\subsection{Coremark}
+    \label{ch:theo/benc/core}
+While the idea of Coremark is similar to \ac{SPEC}, they approach the problem from the opposite angle. To our knowledge, not a lot of research papers have been published on Coremark, most of the information given here is from the whitepaper \cite{gal-onExploringCoremarkBenchmark2012}.
+
+Similar to \ac{SPEC}, Coremark tries to come up with a single performance number to characterize a given core. Where \ac{SPEC} consists of real world programs adapted to work as a benchmarking workload, Coremark consists of an artificially constructed workload engineered to stress different subsystems separately to the best of its abilities. The workload still stays the same for different artifacts so while a specific workload is still handled in cache on one artifact, it might be already stressing the memory system on another.
+
+While Coremark takes steps to ensure portability of code between different artifacts like not using malloc, \ac{ISA} specific tools like \ac{SIMD} instructions and \ac{MAC unit}s are still used as they ultimately contribute to the overall performance of an artifact. Just like \ac{SPEC}, the compiler still has significant influence over how well a given artifact might perform. E.g. it can be configured to generate a smaller executable to fit on systems with less storage, which drops the performance roughly by 19\% \cite{gal-onExploringCoremarkBenchmark2012}. While this might suggest a large file size, \textit{smaller} may be misleading. By default, Coremark requires a total space of roughly 2 Kbytes compared to the minimum memory of 1 Gbyte for \ac{SPEC}rate in 32 Bit mode and a total install size of 250 Gbyte (or 1.2 Gbyte for \ac{SPEC}rate per copy). \cite{SystemRequirementsCPU}
+
+We will use Coremark as a target to analyze, since it is the most used benchmark for the kind of platforms this paper is targeting.
+
+
+% Render bibliograhy and acronyms if rendered standalone
+\isstandalone
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+\subfile{abbreviations.tex}
+\fi
+
+\end{document} 
