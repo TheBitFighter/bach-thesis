@@ -11,7 +11,7 @@
 We chose the open RISC-V \ac{ISA} as our target. RISC-V has seen a surge in popularity in recent years, as its usage is completely free and open. This has lead to a flourishing ecosystem of open IPs from different institutions with different goals in mind. The architecture is a basic RISC like load/store architecture featuring an unprivileged and privileged specification \cite{RISCVInstructionSet2022}.
 
 \section{Base IP}
-We base our design on the Pulpissimo microcontroller IP provided by the ETH Z\"urich, and University of Bologna \cite{schiavoneQuentinUltraLowPowerPULPissimo2018}. The core used in the design is the CV32E40P, formerly known and here (for simplicity) referred to as RI5CY \cite{gautschiNearThresholdRISCVCore2017}. RI5CY is a 32-bit core with a single-issue, in-order, 4-stage pipeline implementing the RV32IM[F]C instruction set. Floating point support can be enabled and disabled ([F]) depending on requirements towards the core. We will have floating point support enabled as dedicated hardware \acp{FPU} have become rather common even in embedded \acp{SOC}. RI5CY does support several nonstandard extensions to the RISC-V \ac{ISA} such has \acl{HWL}, dot product multiplication (also referred to as multiply-accumulate), nonstandard floating point formats, as well as packed SIMD operations.
+We base our design on the Pulpissimo microcontroller IP provided by the ETH Z\"urich, and University of Bologna \cite{schiavoneQuentinUltraLowPowerPULPissimo2018}. The core used in the design is the CV32E40P, formerly known and here (for simplicity) referred to as RI5CY \cite{gautschiNearThresholdRISCVCore2017}. RI5CY is a 32-bit core with a single-issue, in-order, 4-stage pipeline implementing the RV32IM[F]C instruction set. Floating point support can be enabled and disabled ([F]) depending on requirements towards the core. We will have floating point support enabled as dedicated hardware \acp{FPU} have become rather common even in embedded \acp{SoC}. RI5CY does support several nonstandard extensions to the RISC-V \ac{ISA} such has \acl{HWL}, dot product multiplication (also referred to as multiply-accumulate), nonstandard floating point formats, as well as packed SIMD operations.
 
 \subsection{Pipeline}
 As seen in figure \ref{fig:plat/base/blockdia}, RI5CY consists of 4 pipeline stages. Stage one is an instruction fetch stage using a 4 entry prefetch buffer as well as a \ac{HWL} controller, which we will go into detail about in section \ref{sub:plat/ip/ctrl}. Stage 2 is the instruction decode stage, containing the RISC-V decoder as well as the register file and \ac{HWL} registers. Stage 3 is the execute stage featuring an \ac{ALU} for arithmetic and logic operations except multiplication, as well as a multi-cycle multiplication unit which can also perform multiply accumulate operations. Additionally, if enabled, the exec stage also contains the \ac{FPU} which we will go further into in section \ref{sub:plat/ip/fpu}. The 4th and final pipeline stage contains the load/store unit as well as the register write-back. The main design goal of the RI5CY core was to provide a low power, high performance \ac{DSP} focused core \cite{gautschiNearThresholdRISCVCore2017}, which is reflected in the chosen set of optimizations.
@@ -35,9 +35,33 @@ Apart from \ac{DSP} calculations, the inclusion of \acp{HWL} has also shown to p
 
 \subsection{Floating point support}
     \label{sub:plat/ip/fpu}
-The \ac{FPU} is enabled for the experiments in this thesis. RI5CY uses a slimmed down version of FPnew, a highly configurable open-source multiformat floating point unit \cite{machFPnewOpenSourceMultiformat2021}. FPnew is split into four different data paths, each of them having configurable datapath depth and width, and supports transprecision computing \cite{malossiTransprecisionComputingParadigm2018}. In addition to 32 bit single precision (FP32), and 64 bit double precision (FP64) it supports half-precision (FP16), 16 bit bfloats (FP16alt), as well as an 8 bit custom format (FP8). For RI5CY, only support for FP32, FP16, and FP16alt is enabled. The four data paths implement the functions \ac{ADDMUL}, \ac{DIVSQRT}, \ac{COMP}, and \ac{CONV} respectively. These datapaths can be either generated in parallel to support one data format per lane or merged to be multiformat. They can also be disabled completely, if required. For RI5CY, \ac{ADDMUL} and \ac{COMP} are enabled in merged mode to save power and area allowing one FP32 operation or a packed vector of either 2 FP16 or FP16alt, \ac{COMP} is implemented in parallel mode allowing for one FP32 operation or a packed vector of either 2 FP16 or FP16alt, and \ac{DIVSQRT} is disabled outright. All pipelines have a depth of 1 as clock requirements are relatively relaxed for smaller \acp{MCU} like RI5CY, so floating point operations can complete within a single cycle. 
+The \ac{FPU} is enabled for the experiments in this thesis. RI5CY uses a slimmed down version of FPnew, a highly configurable open-source multiformat floating point unit \cite{machFPnewOpenSourceMultiformat2021}. FPnew is split into four different data paths, each of them having configurable datapath depth and width, and supports transprecision computing \cite{malossiTransprecisionComputingParadigm2018}. In addition to 32 bit single precision (FP32), and 64 bit double precision (FP64) it supports half-precision (FP16), 16 bit bfloats (FP16alt), as well as an 8 bit custom format (FP8). For RI5CY, only support for FP32, FP16, and FP16alt is enabled. The four data paths implement the functions \ac{ADDMUL}, \ac{DIVSQRT}, \ac{COMP}, and \ac{CONV} respectively. These datapaths can be either generated in parallel to support one data format per lane or merged to be multiformat. They can also be disabled completely, if required. For RI5CY, \ac{ADDMUL} and \ac{COMP} are enabled in merged mode to save power and area allowing one FP32 operation or a packed vector of either 2 FP16 or FP16alt, \ac{COMP} is implemented in parallel mode allowing for one FP32 operation or a packed vector of either 2 FP16 or FP16alt, and \ac{DIVSQRT} is disabled outright (as seen in table \ref{tab:plat/base/fpu}). All pipelines have a depth of 1 as clock requirements are relatively relaxed for smaller \acp{MCU} like RI5CY, so floating point operations can complete within a single cycle. The \ac{FPU} is integrated into the \ac{APU} port of the execution stage.
 
-\section{Xilinx ZYNQ SoC}
+\begin{table}
+    \centering
+    \begin{tabular}{lllll}
+        \hline \\[-0.9em]
+        \textbf{Format} & \multicolumn{4}{l}{\textbf{Implementation} (number of cycles, number of lanes)}   \\
+                        & \ac{ADDMUL}   & \ac{DIVSQRT}  & \ac{COMP}     & \ac{CONV}     \\
+        \hline \\[-0.9em]
+        FP32            & merged (1,1)  & disabled (-,-)& parallel (1,1)& merged (1,2)  \\
+        FP16            & merged (1,2)  & disabled (-,-)& parallel (1,2)& merged (1,2)  \\
+        FP16alt         & merged (1,2)  & disabled (-,-)& parallel (1,2)& merged (1,2)  \\
+        \hline
+    \end{tabular}
+    \caption{Configuration of the FPU for RI5CY \cite{machFPnewOpenSourceMultiformat2021}}
+    \label{tab:plat/base/fpu}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\columnwidth]{zynq_block}
+    \caption{Block diagram of the Xilinx\textsuperscript{\textregistered} Zynq\textsuperscript{\textregistered}-7000 All Programmable \ac{SoC}}
+    \label{fig:plat/base/zynq}
+\end{figure}
+
+\section{Xilinx ZYNQ-7000 SoC}
+The hardware used is a ZedBoard\textsuperscript{TM} by Digilent\textsuperscript{\textregistered}. It is equipped with a Zynq\textsuperscript{\textregistered}-7000 All Programmable \ac{SoC} by Xilinx\textsuperscript{\textregistered} and natively supported by Pulpissimo. The Zynq-7000 processor features a \ac{PL} as well as a Dual ARM\textsuperscript{\textregistered} Cortex\textsuperscript{\textregistered}-A9 MPCore\textsuperscript{TM} hard IP able to run Linux. The hard IP and \ac{PL} are connected via an AXI bus which can be configured using block diagrams inside the Vivado\textsuperscript{\textregistered} design environment. \cite{Zynq7000SoC} An architectural block diagram can be seen in figure \ref{fig:plat/base/zynq}.
 
 
 % Render bibliograhy and acronyms if rendered standalone

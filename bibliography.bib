@@ -305,6 +305,20 @@
   file = {/home/fabian/Zotero/storage/7W9THIBY/Guthaus et al_2001_MiBench.pdf;/home/fabian/Zotero/storage/9NIW8RYI/990739.html}
 }
 
+@inproceedings{haungsBranchTransitionRate2000,
+  title = {Branch Transition Rate: A New Metric for Improved Branch Classification Analysis},
+  shorttitle = {Branch Transition Rate},
+  booktitle = {Proceedings {{Sixth International Symposium}} on {{High-Performance Computer Architecture}}. {{HPCA-6}} ({{Cat}}. {{No}}.{{PR00550}})},
+  author = {Haungs, M. and Sallee, P. and Farrens, M.},
+  year = {2000},
+  month = jan,
+  pages = {241--250},
+  doi = {10.1109/HPCA.2000.824354},
+  abstract = {Recent studies have shown significantly improved branch prediction through the use of branch classification. By separating static branches into groups, or classes, with similar dynamic behavior predictors may be selected that are best suited for each class. Previous methods have classified branches according to taken rate (or bias). We propose a new metric for branch classification: branch transition rate, which is defined as the number of times a branch changes direction between taken and not taken during execution. We show that transition rate is a more appropriate indicator of branch behavior than taken rate for determining predictor performance. When both metrics are combined, an even clearer picture of dynamic branch behavior emerges, in which expected predictor performance for a branch is closely correlated with its combined taken and transition rate class. Using this classification, a small group of branches is identified for which two-level predictors are ineffective.},
+  keywords = {Accuracy,Electronic mail,History},
+  file = {/home/fabian/Zotero/storage/36EVFYUN/Haungs et al_2000_Branch transition rate.pdf;/home/fabian/Zotero/storage/WV9BEZYU/824354.html}
+}
+
 @inproceedings{hauserGarpMIPSProcessor1997,
   title = {Garp: A {{MIPS}} Processor with a Reconfigurable Coprocessor},
   shorttitle = {Garp},
@@ -696,6 +710,23 @@
   file = {/home/fabian/Zotero/storage/DU8ZZ39R/Phansalkar et al_2005_Measuring Program Similarity.pdf;/home/fabian/Zotero/storage/5B3KHIAD/1430555.html}
 }
 
+@article{pulliniMrWolfEnergyPrecision2019,
+  title = {Mr.{{Wolf}}: {{An Energy-Precision Scalable Parallel Ultra Low Power SoC}} for {{IoT Edge Processing}}},
+  shorttitle = {Mr.{{Wolf}}},
+  author = {Pullini, Antonio and Rossi, Davide and Loi, Igor and Tagliavini, Giuseppe and Benini, Luca},
+  year = {2019},
+  month = jul,
+  journal = {IEEE Journal of Solid-State Circuits},
+  volume = {54},
+  number = {7},
+  pages = {1970--1981},
+  issn = {1558-173X},
+  doi = {10.1109/JSSC.2019.2912307},
+  abstract = {This paper presents Mr.Wolf, a parallel ultra-low power (PULP) system on chip (SoC) featuring a hierarchical architecture with a small (12 kgates) microcontroller (MCU) class RISC-V core augmented with an autonomous IO subsystem for efficient data transfer from a wide set of peripherals. The small core can offload compute-intensive kernels to an eight-core floating-point capable of processing engine available on demand. The proposed SoC, implemented in a 40-nm LP CMOS technology, features a 108-{$\mu$}W fully retentive memory (512 kB). The IO subsystem is capable of transferring up to 1.6 Gbit/s from external devices to the memory in less than 2.5 mW. The eight-core compute cluster achieves a peak performance of 850 million of 32-bit integer multiply and accumulate per second (MMAC/s) and 500 million of 32-bit floating-point multiply and accumulate per second (MFMAC/s) -1 GFlop/s-with an energy efficiency up to 15 MMAC/s/mW and 9 MFMAC/s/mW. These building blocks are supported by aggressive on-chip power conversion and management, enabling energy-proportional heterogeneous computing for always-on IoT end nodes improving performance by several orders of magnitude with respect to traditional single-core MCUs within a power envelope of 153 mW. We demonstrated the capabilities of the proposed SoC on a wide set of near-sensor processing kernels showing that Mr.Wolf can deliver performance up to 16.4 GOp/s with energy efficiency up to 274 MOp/s/mW on real-life applications, paving the way for always-on data analytics on high-bandwidth sensors at the edge of the Internet of Things.},
+  keywords = {Bandwidth,Data analysis,Data transfer,Digital signal processors,dynamic voltage scaling,Engines,memory architecture,multicore processing,parallel architectures,Program processors,Sensors,System-on-chip},
+  file = {/home/fabian/Zotero/storage/4XKITDVP/Pullini et al_2019_Mr.pdf;/home/fabian/Zotero/storage/PZM3FBXD/8715500.html}
+}
+
 @misc{PulpplatformPulpino2021,
   title = {Pulp-Platform/Pulpino},
   year = {2021},
@@ -898,6 +929,11 @@
   file = {/home/fabian/Zotero/storage/WXQ2A5NZ/Williams - 2012 - ARMV8 debug and trace architectures.pdf;/home/fabian/Zotero/storage/4YCART7U/6338158.html}
 }
 
+@misc{XC7Z010XC7Z020DataSheet,
+  title = {{{XC7Z010-XC7Z020 Data Sheet}}},
+  file = {/home/fabian/Zotero/storage/INYGWR4Z/ds187-XC7Z010-XC7Z020-Data-Sheet.pdf}
+}
+
 @inproceedings{yiStatisticallyRigorousApproach2003,
   title = {A Statistically Rigorous Approach for Improving Simulation Methodology},
   booktitle = {The {{Ninth International Symposium}} on {{High-Performance Computer Architecture}}, 2003. {{HPCA-9}} 2003. {{Proceedings}}.},
@@ -940,6 +976,15 @@
   abstract = {With the rapid proliferation of malware attacks on the Internet, understanding these malicious behaviors plays a critical role in crafting effective defense. Advanced malware analysis relies on virtualization or emulation technology to run samples in a confined environment, and to analyze malicious activities by instrumenting code execution. However, virtual machines and emulators inevitably create artifacts in the execution environment, making these approaches vulnerable to detection or subversion. In this paper, we present MALT, a debugging framework that employs System Management Mode, a CPU mode in the x86 architecture, to transparently study armored malware. MALT does not depend on virtualization or emulation and thus is immune to threats targeting such environments. Our approach reduces the attack surface at the software level, and advances state-of-the-art debugging transparency. MALT embodies various debugging functions, including register/memory accesses, breakpoints, and four stepping modes. We implemented a prototype of MALT on two physical machines, and we conducted experiments by testing an array of existing anti-virtualization, anti-emulation, and packing techniques against MALT. The experimental results show that our prototype remains transparent and undetected against the samples. Furthermore, our prototype of MALT introduces moderate but manageable overheads on both Windows and Linux platforms.},
   keywords = {Debugging,debugging transparency,emulation technology,Hardware,hardware features,Internet,invasive software,Kernel,Linux,Linux platforms,malicious behaviors,MALT,Malware,malware attacks,malware debugging,program debugging,rapid proliferation,Registers,Servers,SMM,software architecture,system management mode,transparency,virtual machines,virtualisation,Virtualization,virtualization technology,Windows platforms,x86 architecture},
   file = {/home/fabian/Zotero/storage/RDHCJBK6/Zhang et al. - 2015 - Using Hardware Features for Increased Debugging Tr.pdf;/home/fabian/Zotero/storage/BJ9LIERR/7163018.html}
+}
+
+@misc{Zynq7000SoC,
+  title = {Zynq-7000 {{SoC}}},
+  journal = {Xilinx},
+  abstract = {Zynq-7000 SoC devices integrate the software programmability of an ARM-based processor with the hardware programmability of an FPGA, enabling key analytics and hardware acceleration while integrating CPU, DSP, ASSP, and mixed signal functionality on a single device.},
+  howpublished = {https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html},
+  langid = {english},
+  file = {/home/fabian/Zotero/storage/MMCN6YUY/zynq-7000.html}
 }
 
 

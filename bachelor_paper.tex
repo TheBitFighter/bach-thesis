@@ -102,7 +102,7 @@
 %%% Package to define caption style of images, tables, etc. %%%
 \usepackage{caption}
 % Caption of tables should be left aligned (instead of centered)
-\captionsetup[table]{singlelinecheck=false}
+%\captionsetup[table]{singlelinecheck=false}
 
 %%% Package to append pages of an existing PDF document %%%
 \usepackage{pdfpages}
@@ -115,7 +115,7 @@
 \Crefname{lstlisting}{Listing}{Listings}
 
 %%% Package to allow combining several images to own figure %%%
-\usepackage{subfig}
+\usepackage{subcaption}
 %%% Package  for various text symbols such as degree, euro, etc. %%%
 \usepackage{textcomp}
 %%% Enhancement for footnote related stuff (e.g. footref) %%%
@@ -126,6 +126,12 @@
 \usepackage{csquotes}
 %%% Enable SVG images
 \usepackage{svg}
+%%% Enable text rotation
+\usepackage{rotating}
+%% Enable the possibility to mess with collumns in tables
+\usepackage{array}
+%% Better tables i guess
+\usepackage{tabularx}
 
 \usepackage{xargs}
 % Allow todo notes

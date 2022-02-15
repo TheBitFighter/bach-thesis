@@ -1,12 +1,129 @@
 %!TEX spellcheck
+%!TEX root = ../bachelor_paper.tex
 \documentclass[../bachelor_paper.tex]{subfiles}
 \graphicspath{{\subfix{images/}}}
 \begin{document}
 
 \chapter{Architecture}
     \label{ch:arch}
-    
+In contrast to most approaches presented in section \ref{ch:prob}, we do not observe outside metrics of the hardware or instrument the measured workload itself. The goals set out were to be able to measure detailed information about the similarity of two workloads beyond simple execution time while only requiring one hardware platform for measurement. Additionally, the workload tested should not require any modification which could impact performance and thus possibly skew any real world application dependent on outside interrupts. We thus concluded the most effective method to be modifying open source hardware and extract data directly from the running core. While this specific implementation is, in the context of all RISC-V \acp{MCU}, merely a proof of concept, it can be used to determine similarity of programs and thus representativeness of benchmarks on the specific platform it was implemented on.
 
+We designed an architecture that aims to measure the stress on the same subsystems as \cite{phansalkarMeasuringProgramSimilarity2005,joshiMeasuringBenchmarkSimilarity2006,eeckhoutQuantifyingImpactInput} while simplifying certain data points to the specific environment provided by RI5CY. While some data points have been adopted without change, some have been modified as the alternate data point might be simpler to measure and sufficient for determining similarity on RI5CY. We will justify our choices as well as elaborate on the implementation of all data points read.
+
+The data points are handed from a hardware add-on inside the RI5CY core to the Linux instance running on the Dual ARM\textsuperscript{\textregistered} Cortex\textsuperscript{\textregistered}-A9 MPCore\textsuperscript{TM} hard \ac{IP}.
+
+We thus preset \emph{datalynx}, a non-invasive data gathering engine implemented as an extension to RI5CY. datalynx consists of three main parts: An encoder addon to the \ac{CSR} module inside the RI5CY core called \emph{enlynx}, an AXI GPIO based connection between the Pulpissimo \ac{SoC} and the ARM\textsuperscript{\textregistered} hard \ac{IP} called \emph{datalynx bridge}, and finally a Linux based software logger, reading data from the memory mapped GPIO units called \emph{delynx}.
+
+\section{Observed features}
+We attempt to measure the impact of workloads run on the core on different subsystems. In the following we will describe the data points measured by the hardware add-on we call \emph{enlynx}.
+
+\subsection{Utilization}
+    \label{sub:arch/feat/ut}
+In order to gauge utilization of the different subsystems, we have opted to measure the total number of instructions, the number of memory load instructions, the number of memory store instructions, the number of arithmetic instructions except multiplication, the number of multiplication instructions, the number of branching instructions, the number of jump instructions, the number of hardware loop initializations (further described in section \todo{add reference}), as well as the number of \ac{FPU} operations. From this, we can calculate the percentage share of each of those instruction types. \todo{load store as one?}
+
+An instruction is registered every time the decode stage marks an instruction as valid.
+
+A load instruction is registered when the \ac{MPU} \todo{find other usages of MPU in text} sends out a data request, the data request is granted, data write enable is not raised, and the decode stage marks the instruction as valid. A store instruction is registered when the \ac{MPU} sends out a data request, the request is granted, data write enable is raised, and the decode stage marks the instruction as valid.
+
+We have decided to split multiplication instructions from other arithmetic instructions as the former is handled by a dedicated multiplication unit which can also handle dot product multiplication \cite{gautschiNearThresholdRISCVCore2017}. While the multiplication unit can handle these operations within a single cycle, we felt the necessity to split these operations for the sake of completeness. An arithmetic instruction is registered every time the \ac{ALU} is invoked and the decode stage marks the instruction as valid, a multiplication instruction is registered every time the multiplication unit is invoked and the decode stage marks the instruction as valid.
+
+A branching instruction is registered when a branching instruction reaches the execution stage and the decode stage marks the instruction as valid. A branch taken is registered when a branching instruction reaches the execution stage, the decode stage marks the instruction as valid, and the execution stage marks a positive branching decision. A jump instruction is recorded when the decode stage encounters a jump instruction and the decode stage marks the instruction as valid. A hardware loop initialization is recorded when the write enable for the iteration counter is raised and the decode stage marks the instruction as valid. 
+
+An \ac{FPU} instruction is recorded when the \ac{APU} enabled signal is raised by the execution stage and the decode stage marks the instruction as valid.
+
+\subsection{Control Flow Behavior}
+To measure the control flow behavior of RI5CY, we record the number of branching instructions, the number of taken branches, the number of \ac{HWL} initializations, as well as the number of \ac{HWL} induced branches.
+
+RI5CY does not use any sophisticated branch predictors but utilizes a simple \emph{branch not taken} approach. For this reason, we can ignore features like branch transition rate \cite{haungsBranchTransitionRate2000} for this specific architecture. Occurrence of branching instructions and taken branches are recorded as described in section \ref{sub:arch/feat/ut}. For a more generalized approach, a more pattern based method of recording branch behavior might be desirable, as more complex architectures often implement prediction schemes based on patterns in the branching history.
+
+We record the number of hardware loop initializations as we want to measure a potential representativeness change when compiling programs with and without \acp{HWL} enabled. Additionally, we should see a change in performance as \acp{HWL} do not cause stalls on a backwards facing branch during loop execution. As RI5CY only employs a \emph{branch not taken} approach, a backwards facing branch belonging to a \texttt{for}-loop will always but the last execution cause delays when executed.
+
+\subsection{Instruction Level Parallelism}
+We have opted to omit \ac{ILP} as a point of measurement in this implementation, as Pulpissimo is a single core \ac{MCU}. Since its bigger brother Pulp \cite{pulliniMrWolfEnergyPrecision2019} is a multi-core \ac{MCU}, adding support for \ac{ILP} measurement might be desired for a future iteration.
+
+\subsection{Cache and Data}
+RI5CY does not feature a full level 1 cache. Instead, a 4 instruction deep prefetch buffer is used to minimize delays towards the decode stage. We attempt to measure the effectiveness of this prefetch buffer by comparing the amount of instructions executed to the amount of instructions requested by the buffer. Because of this implementation, we have opted to omit data spacial and temporal locality, as virtually no locality effects can be exploited by this system. However, the prefetch buffer still acts as a loop instruction buffer for the \ac{HWL} system. Thus, a program with less average instruction count inside \texttt{for}-loops should see a better instruction to load ratio overall.
+
+An instruction request is recorded when the prefetch buffer sends an instruction request to the \ac{MPU} and the \ac{MPU} grants the request.
+
+\subsection{Additional flags}
+Additionally to the described main features, the data link contains several other flags to indicate the state of the system. An overflow vector indicates the saturation of each counter where one bit signals the saturation of its respective counter. Lastly, the end of program is indicated to the logger on the Linux side by the \texttt{eop} flag.
+
+\section{enlynx}
+Events are registered via the enlynx add-on to the \ac{CSR} unit. It is implemented similarly but separate to the \ac{PC} module. Unlike the \ac{PC} module, the counters are not implemented as readable registers but as configurable width counters. As the limit of the Xilinx\textsuperscript{\textregistered} provided AXI GPIO 2.0 units is 32 bits, we have opted for 32 bit unsigned integer counters to make the setup as simple as possible as well as maximize the value range. The GPIOs are memory mapped in Linux starting at address \texttt{0x4120\_0000}. Table \ref{tab:arch/enl/memmap} shows the memory layout as observed in Linux. Counter width can be configured via parameters in the \texttt{xilinx\_pulpissimo.v} top module by changing the \texttt{NLYNX\_COUNTER\_WIDTH} parameter. Increasing the counter width beyond 32 bit would require reconfiguration of the datalynx block diagram, as two GPIO ports would be needed for a single event counter.
+
+\begin{table}
+    \centering
+    \begin{tabular}{lp{0.08\linewidth}p{0.13\linewidth}p{0.5\linewidth}}
+        \hline \\[-0.9em]
+        \textbf{Counter}    & \textbf{GPIO unit \#} & \textbf{Memory address}   & \textbf{Description}  \\
+        \hline \\[-0.9em]
+        \texttt{instr\_cnt} & 0.1                   & \texttt{0x4120\_0000}     & Instruction count     \\
+        \texttt{load\_cnt}  & 0.2                   & \texttt{0x4120\_0008}     & Number of load instructions encountered \\
+        \texttt{store\_cnt} & 1.1                   & \texttt{0x4121\_0000}     & Number of store instructions encountered \\
+        \texttt{alu\_cnt}   & 1.2                   & \texttt{0x4121\_0008}     & Number of arithmetic instructions excluding multiplication encountered \\
+        \texttt{mult\_cnt}  & 2.1                   & \texttt{0x4122\_0000}     & Number of multiplication instructions encountered \\
+        \texttt{branch\_cnt}& 2.2                   & \texttt{0x4122\_0008}     & Number of branching instructions seen \\
+        \texttt{branch\_taken\_cnt} & 3.1           & \texttt{0x4123\_0000}     & Number of taken branches \\
+        \texttt{fpu\_cnt}   & 3.2                   & \texttt{0x4123\_0008}     & Number of \ac{FPU} instructions \\
+        \texttt{jump\_cnt}  & 4.1                   & \texttt{0x4124\_0000}     & Number of jumps see \\
+        \texttt{hwl\_init\_cnt} & 4.2               & \texttt{0x4124\_0008}     & Number of \ac{HWL} initializations \\
+        \texttt{hwl\_jump\_cnt} & 5.1               & \texttt{0x4125\_0000}     & Number of \ac{HWL} induced jumps \\
+        \texttt{inst\_fetch\_cnt} & 5.2             & \texttt{0x4125\_0008}     & Number of instruction fetches by the prefetch buffer \\
+        \texttt{cycl\_wasted\_cnt} & 6.1            & \texttt{0x4126\_0000}     & Number of cycles wasted \\
+        \texttt{eop}        & 7.1                   & \texttt{0x4127\_0000}     & End of program flag \\
+        \texttt{overflow}   & 7.2                   & \texttt{0x4127\_0002}     & Overflow vector \\
+        \hline
+    \end{tabular}
+    \caption{Memory map for the event counters in Linux}
+    \label{tab:arch/enl/memmap}
+\end{table}
+
+Like the \ac{PC} module, the counter can be enabled and disabled via a write to a control register at address \texttt{0x7A2}. This is to crop out any instructions executed by the runtime prior to payload execution. The register holds two bits of information. \todo{rework control register} Bit \texttt{0} enables or disables the counter. When the flag is raised, the global counter inside enlynx will increase at every positive clock edge for events which have a raised flag. This information is not be visible at the GPIO output right away. Bit \texttt{1} is connected to the \texttt{eop} flag at the output. The reset value for the control register is \texttt{0x0000\_0000}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|*{32}{>{\centering\arraybackslash}p{0.004\linewidth}|}}
+        \multicolumn{1}{c}{\tiny{31}} & \multicolumn{29}{c}{} & \multicolumn{1}{c}{\tiny{1}} & \multicolumn{1}{c}{\tiny{0}} \\
+        \hline
+        & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \begin{turn}{-90}\scriptsize{\textbf{eop flag}}\end{turn} & \begin{turn}{-90}\scriptsize{\textbf{counter enable}}\end{turn}\\
+        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+        \hline
+    \end{tabular}
+    \bigskip
+
+    \begin{tabular}{p{0.07\linewidth} p{0.07\linewidth} p{0.75\linewidth}}
+        \hline \\[-0.9em]
+        \textbf{Bit \#}  & \textbf{R/W}  & \textbf{Description} \\
+        \hline \\[-0.9em]
+        0               & R/W           & \textbf{Counter enable:} Activate/deactivate all event counting. If this bit is 0, all event counting is disabled. After reset, this bit is not set.\\
+        1               & R/W           & \textbf{eop flag:} Set the counter to total mode and indicate end of program. If this bit is not set, counter values outputted to the datalynx bridge indicate the metrics of the previous instruction section. Metrics are updated every time a new section is completed. If this bit is set, total metrics since the last reset are outputted to the datalynx bridge. After reset, this bit is not set.\\
+        \hline
+    \end{tabular}
+    \caption{\ac{CSR} layout for the enlynx control register}
+    \label{tab:arch/enl/csrlayout}
+\end{table}
+
+The enlynx module has two modes: section mode and total mode. Section mode is active as long as the \texttt{eop} bit inside the \ac{CSR} has not been set. In section mode, the GPIOs show the counter values of the last 1024 instructions executed in the core. This window size can be adjusted by changing the \texttt{NLYNX\_SECTION\_SIZE} \todo{pull this up in hardware} parameter in the \texttt{xilinx\_pulpissimo.v} top module. Window sizes can be set to powers of 2, where the parameter indicates the exponent. Data will only be visible after the amount of instructions given by the window have been completed, furthermore there is no indication for data change on the output. The values are collected regularly by the delynx decoder and are solely meant to visualize behavioral changes of programs over time. As the metrics recorded have been chosen to be able to represent overall behavior of a program, these data points are mostly meant for visualization purposes. A further study might explore possible effects these changes could have like power draw or heat dissipation, but we expect them to be minor overall in the context of embedded devices.\\
+Total mode is active as soon as the \texttt{eop} flag has been set. The GPIOs show global counters since the last reset of the core. If a counter has been saturated since the last reset, the output will show \texttt{0xFFFF\_FFFF} and the corresponding bit of the overflow vector is set.
+
+The overflow vector is tied to the global counter in the module. Although a sectional counter might not be saturated, data is to be treated invalid as soon as the overflow flag of a specific counter is set.
+
+Payloads are not supposed to read from or write to the enlynx \ac{CSR}. Accesses to the register are made by the Pulp runtime only just before and after payload execution.
+
+\section{Communication with the Linux system}
+Communication with the Linux system is achieved via the aforementioned AXI GPIO units. These units have two input ports on the \ac{PL} side with a width of 32 bit each. These GPIO units communicate with the Zynq\textsuperscript{\textregistered}-7000 processing system via an AXI crossbar module. The GPIO units, the AXI crossbar unit, as well as the Zynq\textsuperscript{\textregistered}-7000 processing system are provided by Xilinx\textsuperscript{\textregistered} as \ac{IP}-cores. As mentioned before, the inputs of the GPIO are mapped into memory by the Linux operating system and the memory map is visible in table \ref{tab:arch/enl/memmap}. The block diagram is visible in figure \ref{fig:arch/comm/block} and we call this component the datalynx bridge.
+
+\section{delynx}
+The delynx decoder is a simple program running on the \ac{PS} side of the \ac{SoC}. It is executed by the make file initializing the tests and continually reads the data provided by the datalynx bridge. The read intervals are controlled on a time basis rather than a window basis to represent the change of program behavior over time. This is a possible point of data loss however. As we have explained earlier, we do not expect significant effects from temporal behavioral changes of programs and thus temporal data accuracy has not been a priority. A future iteration of the datalynx bridge might fix this shortcoming. The \texttt{eop} flat is checked before and after data has been read, to ensure global data is not accidentally read as a local value. After a transition on the \texttt{eop} flag has been seen, global data is read, saved, and the decoder terminated. Data is saved into a corresponding \texttt{.csv} file containing time stamps and values read.
+
+\begin{figure}
+    \centering
+    %\includesvg[width=0.6\columnwidth]{ri5cy_blockdiagram}
+    \includegraphics[width=0.6\columnwidth]{placeholder}
+    \caption{Block diagram of the datalynx bridge}
+    \label{fig:arch/comm/block}
+\end{figure}
 
 % Render bibliograhy and acronyms if rendered standalone
 \isstandalone
