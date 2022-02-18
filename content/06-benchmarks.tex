@@ -1,11 +1,17 @@
 %!TEX spellcheck
+%!TEX root = ../bachelor_paper.tex
 \documentclass[../bachelor_paper.tex]{subfiles}
 \graphicspath{{\subfix{images/}}}
 \begin{document}
 
 \chapter{Benchmarks}
     \label{ch:bench}
-    
+
+The scenery of possible benchmarks to run is almost as varied as the scenery of architectures out there. Over the years however, some suits have established themselves as the standard go-to for embedded systems, with the embedded part posing some specific restrictions on what programs can be run. While being one of the most well known benchmarks of all time, suits like SPEC are meant for high performance computing and assume an underlying operating system to be present \cite{SystemRequirementsCPU}. Additionally, raw performance might not be the primary goal of a microarchitecture design. Additional requirements, like draconian power restrictions to maximize battery life might have much higher importance. For this reason, specialized benchmark suites are assembled to explore the much different landscape of embedded computing. In the following, we will present a selection of benchmarks we are using for our investigation.
+
+\section{Coremark}
+Coremark may be one of the most well known benchmarks out of this list. It is a purely synthetic benchmark aimed at providing a single performance score for as many embedded systems as possible. From the list presented here, Coremark is the only fully synthetic benchmark, which makes the comparison against an actual workload that much more interesting. The three main focuses of the benchmark are list processing, matrix processing, as well as state machine processing. List processing iterates through a list of data containing either precomputed values or algorithm invocation instructions, where the list itself is also searched, inversed and searched. Matrix processing mainly strains the compute engine of a core, performing matrix operations which cannot be computed at compile time. These operations are also meant to test the efficiency of a cores compiler optimization as well as tight loop operations and \ac{SIMD} instructions. State machine processing mainly strains the control flow part of a core, using \texttt{if}-statements as the list portion is already implemented using \texttt{switch}-statements \cite{gal-onExploringCoremarkBenchmark2012}.\\
+As already mentioned, the synthetic nature makes Coremark an especially interesting target for comparison against an actual demo workload. Coremark's instruction profile also strongly varies over time \cite{gal-onExploringCoremarkBenchmark2012}, which should be reflected in sectional data as explained in \ref{sec:arch/enlynx}.
 
 \section{Benchmarks}
     \label{ch:theo/benc}

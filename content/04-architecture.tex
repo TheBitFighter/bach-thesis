@@ -51,6 +51,7 @@ An instruction request is recorded when the prefetch buffer sends an instruction
 Additionally to the described main features, the data link contains several other flags to indicate the state of the system. An overflow vector indicates the saturation of each counter where one bit signals the saturation of its respective counter. Lastly, the end of program is indicated to the logger on the Linux side by the \texttt{eop} flag.
 
 \section{enlynx}
+    \label{sec:arch/enlynx}
 Events are registered via the enlynx add-on to the \ac{CSR} unit. It is implemented similarly but separate to the \ac{PC} module. Unlike the \ac{PC} module, the counters are not implemented as readable registers but as configurable width counters. As the limit of the Xilinx\textsuperscript{\textregistered} provided AXI GPIO 2.0 units is 32 bits, we have opted for 32 bit unsigned integer counters to make the setup as simple as possible as well as maximize the value range. The GPIOs are memory mapped in Linux starting at address \texttt{0x4120\_0000}. Table \ref{tab:arch/enl/memmap} shows the memory layout as observed in Linux. Counter width can be configured via parameters in the \texttt{xilinx\_pulpissimo.v} top module by changing the \texttt{NLYNX\_COUNTER\_WIDTH} parameter. Increasing the counter width beyond 32 bit would require reconfiguration of the datalynx block diagram, as two GPIO ports would be needed for a single event counter.
 
 \begin{table}
