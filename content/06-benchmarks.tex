@@ -7,37 +7,61 @@
 \chapter{Benchmarks}
     \label{ch:bench}
 
-The scenery of possible benchmarks to run is almost as varied as the scenery of architectures out there. Over the years however, some suits have established themselves as the standard go-to for embedded systems, with the embedded part posing some specific restrictions on what programs can be run. While being one of the most well known benchmarks of all time, suits like SPEC are meant for high performance computing and assume an underlying operating system to be present \cite{SystemRequirementsCPU}. Additionally, raw performance might not be the primary goal of a microarchitecture design. Additional requirements, like draconian power restrictions to maximize battery life might have much higher importance. For this reason, specialized benchmark suites are assembled to explore the much different landscape of embedded computing. In the following, we will present a selection of benchmarks we are using for our investigation.
+When looking at possible benchmarks for microarchitectural design evaluation, the number of options is almost as varied as the design options of the architecture implementation itself, and for good reason. Different suits focus on different performance aspects, scoring methods, system requirements and more criteria.\todo{ehhh} While \acs{SPEC} might be one of the most well known suits in general, its requirement for an operating system and focus on high performance render it impractical for an embedded context. At the same time, \acs{SPEC} does not compare performance to power drain as strict power constraints are only vaguely existent in the desktop computing space. In the following we will present the list of benchmarks we selected to compare against our demonstration workload. Naturally, these benchmark suits are designed for an embedded context, but vastly vary in composition, goal, and score evaluation. We feel these benchmarks to be the most commonly used ones when evaluating embedded designs.
 
 \section{Coremark}
-Coremark may be one of the most well known benchmarks out of this list. It is a purely synthetic benchmark aimed at providing a single performance score for as many embedded systems as possible. From the list presented here, Coremark is the only fully synthetic benchmark, which makes the comparison against an actual workload that much more interesting. The three main focuses of the benchmark are list processing, matrix processing, as well as state machine processing. List processing iterates through a list of data containing either precomputed values or algorithm invocation instructions, where the list itself is also searched, inversed and searched. Matrix processing mainly strains the compute engine of a core, performing matrix operations which cannot be computed at compile time. These operations are also meant to test the efficiency of a cores compiler optimization as well as tight loop operations and \ac{SIMD} instructions. State machine processing mainly strains the control flow part of a core, using \texttt{if}-statements as the list portion is already implemented using \texttt{switch}-statements \cite{gal-onExploringCoremarkBenchmark2012}.\\
-As already mentioned, the synthetic nature makes Coremark an especially interesting target for comparison against an actual demo workload. Coremark's instruction profile also strongly varies over time \cite{gal-onExploringCoremarkBenchmark2012}, which should be reflected in sectional data as explained in \ref{sec:arch/enlynx}.
+Coremark is a purely synthetic benchmark aimed at providing a single performance score for as many embedded systems as possible. From the list presented here, Coremark is the only fully synthetic benchmark, which makes the comparison against an actual workload much more interesting. The benchmark consists of three main segments, which are list processing, matrix processing, and state machine processing. List processing iterates through a list of data containing either precomputed values or algorithm invocation instructions, where the list itself is also searched, inversed and sorted. Matrix processing mainly strains the compute engine of a core, performing matrix operations which cannot be computed at compile time. These operations are also meant to test the efficiency of a core's compiler optimizations as well as its handling of tight loop operations and \ac{SIMD} instructions. State machine processing mainly strains the control flow part of a core, using \texttt{if}-statements as the list portion is already implemented using \texttt{switch}-statements \cite{gal-onExploringCoremarkBenchmark2012}.
 
-\section{Benchmarks}
-    \label{ch:theo/benc}
-We will start this section by mentioning the two in scientific circles ost well known benchmark suits, the \emph{SPEC suit} and \emph{Coremark}.
+As already mentioned, its synthetic nature makes Coremark an especially interesting target for comparison against an actual demo workload. Coremark's instruction profile also strongly varies over time \cite{gal-onExploringCoremarkBenchmark2012}, which should be reflected in sectional data as explained in \ref{sec:arch/enlynx}.
 
-\subsection{SPEC suite}
-    \label{ch:theo/benc/spec}
-The \ac{SPEC} is a non-profit corporation, founded in 1988 by Apollo, Hewlett Packard, MIPS and Sun Microsystems. \cite{dixitSPECBenchmarks1991} The idea was to provide uniform tools to evaluate performance of an artifact in a way where it could be compared to a architecturally different artifact. This however posed one of the greatest questions: What even is performance? And \todo{remove the joke} if yes, how does one measure it?\\
-The biggest problem at hand was the fundamental difference between the systems, \ac{SPEC}\footnote{\ac{SPEC} is used for the institution and their benchmarking suite interchangeably} aims to provide. According to the official website of \ac{SPEC} CPU\rsym 2017, the current iteration of the CPU benchmark offered by \ac{SPEC}, toolsets for ARM, Power ISA, SPARC, and x86 are provided. It is possible to easily port the benchmarks for other \ac{ISA}s as well, should one need it. The benchmarks were specifically selected to be easily portable between different platforms. Modifications were added to make the code as platform agnostic, and the codepath as uniform as possible.
+\section{MiBench}
+MiBench came about it 2001 and was a response to \acs{SPEC} on the desktop side as a standardized benchmark computing suite meant for embedded applications. Its intention was to assemble a portable suite of open source software able to run on as many systems as possible and to be as representative as possible \cite{guthausMiBenchFreeCommercially2001}. In contrast to Coremark, MiBench is a compilation of actual problem solving applications and does not contain purely synthetic elements. MiBench is separated into the categories Automotive and
+Industrial Control, Network, Security, Consumer Devices, Office Automation, and Telecommunications. Each category consists of a set of programs representative of applications possibly run on processors of said category at the time of benchmark design as seen in table \ref{tab:bench/mibench/apps}. \cite{guthausMiBenchFreeCommercially2001} goes on to show that MiBench has a higher variation in instruction profiles compared to its desktop counterpart \acs{SPEC}2000. Thus, selecting not only the right sub-suite, but also the right program(s) from the chosen sub-suite(s) poses an interesting challenge to solve. However, the benchmark suite also assumes a host operating system for most of it's programs \cite{pallisterBEEBSOpenBenchmarks2013}. This is a rather steep constraint and applications with that requirement will not be tested on our platform. \todo{check this in benchmark script}
 
-This reveals the second issue \ac{SPEC} has: The selection of benchmarks is more democratic than scientific. When a new iteration of \ac{SPEC} CPU\rsym is created, \ac{SPEC} puts out a call for programs representing real life workloads and meeting their portability criteria. Members of the board vote for the inclusion of a particular workload. \cite{henningSPECCPU2000Measuring2000} This means the representation of workloads is somewhat balanced, as no architecture shall be favored; however vendor interest is hardly a scientific criterion. 
+\begin{table}
+    \centering
+    \begin{tabular}{llllll}
+        \textbf{Auto./Industrial}   & \textbf{Consumer} & \textbf{Office}   & \textbf{Network}  & \textbf{Security}     & \textbf{Telecom.} \\
+        \hline\\[-0.9em]
+        basicmath           & jpeg          & ghostscript   & dijkstra  & blowfish enc. & CRC32     \\
+        bitcount            & lame          & ispell        & patricia  & blowfish dec. & FFT       \\
+        qsort               & mad           & rsynth        & (CRC32)   & pgp sign      & IFFT      \\
+        susan (edges)       & tiff2bw       & sphinx        & (sha)     & pgp verify    & ADPCM enc.\\
+        susan (corners)     & tiff2rgba     & stringsearch  & (blowfish)& rijndael enc. & ADPCM dec.\\
+        susan (smoothing)   & tiffdither    &               &           & rijndael dec. & GSM enc.  \\
+                            & tiffmedian    &               &           & sha           &           \\
+                            & typeset       &               &           &               &           \\
+        \hline
+    \end{tabular}
+    \caption{Applications contained in the different sub-suites of MiBench \cite{guthausMiBenchFreeCommercially2001}}
+    \label{tab:bench/mibench/apps}
+\end{table}
 
-The \ac{SPEC} suit stresses the toolchain as a whole as the programs are provided as source code. Different compiler settings thus may lead to vastly different results on a single platform. \ac{SPEC} counters this by adding a full system report to the result of a benchmark run and encrypting them. \cite{bucekSPECCPU2017NextGeneration2018} Still, different toolchains may react differently to certain code patters. One of the criteria for inclusion is the predictability of the codepath, but while somewhat predictable, they are still not identical. 
+\section{BEEBS}
+BEEBS' main focus is the exploration of energy consumption. The corresponding whitepaper was published in 2013 and is designed for embedded applications. BEEBS is a conglomerate of workloads cherry picked from already existing benchmark suites with a main focus on providing applications big enough to be representative while setting as little requirements for the host platform as possible (storage requirements, file system, ...). They group the applications contained by four different categories corresponding to strain exerted on different subsystems of a core under test. Each of the categories, integer operations, floating point operations, memory access intensity, and branching frequency, are marked with either low, medium, or high \cite{pallisterBEEBSOpenBenchmarks2013}. The benchmarks were mostly sourced from the MiBench suite \cite{guthausMiBenchFreeCommercially2001} with 3 applications being derived from the WCET suite \cite{gustafssonMalardalenWCETBenchmarks2010} and one from DSPStone \cite{zivojnovicDSPstoneDSPorientedBenchmarking1994}, as seen in table \ref{tab:bench/beebs/apps}. The table also shows their categorization according to the grouping criteria laid out by \cite{pallisterBEEBSOpenBenchmarks2013}. The resulting set was tested on different architectures representing different tiers of processors. As the main metric to be observed is power consumption, a memory access on an implementation featuring a cache uses a different amount of energy than the same access on an implementation without one. The applications were validated on a Cortex-M0 processor, a simple single core implementation, an XMOS L1, an event driven platform with eight hardware threads, and Epiphany, a super scalar 16-core processor \cite{pallisterBEEBSOpenBenchmarks2013}. The benchmarks were validated by generating instruction traces in order to ensure a large enough spread in operation distribution.
 
-And finally, \ac{SPEC} CPU\rsym requires the use of a Unix like \ac{OS} or Windows\footnote{For further information see \cite{SystemRequirementsCPU}} and at least 1Gbyte of \ac{RAM} for \ac{SPEC}rate per copy when compiled in 32 bit and up to 16Gbyte for \ac{SPEC}speed. It is trivial to see how those two are knockout criteria for an \ac{MPU} focused core. Nevertheless, \ac{SPEC} is easily the most well studied benchmark suit out there. It is a well put together suit of programs, meant to test the limit of high performance machines. It stresses the system as a whole in a rather extensive set of use cases. We will come back to \ac{SPEC} in section \todo{blah}.
+BEEBS' most interesting characteristic in our context is the difference in pipelines for multiplication in RI5CY as explained in section \ref{sec:plat/pipe}. 
 
-\subsection{Coremark}
-    \label{ch:theo/benc/core}
-While the idea of Coremark is similar to \ac{SPEC}, they approach the problem from the opposite angle. To our knowledge, not a lot of research papers have been published on Coremark, most of the information given here is from the whitepaper \cite{gal-onExploringCoremarkBenchmark2012}.
-
-Similar to \ac{SPEC}, Coremark tries to come up with a single performance number to characterize a given core. Where \ac{SPEC} consists of real world programs adapted to work as a benchmarking workload, Coremark consists of an artificially constructed workload engineered to stress different subsystems separately to the best of its abilities. The workload still stays the same for different artifacts so while a specific workload is still handled in cache on one artifact, it might be already stressing the memory system on another.
-
-While Coremark takes steps to ensure portability of code between different artifacts like not using malloc, \ac{ISA} specific tools like \ac{SIMD} instructions and \ac{MAC unit}s are still used as they ultimately contribute to the overall performance of an artifact. Just like \ac{SPEC}, the compiler still has significant influence over how well a given artifact might perform. E.g. it can be configured to generate a smaller executable to fit on systems with less storage, which drops the performance roughly by 19\% \cite{gal-onExploringCoremarkBenchmark2012}. While this might suggest a large file size, \textit{smaller} may be misleading. By default, Coremark requires a total space of roughly 2 Kbytes compared to the minimum memory of 1 Gbyte for \ac{SPEC}rate in 32 Bit mode and a total install size of 250 Gbyte (or 1.2 Gbyte for \ac{SPEC}rate per copy). \cite{SystemRequirementsCPU}
-
-We will use Coremark as a target to analyze, since it is the most used benchmark for the kind of platforms this paper is targeting.
-
+\begin{table}
+    \centering
+    \begin{tabular}{lllllll}
+    \textbf{Name}   & \textbf{Source}   & \textbf{B} & \textbf{M} & \textbf{I} & \textbf{FP}    & \textbf{Category} \\
+    \hline\\[-0.9em]
+    Blowfish        & MiBench   & L & M & H & L & Security \\
+    CRC32           & MiBench   & M & L & H & L & Telecom. \\
+    Cubic root solver & MiBench & L & M & H & L & Automotive \\
+    Dijkstra        & MiBench   & M & L & H & L & Network  \\
+    FDCT            & WCET      & H & H & L & H & Consumer \\
+    Float Matmult   & WCET      & M & H & M & M & Automotive, consumer \\
+    Integer Matmult & WCET      & M & M & H & L & Automotive \\
+    Rijndael        & MiBench   & H & L & M & L & Security \\
+    SHA             & MiBench   & H & M & M & L & Network, security \\
+    2D FIR          & DSPstone  & H & M & L & H & Automotive, consumer \\
+    \hline
+    \end{tabular}
+    \caption{Applications contained in BEEBS, their origins, and their categorization \cite{pallisterBEEBSOpenBenchmarks2013}}
+    \label{tab:bench/beebs/apps}
+\end{table}
 
 % Render bibliograhy and acronyms if rendered standalone
 \isstandalone
