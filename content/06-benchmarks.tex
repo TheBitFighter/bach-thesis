@@ -7,7 +7,7 @@
 \chapter{Benchmarks}
     \label{ch:bench}
 
-When looking at possible benchmarks for microarchitectural design evaluation, the number of options is almost as varied as the design options of the architecture implementation itself, and for good reason. Different suits focus on different performance aspects, scoring methods, system requirements and more criteria.\todo{ehhh} While \acs{SPEC} might be one of the most well known suits in general, its requirement for an operating system and focus on high performance render it impractical for an embedded context. At the same time, \acs{SPEC} does not compare performance to power drain as strict power constraints are only vaguely existent in the desktop computing space. In the following we will present the list of benchmarks we selected to compare against our demonstration workload. Naturally, these benchmark suits are designed for an embedded context, but vastly vary in composition, goal, and score evaluation. We feel these benchmarks to be the most commonly used ones when evaluating embedded designs.
+When looking at possible benchmarks for microarchitectural design evaluation, the number of options is almost as varied as the design options of the architecture implementation itself, and for good reason. Different suits focus on different performance aspects, scoring methods, system requirements and more criteria.\todo{ehhh} While \acs{SPEC} might be one of the most well known suits in general, its requirement for an operating system and focus on high performance render it impractical for an embedded context. At the same time, \acs{SPEC} does not compare performance to power drain as strict power constraints are only vaguely existent in the desktop computing space. In the following we will present the list of benchmarks we selected to compare against our demonstration workload. Naturally, these benchmark suits are designed for an embedded context, but vastly vary in composition, goal, and score evaluation. We feel these benchmarks to be the most commonly used ones when evaluating embedded designs. \todo{neu schreiben}
 
 \section{Coremark}
 Coremark is a purely synthetic benchmark aimed at providing a single performance score for as many embedded systems as possible. From the list presented here, Coremark is the only fully synthetic benchmark, which makes the comparison against an actual workload much more interesting. The benchmark consists of three main segments, which are list processing, matrix processing, and state machine processing. List processing iterates through a list of data containing either precomputed values or algorithm invocation instructions, where the list itself is also searched, inversed and sorted. Matrix processing mainly strains the compute engine of a core, performing matrix operations which cannot be computed at compile time. These operations are also meant to test the efficiency of a core's compiler optimizations as well as its handling of tight loop operations and \ac{SIMD} instructions. State machine processing mainly strains the control flow part of a core, using \texttt{if}-statements as the list portion is already implemented using \texttt{switch}-statements \cite{gal-onExploringCoremarkBenchmark2012}.
@@ -63,6 +63,8 @@ BEEBS' most interesting characteristic in our context is the difference in pipel
     \label{tab:bench/beebs/apps}
 \end{table}
 
+\section{Embench}
+\todo{add this}
 % Render bibliograhy and acronyms if rendered standalone
 \isstandalone
 \bibliographystyle{IEEEtran}
