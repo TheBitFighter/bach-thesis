@@ -36,20 +36,20 @@ As seen in figure \ref{fig:perf/power/split}, the share of dynamic power losses 
 \end{table}
 \begin{table}
     \centering
-    \begin{tabular}{llp{0.15\linewidth}p{0.15\linewidth}p{0.15\linewidth}p{0.15\linewidth}}
-    \textbf{Resource}   & \textbf{Available}    & \textbf{Utilization unmodified} & \textbf{Utilization \% unmodified}  & \textbf{Utilization modified}   & \textbf{Utilization \% modified}\\
+    \begin{tabular}{llp{0.15\linewidth}p{0.15\linewidth}p{0.15\linewidth}p{0.15\linewidth}l}
+    \textbf{Resource}   & \textbf{Available}    & \textbf{Utilization unmodified} & \textbf{Utilization \% unmodified}  & \textbf{Utilization modified}   & \textbf{Utilization \% modified}    & \textbf{Change}\\
     \hline
-    \acs{LUT}           & 53200                 & 43502                     & 81.77\%                       & 46432                     & 87.28\%   \\
-    \acs{LUTRAM}        & 17400                 & 12                        & 0.07\%                        & 74                        & 0.43\%    \\
-    \acs{FF}            & 106400                & 22526                     & 21.17\%                       & 28214                     & 26.52\%   \\
-    \acs{BRAM}          & 140                   & 128                       & 91.43\%                       & 128                       & 91.43\%   \\
-    \acs{DSP}           & 220                   & 12                        & 5.45\%                        & 12                        & 5.45\%    \\
-    \acs{IO}            & 200                   & 38                        & 19.00\%                       & 38                        & 19.00\%   \\
-    \acs{BUFG}          & 32                    & 9                         & 28.13\%                       & 10                        & 31.25\%   \\
-    \acs{MMCM}          & 4                     & 2                         & 50.00\%                       & 2                         & 50.00\%   \\
+    \acs{LUT}           & 53200                 & 43502                     & 81.77\%                       & 46432                     & 87.28\%   & x\\
+    \acs{LUTRAM}        & 17400                 & 12                        & 0.07\%                        & 74                        & 0.43\%    & x\\
+    \acs{FF}            & 106400                & 22526                     & 21.17\%                       & 28214                     & 26.52\%   & x\\
+    \acs{BRAM}          & 140                   & 128                       & 91.43\%                       & 128                       & 91.43\%   & x\\
+    \acs{DSP}           & 220                   & 12                        & 5.45\%                        & 12                        & 5.45\%    & x\\
+    \acs{IO}            & 200                   & 38                        & 19.00\%                       & 38                        & 19.00\%   & x\\
+    \acs{BUFG}          & 32                    & 9                         & 28.13\%                       & 10                        & 31.25\%   & x\\
+    \acs{MMCM}          & 4                     & 2                         & 50.00\%                       & 2                         & 50.00\%   & x\\
     \hline
     \end{tabular}
-    \caption{Resource utilization unmodified vs. modified \todo{änderungsspalte}}
+    \caption{Resource utilization unmodified vs. modified}
     \label{tab:perf/util/data}
 \end{table}
 
