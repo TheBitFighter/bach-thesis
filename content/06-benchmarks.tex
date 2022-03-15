@@ -15,6 +15,7 @@ Coremark is a purely synthetic benchmark aimed at providing a single performance
 As already mentioned, its synthetic nature makes Coremark an especially interesting target for comparison against an actual demo workload. Coremark's instruction profile also strongly varies over time \cite{gal-onExploringCoremarkBenchmark2012}, which should be reflected in sectional data as explained in \ref{sec:arch/enlynx}.
 
 \section{MiBench}
+    \label{sec:bench:mibench}
 MiBench came about it 2001 and was a response to \acs{SPEC} on the desktop side as a standardized benchmark computing suite meant for embedded applications. Its intention was to assemble a portable suite of open source software able to run on as many systems as possible and to be as representative as possible \cite{guthausMiBenchFreeCommercially2001}. In contrast to Coremark, MiBench is a compilation of actual problem solving applications and does not contain purely synthetic elements. MiBench is separated into the categories Automotive and
 Industrial Control, Network, Security, Consumer Devices, Office Automation, and Telecommunications. Each category consists of a set of programs representative of applications possibly run on processors of said category at the time of benchmark design as seen in table \ref{tab:bench/mibench/apps}. \cite{guthausMiBenchFreeCommercially2001} goes on to show that MiBench has a higher variation in instruction profiles compared to its desktop counterpart \acs{SPEC}2000. Thus, selecting not only the right sub-suite, but also the right program(s) from the chosen sub-suite(s) poses an interesting challenge to solve. However, the benchmark suite also assumes a host operating system for most of it's programs \cite{pallisterBEEBSOpenBenchmarks2013}. This is a rather steep constraint and applications with that requirement will not be tested on our platform. \todo{check this in benchmark script}
 
@@ -38,6 +39,7 @@ Industrial Control, Network, Security, Consumer Devices, Office Automation, and 
 \end{table}
 
 \section{BEEBS}
+    \label{sec:bench:beebs}
 BEEBS' main focus is the exploration of energy consumption. The corresponding whitepaper was published in 2013 and is designed for embedded applications. BEEBS is a conglomerate of workloads cherry picked from already existing benchmark suites with a main focus on providing applications big enough to be representative while setting as little requirements for the host platform as possible (storage requirements, file system, ...). They group the applications contained by four different categories corresponding to strain exerted on different subsystems of a core under test. Each of the categories, integer operations, floating point operations, memory access intensity, and branching frequency, are marked with either low, medium, or high \cite{pallisterBEEBSOpenBenchmarks2013}. The benchmarks were mostly sourced from the MiBench suite \cite{guthausMiBenchFreeCommercially2001} with 3 applications being derived from the WCET suite \cite{gustafssonMalardalenWCETBenchmarks2010} and one from DSPStone \cite{zivojnovicDSPstoneDSPorientedBenchmarking1994}, as seen in table \ref{tab:bench/beebs/apps}. The table also shows their categorization according to the grouping criteria laid out by \cite{pallisterBEEBSOpenBenchmarks2013}. The resulting set was tested on different architectures representing different tiers of processors. As the main metric to be observed is power consumption, a memory access on an implementation featuring a cache uses a different amount of energy than the same access on an implementation without one. The applications were validated on a Cortex-M0 processor, a simple single core implementation, an XMOS L1, an event driven platform with eight hardware threads, and Epiphany, a super scalar 16-core processor \cite{pallisterBEEBSOpenBenchmarks2013}. The benchmarks were validated by generating instruction traces in order to ensure a large enough spread in operation distribution.
 
 BEEBS' most interesting characteristic in our context is the difference in pipelines for multiplication in RI5CY as explained in section \ref{sec:plat/pipe}. 
@@ -63,8 +65,41 @@ BEEBS' most interesting characteristic in our context is the difference in pipel
     \label{tab:bench/beebs/apps}
 \end{table}
 
-\section{Embench}
-\todo{add this}
+\section{EmBench}
+EmBench is an open source benchmarking suite created in 2019 as one suite to measure them all. The intention was to displace benchmarks previously tagged as industry standard by assembling a free and open source suite comprised of real world programs maintained by a central organization \cite{jun11EmbenchRecruitingLong2019}. The code is available on their official website \cite{EmbenchModernEmbedded}, at version 1.0 as of writing, and consists of 19 benchmarks. These benchmarks were largely sourced from MiBench \cite{guthausMiBenchFreeCommercially2001} (see Section \ref{sec:bench:mibench}), BEEBS \cite{pallisterBEEBSOpenBenchmarks2013} (see Section \ref{sec:bench:beebs}), and TACleBench \cite{falkTACLeBenchBenchmarkCollection2016}. EmBench reports the geometric mean compared to a reference system as well as standard deviation as the single performance score. Additionally, code size of the target platform in regards to the reference system are also reported. Quite fittingly, RI5CY is the reference system for EmBench \cite{jun11EmbenchRecruitingLong2019}.
+
+\section{Summary}
+We use the benchmarking suits presented above to test our hardware framework. Due to availability and portability, we were not able to test every single program in each suite, however all programs tested can be seen in Table \ref{tab:bench/sum/run}. Additionally to the suits presented above, other benchmarks were also run due to their availability for the platform. They have been added in the \emph{Custom} category.
+
+\begin{table}
+    \centering
+    \begin{tabular}{llllll}
+        \textbf{Coremark}   & \textbf{MiBench}  & \textbf{EmBench}  & \textbf{BEEBS}    & \textbf{Custom}   \\
+        \hline\\[-0.9em]
+        Coremark            & basicmath         & aha-mont64        & crc32             & Dhrystone         \\
+                            & bitcount          & crc32             & cubic             & median            \\
+                            & dijkstra          & cubic             & dijkstra          & multiply          \\
+                            & fft               & edn               &                   & rsort             \\
+                            & qsort             & huffbench         &                   & sort              \\
+                            & stringsearch      & matmult-int       &                   & spmv              \\
+                            & susan             & minver            &                   & towers            \\
+                            &                   & nbody             &                   & vvadd             \\
+                            &                   & nettle-aes        &                   & factorial         \\
+                            &                   & nettle-sha256     &                   & nqueens           \\
+                            &                   & nsichneu          &                   & tak               \\
+                            &                   & picojpeg          &                   & nBench            \\
+                            &                   & qrduino           &                   &                   \\
+                            &                   & sglib-combined    &                   &                   \\
+                            &                   & slre              &                   &                   \\
+                            &                   & st                &                   &                   \\
+                            &                   & statemate         &                   &                   \\
+                            &                   & ud                &                   &                   \\
+                            &                   & wikisort          &                   &
+    \end{tabular}
+    \caption{Benchmarks run per suite}
+    \label{tab:bench/sum/run}
+\end{table}
+
 % Render bibliograhy and acronyms if rendered standalone
 \isstandalone
 \bibliographystyle{IEEEtran}

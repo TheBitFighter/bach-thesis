@@ -1,13 +1,14 @@
 %!TEX spellcheck
+%!TEX root = ../bachelor_paper.tex
 \documentclass[../bachelor_paper.tex]{subfiles}
 \graphicspath{{\subfix{images/}}}
 \begin{document}
 
 \chapter{Future Work}
     \label{ch:future}
-For future work we intend to compare the benchmarks presented here to a workload representative of what might be run on an actual processor in the field. While running one very specific application can never be representative of all possible workloads in the field, we want to demonstrate the capabilities of this system in a more practical environment. We also want to modify the data communication bridge from a broadcast based approach to a more meaningful push based buffered approach. Accuracy of the in flight data was not a priority for this thesis, so the simplest approach was taken. 
+Future work might compare the benchmarks presented here to a workload representative of what might be run on an actual processor in the field. While running one very specific application can never be representative of all possible workloads might applied to this artifact, we want to demonstrate the capabilities of this system in a more practical setting. We also intend to modify the data communication bridge from a broadcast-based approach to a more meaningful buffered push-based approach. Accuracy of the in flight data was not a priority for this thesis, so the simplest communication method was chosen. 
 
-Additionally, further work might be interested in 
+Additionally, further work might be interested in adapting the metrics collected to a more general processor model. As \cite{joshiDistillingEssenceProprietary2008} demonstrated, memory access behavior can be modeled using stride characteristics. These data points have been vastly simplified given the minimalist nature of the RI5CY memory system. Similarly, expanding to include metrics like branch transition rate \cite{haungsBranchTransitionRate2000} would benefit similarity measurement on platforms employing more complex branch prediction schemes. These possible expansions were outside of the scope of this thesis but would be imperative to rule out implementation reliant metrics.
 
 
 % Render bibliograhy and acronyms if rendered standalone
