@@ -26,6 +26,7 @@
 **/*.glsdefs
 **/*.bak
 **/*~
+**/*-eps-converted-to.pdf
 content/bibliography.bib
 content/*.pdf
 bachelor_paper.pdf

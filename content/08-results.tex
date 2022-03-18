@@ -7,13 +7,30 @@
 \chapter{Results}
     \label{ch:res}
     
-Overall we were able to observe bla bla bla ...
+We were able to successfully generate performance profiles for the benchmarking workloads described in Section \ref{sec:bench/sum}. The workloads vary highly in instruction distribution, however for most of them, arithmetic instructions are the dominant instruction type overall (see Figure \ref{fig:res/overall/inst}). Not all workloads tested support hardware loops. Of those which do, most of them display vastly different \ac{HWL} utilization, depending on the algorithm implemented. We will talk more about this in the following. Of special note is almost 75\% of workloads take more than 50\% of branches (see Figure \ref{fig:res/overall/branch_tk}). Given the \emph{branch not taken} approach taken in RI5CY, this incurs high branching penalties. However, it also indicates a loop-heavy algorithm. In fact, all five programs with a load coefficient less than 1 (meaning less instructions loaded from level 2 than executed) have a branch taken percentage well above 50\% (we intentionally excluded \texttt{tak} included in the \emph{custom} set here, as it only executes 2555 instructions is thus too small to draw conclusions from). 
+
+The opposite conclusion is not possible however, as loop size also matters with regards to the harsh constraint of a 4 instruction preload buffer. \texttt{nettle aes} and \texttt{nettle sha256} have a branch taken rate of 53.68\% and 91.22\% as well as a fetch coefficient of 0.91 and 0.71 respectively. Meanwhile Dhrystone only managed a fetch coefficient of 1.39 with a branch taken rate of 64.89\%. 
+
+This also ties in the above mentioned \ac{HWL} utilization. There is no obvious correlation visible between average \ac{HWL} distance, branch taken rate, and fetch coefficient.
+
+There not being any or little correlation between those metrics is in fact a good thing. The less correlation there is between these data points, the less chance for bias exists when adding a similarity profiler on top of these data sets. In future works we will explore the possibilities for benchmark selection given a certain real life workload and a set of possible benchmark applications.
+
+Lastly, we have identified three major types of programs given their temporal behavior. Not all benchmarks have been analyzed in regards to temporal behavior changes given the relatively short length of some of them. The graphs of those which have been analyzed can be found in Appendix \ref{ch:graphs}. Group 1 does not majorly change its behavior over the duration of the benchmark. All metrics are unchanged over the entire run. One example for group 1 is Dhrystone as seen in Figure \ref{fig:res/dhrystone/inst} and Figure \ref{fig:res/dhrystone/fetch_waste}. The \ac{HWL} graph for Dhrystone is missing, as Dhrystone does not utilize \acp{HWL}. Group 2 shows sectional behavior changes, where sections have relatively stable behavior with stark changes between sections. An example for group 2 would be \texttt{bitcount}, the temporal behavior graphs of which can be seen in Figure \ref{fig:res/bitcount/inst}, Figure \ref{fig:res/bitcount/hwl}, and Figure \ref{fig:res/bitcount/fetch_waste}. Group 3 fluctuates strongly during the entire duration of the benchmark. Examples for group 3 are the synthetic Coremark, as can be seen in Figure \ref{fig:res/coremark/inst}, Figure \ref{fig:res/coremark/hwl}, and Figure \ref{fig:res/coremark/fetch_waste}, as well as \texttt{sglib-combined}, as seen in Figure \ref{fig:res/sglib/inst}, Figure \ref{fig:res/sglib/hwl}, and \ref{fig:res/sglib/fetch_waste}.
+
+%% Overall
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{graph/overall_inst_dist}
     \includegraphics[width=\textwidth]{graph/overall_inst_dist2}
     \caption{Overall instruction distribution of all tested benchmarking workloads}
     \label{fig:res/overall/inst}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/graph/overall_branch_tk.eps}
+    \caption{Overall branch taken behavior of all tested benchmarking workloads}
+    \label{fig:res/overall/branch_tk}
 \end{figure}
 
 \begin{figure}
@@ -30,27 +47,85 @@ Overall we were able to observe bla bla bla ...
     \label{fig:res/overall/fetch_waste}
 \end{figure}
 
-\section{Coremark}
+%% Dhrystone
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/graph/riscv/dhrystone_inst.eps}
+    \caption{Instruction distribution over time of Dhrystone (Time in ms)}
+    \label{fig:res/dhrystone/inst}
+\end{figure}
 
 \begin{figure}
     \centering
+    \includegraphics[width=\textwidth]{img/graph/riscv/dhrystone_fetch_waste.eps}
+    \caption{Fetch coefficient and cycles wasted per instruction over time of Dhrystone (Time in ms)}
+    \label{fig:res/dhrystone/fetch_waste}
+\end{figure}
+
+%% bitcount
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/graph/mibench/bitcount_inst.eps}
+    \caption{Instruction distribution over time of \texttt{bitcount} (Time in ms)}
+    \label{fig:res/bitcount/inst}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/graph/mibench/bitcount_hwl.eps}
+    \caption{Hardware loop behavior over time of \texttt{bitcount} (Time in ms)}
+    \label{fig:res/bitcount/hwl}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/graph/mibench/bitcount_fetch_waste.eps}
+    \caption{Fetch coefficient and cycles wasted per instruction over time of \texttt{bitcount} (Time in ms)}
+    \label{fig:res/bitcount/fetch_waste}
+\end{figure}
+
+%% Coremark
+\begin{figure}
+    \centering
     \includegraphics[width=\textwidth]{img/graph/coremark/coremark_inst.eps}
-    \caption{Instruction distribution over time of Coremark}
+    \caption{Instruction distribution over time of Coremark (Time in ms)}
     \label{fig:res/coremark/inst}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{img/graph/coremark/coremark_hwl.eps}
-    \caption{Hardware loop behavior over time of Coremark}
+    \caption{Hardware loop behavior over time of Coremark (Time in ms)}
     \label{fig:res/coremark/hwl}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{img/graph/coremark/coremark_fetch_waste.eps}
-    \caption{Fetch coefficient and cycles wasted per instruction over time of Coremark}
+    \caption{Fetch coefficient and cycles wasted per instruction over time of Coremark (Time in ms)}
     \label{fig:res/coremark/fetch_waste}
+\end{figure}
+
+%% sglib
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/graph/embench/sglib-combined_inst.eps}
+    \caption{Instruction distribution over time of \texttt{sglib-combined} (Time in ms)}
+    \label{fig:res/sglib/inst}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/graph/embench/sglib-combined_hwl.eps}
+    \caption{Hardware loop behavior over time of \texttt{sglib-combined} (Time in ms)}
+    \label{fig:res/sglib/hwl}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/graph/embench/sglib-combined_fetch_waste.eps}
+    \caption{Fetch coefficient and cycles wasted per instruction over time of \texttt{sglib-combined} (Time in ms)}
+    \label{fig:res/sglib/fetch_waste}
 \end{figure}
 
 % Render bibliograhy and acronyms if rendered standalone

@@ -15,3 +15,24 @@ When creating a new subfile, make sure to include this block at the end:
 \fi
 ```
 This will append the bibliography and abbreviations list at the end of the chapter document if rendered as a standalone PDF file. `\issatndalone` is a self defined switch and not part of the `subfiles` package! See the main file for the defines. If not appended, Latex will warn about undefined abbreviations and literature references. Make sure to run `bibtex chapter_name.aux` after a `make distclean` when compiling!
+
+
+# TODO
+* Write abstract german
+* Write abstract english
+* Write introduction
+* write results
+* rewrite future work
+* rewrite conlusions
+* check storyline 
+* write appendix (all graphs)
+* write appendix (how to set up)
+* first pass by supervisor
+* grammar check 
+* add ri5cy pipeline block diagram
+* add cover
+* finish attributions
+* fix capitalization
+* find MPU misuses
+* fix config register change in write up
+* change section size

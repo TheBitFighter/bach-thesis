@@ -16,7 +16,7 @@ We base our design on the Pulpissimo microcontroller IP provided by the ETH Z\"u
 
 \subsection{Pipeline}
     \label{sec:plat/pipe}
-As seen in figure \ref{fig:plat/base/blockdia}, RI5CY consists of 4 pipeline stages. Stage one is an instruction fetch stage using a 4 entry prefetch buffer as well as a \ac{HWL} controller, which we will go into detail about in section \ref{sub:plat/ip/ctrl}. Stage 2 is the instruction decode stage, containing the RISC-V decoder as well as the register file and \ac{HWL} registers. Stage 3 is the execute stage featuring an \ac{ALU} for arithmetic and logic operations except multiplication, as well as a multi-cycle multiplication unit which can also perform multiply accumulate operations. Additionally, if enabled, the exec stage also contains the \ac{FPU} which we will go further into in section \ref{sub:plat/ip/fpu}. The 4th and final pipeline stage contains the load/store unit as well as the register write-back. The main design goal of the RI5CY core was to provide a low power, high performance \ac{DSP} focused core \cite{gautschiNearThresholdRISCVCore2017}, which is reflected in the chosen set of optimizations.
+As seen in Figure \ref{fig:plat/base/blockdia}, RI5CY consists of 4 pipeline stages. Stage one is an instruction fetch stage using a 4 entry prefetch buffer as well as a \ac{HWL} controller, which we will go into detail about in Section \ref{sub:plat/ip/ctrl}. Stage 2 is the instruction decode stage, containing the RISC-V decoder as well as the register file and \ac{HWL} registers. Stage 3 is the execute stage featuring an \ac{ALU} for arithmetic and logic operations except multiplication, as well as a multi-cycle multiplication unit which can also perform multiply accumulate operations. Additionally, if enabled, the exec stage also contains the \ac{FPU} which we will go further into in Section \ref{sub:plat/ip/fpu}. The 4th and final pipeline stage contains the load/store unit as well as the register write-back. The main design goal of the RI5CY core was to provide a low power, high performance \ac{DSP} focused core \cite{gautschiNearThresholdRISCVCore2017}, which is reflected in the chosen set of optimizations.
 
 \begin{figure}
     \centering
@@ -27,7 +27,7 @@ As seen in figure \ref{fig:plat/base/blockdia}, RI5CY consists of 4 pipeline sta
 \end{figure}
 
 \subsection{Storage architecture}
-RI5CY does not feature a full level 1 cache. Instead it contains a 4-instruction deep prefetch buffer inside the instruction fetch stage. This buffer is able to preload up to 4 instructions for execution and is used as a minimalist loop buffer for the \ac{HWL} implementation described in section \ref{sub:plat/ip/ctrl}.
+RI5CY does not feature a full level 1 cache. Instead it contains a 4-instruction deep prefetch buffer inside the instruction fetch stage. This buffer is able to preload up to 4 instructions for execution and is used as a minimalist loop buffer for the \ac{HWL} implementation described in Section \ref{sub:plat/ip/ctrl}.
 
 \subsection{Control flow}
     \label{sub:plat/ip/ctrl}
@@ -56,7 +56,7 @@ The \ac{FPU} is enabled for the experiments in this thesis. RI5CY uses a slimmed
 \end{table}
 
 \section{Xilinx ZYNQ-7000 SoC}
-The hardware used is a ZedBoard by Digilent. It is equipped with a Zynq-7000 All Programmable \ac{SoC} by Xilinx and natively supported by Pulpissimo. The Zynq-7000 processor features a \ac{PL} as well as a Dual ARM Cortex-A9 MPCore hard IP able to run Linux. The hard IP and \ac{PL} are connected via an AXI bus which can be configured using block diagrams inside the Vivado design environment \cite{Zynq7000SoC}. An architectural block diagram can be seen in figure \ref{fig:arch/comm/zynq}.
+The hardware used is a ZedBoard by Digilent. It is equipped with a Zynq-7000 All Programmable \ac{SoC} by Xilinx and natively supported by Pulpissimo. The Zynq-7000 processor features a \ac{PL} as well as a Dual ARM Cortex-A9 MPCore hard IP able to run Linux. The hard IP and \ac{PL} are connected via an AXI bus which can be configured using block diagrams inside the Vivado design environment \cite{Zynq7000SoC}. An architectural block diagram can be seen in Figure \ref{fig:arch/comm/zynq}.
 
 
 % Render bibliograhy and acronyms if rendered standalone
