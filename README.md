@@ -32,7 +32,4 @@ This will append the bibliography and abbreviations list at the end of the chapt
 * add ri5cy pipeline block diagram
 * add cover
 * finish attributions
-* fix capitalization
-* find MPU misuses
-* fix config register change in write up
-* change section size
+* change average to mean

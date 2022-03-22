@@ -128,6 +128,29 @@ Lastly, we have identified three major types of programs given their temporal be
     \label{fig:res/sglib/fetch_waste}
 \end{figure}
 
+\section{Metric correlation}
+We calculated the Pearson's correlation coefficient of the different metrics collected in order to gauge metric interdependence. As mentioned previously, a coefficient closer to 0 is desired. A metric represents a subsystem in the core and more correlation means more bias towards this subsystem in the data. Table \ref{tab:res/corr/coeff} shows the correlation coefficient between metrics. We see moderate correlation with the mean being about 0.25. We however notice a few outliers in the data. The most definite example is the correlation between the mean distance between \ac{HWL} initialization and mean \ac{HWL} iteration count. Workloads which use \acp{HWL} more often seem to strongly prefer more iterations, while workloads with more distance between \acp{HWL} favor less iterations. A possible hypothesis would be a longer loop body, however we cannot verify this with the current setup. We also see a very strong correlation between the fetch coefficient and the cycles wasted. This has to be expected as more fetches require more accesses to higher level memory systems which cause more cycles being wasted. The final strong correlation is between the fetch coefficient and the share of branching instructions. While this isn't surprising either given most workloads seem to favor \emph{branches taken}, as suppose to the implemented \emph{branches not taken}, more branching instructions directly means more instructions fetched. Surprising however is only the small correlation between the percentage of taken branches and the fetch coefficient.
+
+\begin{table}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l|SSSSSSSSS}
+                        & \% Branch     & {\% br. taken}    & \% FPU    & \% Jumps  & {mean dist.}  & {mean it.}    & {fetch coeff.}    & {cycles wasted /} \\
+                        &               &                   &           &           & HWL           & HWL           &                   & instruction       \\
+        \hline
+        \% Mult         & -0.37         &  0.24             & -0.09     & -0.27     &  0.26         &  0.26         & -0.04             & -0.19             \\ \hline
+        \% Branch       &               & -0.12             &  0.02     &  0.39     & -0.10         & -0.11         &  0.79             &  0.72             \\ \hline
+        \% br. taken    &               &                   & -0.10     & -0.20     &  0.36         &  0.36         & -0.11             & -0.03             \\ \hline
+        \% FPU          &               &                   &           & -0.01     & -0.03         & -0.03         & -0.05             &  0.13             \\ \hline
+        \% Jumps        &               &                   &           &           & -0.19         & -0.18         &  0.37             &  0.45             \\ \hline
+        mean dist. HWL  &               &                   &           &           &               &  1.00         & -0.19             & -0.17             \\ \hline
+        mean it. HWL    &               &                   &           &           &               &               & -0.20             & -0.18             \\ \hline
+        fetch coeff.    &               &                   &           &           &               &               &                   &  0.82             \\
+    \end{tabular}}
+    \caption{Pearson's correlation coefficient between metrics}
+    \label{tab:res/corr/coeff}
+\end{table}
+
 % Render bibliograhy and acronyms if rendered standalone
 \isstandalone
 \bibliographystyle{IEEEtran}
