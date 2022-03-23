@@ -10,20 +10,20 @@ In contrast to most approaches presented in Section \ref{ch:prob}, we do not obs
 
 We designed an architecture that aims to measure the stress on the same subsystems as \cite{phansalkarMeasuringProgramSimilarity2005,joshiMeasuringBenchmarkSimilarity2006,eeckhoutQuantifyingImpactInput} while simplifying certain data points to the specific environment provided by RI5CY. While some data points have been adopted without change, some have been modified as the alternate data point might be simpler to measure and sufficient for determining similarity on RI5CY. We will justify our choices as well as elaborate on the implementation of all data points read.
 
-The data points are handed from a hardware add-on inside the RI5CY core to the Linux instance running on the Dual ARM\textsuperscript{\textregistered} Cortex\textsuperscript{\textregistered}-A9 MPCore\textsuperscript{TM} hard \ac{IP}.
+The data points are handed from a hardware add-on inside the RI5CY core to the Linux instance running on the Dual ARM Cortex-A9 MPCore hard \ac{IP}.
 
-We thus preset \emph{datalynx}, a non-invasive data gathering engine implemented as an extension to RI5CY. datalynx consists of three main parts: An encoder addon to the \ac{CSR} module inside the RI5CY core called \emph{enlynx}, an AXI GPIO based connection between the Pulpissimo \ac{SoC} and the ARM\textsuperscript{\textregistered} hard \ac{IP} called \emph{datalynx bridge}, and finally a Linux based software logger, reading data from the memory mapped GPIO units called \emph{delynx}.
+We thus preset \emph{datalynx}, a non-invasive data gathering engine implemented as an extension to RI5CY. datalynx consists of three main parts: An encoder addon to the \ac{CSR} module inside the RI5CY core called \emph{enlynx}, an AXI GPIO based connection between the Pulpissimo \ac{SoC} and the ARM hard \ac{IP} called \emph{datalynx bridge}, and finally a Linux based software logger, reading data from the memory mapped GPIO units called \emph{delynx}.
 
 \section{Observed features}
 We attempt to measure the impact of workloads run on the core on different subsystems. In the following we will describe the data points measured by the hardware add-on we call \emph{enlynx}.
 
 \subsection{Utilization}
     \label{sub:arch/feat/ut}
-In order to gauge utilization of the different subsystems, we have opted to measure the total number of instructions, the number of memory load instructions, the number of memory store instructions, the number of arithmetic instructions except multiplication, the number of multiplication instructions, the number of branching instructions, the number of jump instructions, the number of hardware loop initializations (further described in Section \ref{sub:arch/feat/ctrl}), as well as the number of \ac{FPU} operations. From this, we can calculate the percentage share of each of those instruction types.
+In order to gauge utilization of the different subsystems, we have opted to measure the total number of instructions, the number of memory load instructions, the number of memory store instructions, the number of multiplication instructions, the number of branching instructions, the number of jump instructions, the number of hardware loop initializations (further described in Section \ref{sub:arch/feat/ctrl}), as well as the number of \ac{FPU} operations. From this, we can calculate the percentage share of each of those instruction types, as well as the share of arithmetic instructions except multiplication, as instrumentation in hardware proved rather difficult.
 
 An instruction is registered every time the decode stage marks an instruction as valid.
 
-A load instruction is registered when the \ac{MPU} \todo{find other usages of MPU in text} sends out a data request, the data request is granted, data write enable is not raised, and the decode stage marks the instruction as valid. A store instruction is registered when the \ac{MPU} sends out a data request, the request is granted, data write enable is raised, and the decode stage marks the instruction as valid.
+A load instruction is registered when the \ac{MPU} sends out a data request, the data request is granted, data write enable is not raised, and the decode stage marks the instruction as valid. A store instruction is registered when the \ac{MPU} sends out a data request, the request is granted, data write enable is raised, and the decode stage marks the instruction as valid.
 
 We have decided to split multiplication instructions from other arithmetic instructions as the former is handled by a dedicated multiplication unit which can also handle dot product multiplication \cite{gautschiNearThresholdRISCVCore2017}. While the multiplication unit can handle these operations within a single cycle, we felt the necessity to split these operations for the sake of completeness. A multiplication instruction is registered every time the multiplication unit is invoked and the decode stage marks the instruction as valid. We have opted to calculate the arithmetic instructions as measuring them proved to be more difficult than expected. Arithmetic instruction count is determined by simply excluding all other instruction types.
 
@@ -43,7 +43,7 @@ We record the number of hardware loop initializations as we want to measure a po
 We have opted to omit \ac{ILP} as a point of measurement in this implementation, as Pulpissimo is a single core \ac{MCU}. Since its bigger brother Pulp \cite{pulliniMrWolfEnergyPrecision2019} is a multi-core \ac{MCU}, adding support for \ac{ILP} measurement might be desired for a future iteration.
 
 \subsection{Cache and Data}
-RI5CY does not feature a full level 1 cache. Instead, a 4 instruction deep prefetch buffer is used to minimize delays towards the decode stage. We attempt to measure the effectiveness of this prefetch buffer by comparing the amount of instructions executed to the amount of instructions requested by the buffer. Because of this implementation, we have opted to omit data spacial and temporal locality, as virtually no locality effects can be exploited by this system. However, the prefetch buffer still acts as a loop instruction buffer for the \ac{HWL} system. Thus, a program with less average instruction count inside \texttt{for}-loops should see a better instruction to load ratio overall.
+RI5CY does not feature a full level 1 cache. Instead, a 4 instruction deep prefetch buffer is used to minimize delays towards the decode stage. We attempt to measure the effectiveness of this prefetch buffer by comparing the amount of instructions executed to the amount of instructions requested by the buffer. Because of this implementation, we have opted to omit data spacial and temporal locality, as virtually no locality effects can be exploited by this system. However, the prefetch buffer still acts as a loop instruction buffer for the \ac{HWL} system. Thus, a program with less mean instruction count inside \texttt{for}-loops should see a better instruction to load ratio overall.
 
 An instruction request is recorded when the prefetch buffer sends an instruction request to the \ac{MPU} and the \ac{MPU} grants the request.
 
@@ -124,13 +124,13 @@ The overflow vector is tied to the global counter in the module. Although a sect
 
 Payloads are not intended to read from or write to the enlynx \ac{CSR}. Accesses to the register are made by the Pulp runtime only just before and after payload execution.
 
-\section{delynx}
+\section{Delynx}
 The delynx decoder is a simple program running on the \ac{PS} side of the \ac{SoC}. It is executed by the make file initializing the tests and continually reads the data provided by the datalynx bridge. The read intervals are controlled on a time basis rather than a window basis to represent the change of program behavior over time. This is a possible point of data loss however. As we will see in Chapter \ref{ch:res}, data resolution is well within acceptable range so we do not believe this point of potential loss to be much of an issue. The \texttt{eop} flat is checked before and after data has been read, to ensure global data is not accidentally read as a local value. After a transition on the \texttt{eop} flag has been seen, global data is read, saved, and the decoder terminated. Data is saved into a corresponding \texttt{.csv} file containing time stamps and values read.
 
 \begin{figure}
     \centering
     %\includesvg[width=0.6\columnwidth]{ri5cy_blockdiagram}
-    \includegraphics[width=0.6\columnwidth]{placeholder}
+    \includegraphics[width=\textwidth]{datalynx_bd.pdf}
     \caption{Block diagram of the datalynx bridge}
     \label{fig:arch/comm/block}
 \end{figure}

@@ -1,4 +1,6 @@
-\documentclass[../bachelor_paper.tex]{subfiles}
+%!TEX spellcheck
+%!TEX root = bachelor_paper.tex
+\documentclass[bachelor_paper.tex]{subfiles}
 \graphicspath{{\subfix{images/}}}
 \begin{document}
 
@@ -6,7 +8,7 @@
 \section*{Abstract}\thispagestyle{empty}
     \label{chap:abstract}
 
-    Insert text here \dots
+    Choosing the correct benchmarks for task fitness testing or task specific hardware development is crucial. Measuring program similarity can help in selecting the right benchmark for the right task to be optimized. We present Datalynx, a hardware based framework built for measuring workload similarity, providing the tools necessary for recording data directly in hardware. We first discuss and compare previous approaches to measuring program and benchmark similarity and define a set of features measured for this implementation. Datalynx was implemented as an add-on to the open source RISC-V implementation RI5CY and tested within the Pulpissimo micro controller on the Xilinx Zynq-7000 platform. This implementation allows us to gather telemetry in flight in real time, eliminating the need for time consuming simulation as well as overcoming data availability restrictions or performance impact when measuring on unmodified hardware. While being a proof of concept, the actual core modifications named \emph{Enlynx} show little power impact. We were able to demonstrate a functioning implementation of this approach as well as gather performance profiles from several industry standard benchmarks and categorize them into three main behavioral groups.
     
     \vfill
 % Please insert 3-5 English keywords that characterize the thesis:

@@ -18,18 +18,11 @@ This will append the bibliography and abbreviations list at the end of the chapt
 
 
 # TODO
-* Write abstract german
-* Write abstract english
-* Write introduction
-* write results
-* rewrite future work
-* rewrite conlusions
-* check storyline 
-* write appendix (all graphs)
-* write appendix (how to set up)
+* check storyline
+* change average to mean (done in write up, graphs pending)
 * first pass by supervisor
 * grammar check 
-* add ri5cy pipeline block diagram
 * add cover
 * finish attributions
-* change average to mean
+* write appendix (all graphs)
+* write appendix (how to set up)
