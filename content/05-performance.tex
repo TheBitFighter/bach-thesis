@@ -15,7 +15,8 @@ As seen in Figure \ref{fig:perf/power/split}, the share of dynamic power losses 
 
 \begin{table}
     \centering
-    \begin{tabular}{llp{0.73\linewidth}}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lll}
     \textbf{Design} & \textbf{Path} \\
     \hline\\[-0.9em]
     \textbf{Unmodified} & From  & \texttt{i\_pulpissimo/soc\_domain\_i/pulp\_soc\_i/jtag\_tap\_top\_i/tap\_top\_i/ td\_o\_reg/C} \\
@@ -31,12 +32,13 @@ As seen in Figure \ref{fig:perf/power/split}, the share of dynamic power losses 
                         & To    & \texttt{datalynx\_wrapper\_i/datalynx\_i/axi\_gpio\_4/U0/AXI\_LITE\_IPIF\_I/ I\_SLAVE\_ATTACHMENT/s\_axi\_rdata\_i\_reg[20]/D} \\
                         & Hold  & 0.05ns \\
     \hline
-    \end{tabular}
+    \end{tabular}}
     \caption{Critical paths for setup and hold slack in unmodified and modified design}
     \label{tab:perf/timing/crit}
 \end{table}
 \begin{table}
     \centering
+    \resizebox{\textwidth}{!}{%
     \begin{tabular}{llp{0.13\linewidth}p{0.15\linewidth}p{0.13\linewidth}p{0.15\linewidth}l}
     \textbf{Resource}   & \textbf{Available}    & \textbf{Utilization unmodified} & \textbf{Utilization \% unmodified}  & \textbf{Utilization modified}   & \textbf{Utilization \% modified}    & \textbf{Change}\\
     \hline
@@ -49,7 +51,7 @@ As seen in Figure \ref{fig:perf/power/split}, the share of dynamic power losses 
     \acs{BUFG}          & 32                    & 9                         & 28.13\%                       & 10                        & 31.25\%   & +11.1\%\\
     \acs{MMCM}          & 4                     & 2                         & 50.00\%                       & 2                         & 50.00\%   & +0\%\\
     \hline
-    \end{tabular}
+    \end{tabular}}
     \caption{Resource utilization unmodified vs. modified}
     \label{tab:perf/util/data}
 \end{table}
