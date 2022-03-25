@@ -25,10 +25,10 @@ As seen in Figure \ref{fig:perf/power/split}, the share of dynamic power losses 
     \textbf{Modified}   & From  & \texttt{i\_pulpissimo/soc\_domain\_i/pulp\_soc\_i/jtag\_tap\_top\_i/tap\_top\_i/ td\_o\_reg/C} \\ 
                         & To    & \texttt{pad\_jtag\_tdo} \\
                         & Setup & 1.77ns \\
-    \textbf{Unmodified} & From  & \texttt{i\_pulpissimo/soc\_domain\_i/pulp\_soc\_i/soc\_peripherals\_i/ i\_apb\_adv\_timer/u\_apb\_if/r\_timer1\_th\_reg[9]/C} \\
-                        & To    & \texttt{i\_pulpissimo/soc\_domain\_i/pulp\_soc\_i/soc\_peripherals\_i/ i\_apb\_adv\_timer/u\_tim1/u\_counter/r\_start\_reg[9]/D} \\
+    \textbf{Unmodified} & From  & \texttt{i\_pulpissimo/soc\_domain\_i/pulp\_soc\_i/soc\_peripherals\_i/i\_apb\_adv\_timer/u\_apb\_if/r\_timer1\_th\_reg[9]/C} \\
+                        & To    & \texttt{i\_pulpissimo/soc\_domain\_i/pulp\_soc\_i/soc\_peripherals\_i/i\_apb\_adv\_timer/u\_tim1/u\_counter/r\_start\_reg[9]/D} \\
                         & Hold  & 0.05ns \\
-    \textbf{Modified}   & From  & \texttt{datalynx\_wrapper\_i/datalynx\_i/axi\_gpio\_4/U0/ ip2bus\_data\_i\_D1\_reg[11]/C} \\
+    \textbf{Modified}   & From  & \texttt{datalynx\_wrapper\_i/datalynx\_i/axi\_gpio\_4/U0/ip2bus\_data\_i\_D1\_reg[11]/C} \\
                         & To    & \texttt{datalynx\_wrapper\_i/datalynx\_i/axi\_gpio\_4/U0/AXI\_LITE\_IPIF\_I/ I\_SLAVE\_ATTACHMENT/s\_axi\_rdata\_i\_reg[20]/D} \\
                         & Hold  & 0.05ns \\
     \hline
@@ -39,8 +39,9 @@ As seen in Figure \ref{fig:perf/power/split}, the share of dynamic power losses 
 \begin{table}
     \centering
     \resizebox{\textwidth}{!}{%
-    \begin{tabular}{llp{0.13\linewidth}p{0.15\linewidth}p{0.13\linewidth}p{0.15\linewidth}l}
-    \textbf{Resource}   & \textbf{Available}    & \textbf{Utilization unmodified} & \textbf{Utilization \% unmodified}  & \textbf{Utilization modified}   & \textbf{Utilization \% modified}    & \textbf{Change}\\
+    \begin{tabular}{lllllll}
+    \textbf{Resource}   & \textbf{Available}    & \textbf{Utilization}  & \textbf{Utilization \%}   & \textbf{Utilization}  & \textbf{Utilization \%}   & \textbf{Change}   \\
+                        &                       & \textbf{unmodified}   & \textbf{unmodified}       & \textbf{modified}     & \textbf{modified}         &                   \\
     \hline
     \acs{LUT}           & 53200                 & 43502                     & 81.77\%                       & 46432                     & 87.28\%   & +6.7\%\\
     \acs{LUTRAM}        & 17400                 & 12                        & 0.07\%                        & 74                        & 0.43\%    & +516.7\%\\
@@ -59,13 +60,13 @@ As seen in Figure \ref{fig:perf/power/split}, the share of dynamic power losses 
 \begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[width=\textwidth]{unmodified_power}
+        \includegraphics[width=\textwidth]{img/unmodified_power}
         \caption{Unmodified design}
         \label{fig:perf/power/split/unmod}
     \end{subfigure}
     \hfil
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[width=\textwidth]{modified_power}
+        \includegraphics[width=\textwidth]{img/modified_power}
         \subcaption{Modified design}
         \label{fig:perf/power/split/mod}
     \end{subfigure}

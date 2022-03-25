@@ -55,7 +55,7 @@ Communication with the Linux system is achieved via a AXI GPIO unit \ac{IP} util
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\columnwidth]{zynq_block}
+    \includegraphics[width=1\columnwidth]{img/zynq_block}
     \caption{Block diagram of the Xilinx Zynq-7000 All Programmable \ac{SoC}}
     \label{fig:arch/comm/zynq}
 \end{figure}
@@ -66,9 +66,11 @@ Events are registered via the Enlynx add-on to the \ac{CSR} unit. It is implemen
 
 \begin{table}
     \centering
-    \begin{tabular}{lp{0.08\linewidth}p{0.13\linewidth}p{0.5\linewidth}}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lp{0.087\textwidth}p{0.18\textwidth}p{0.6\textwidth}}
         \hline \\[-0.9em]
-        \textbf{Counter}    & \textbf{GPIO unit \#} & \textbf{Memory address}   & \textbf{Description}  \\
+        \textbf{Counter}    & \textbf{GPIO} & \textbf{Memory}   & \textbf{Description}  \\
+                            & \textbf{unit \#} & \textbf{address} & \\
         \hline \\[-0.9em]
         \texttt{instr\_cnt} & 0.1                   & \texttt{0x4120\_0000}     & Instruction count     \\
         \texttt{load\_cnt}  & 0.2                   & \texttt{0x4120\_0008}     & Number of load instructions encountered \\
@@ -86,7 +88,7 @@ Events are registered via the Enlynx add-on to the \ac{CSR} unit. It is implemen
         \texttt{eop}        & 7.1                   & \texttt{0x4127\_0000}     & End of program flag \\
         \texttt{overflow}   & 7.2                   & \texttt{0x4127\_0002}     & Overflow vector \\
         \hline
-    \end{tabular}
+    \end{tabular}}
     \caption{Memory map for the event counters in Linux}
     \label{tab:arch/enl/memmap}
 \end{table}
@@ -95,13 +97,14 @@ Like the \ac{PC} module, the counter can be enabled and disabled via a write to 
 
 \begin{table}
     \centering
+    \resizebox{\textwidth}{!}{%
     \begin{tabular}{|*{32}{>{\centering\arraybackslash}p{0.004\linewidth}|}}
         \multicolumn{1}{c}{\tiny{31}} & \multicolumn{28}{c}{} & \multicolumn{1}{c}{\tiny{2}} & \multicolumn{1}{c}{\tiny{1}} & \multicolumn{1}{c}{\tiny{0}} \\
         \hline
         & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \begin{turn}{-90}\scriptsize{\textbf{counter reset}}\end{turn} & \begin{turn}{-90}\scriptsize{\textbf{eop flag}}\end{turn} & \begin{turn}{-90}\scriptsize{\textbf{counter enable}}\end{turn}\\
         &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
         \hline
-    \end{tabular}
+    \end{tabular}}
     \bigskip
 
     \begin{tabular}{p{0.07\linewidth} p{0.07\linewidth} p{0.75\linewidth}}
@@ -109,7 +112,8 @@ Like the \ac{PC} module, the counter can be enabled and disabled via a write to 
         \textbf{Bit \#}  & \textbf{R/W}  & \textbf{Description} \\
         \hline \\[-0.9em]
         0               & R/W           & \textbf{Counter enable:} Activate/deactivate all event counting. If this bit is 0, all event counting is disabled. After reset, this bit is not set.\\
-        1               & R/W           & \textbf{eop flag:} Set the counter to total mode and indicate end of program. If this bit is not set, counter values outputted to the datalynx bridge indicate the metrics of the previous instruction section. Metrics are updated every time a new section is completed. If this bit is set, total metrics since the last reset are outputted to the datalynx bridge. After reset, this bit is not set.\\
+        1               & R/W           & \textbf{eop flag:} Set the counter to total mode and indicate end of program. If this bit is not set, counter values outputted to the Datalynx bridge indicate the metrics of the previous instruction section. Metrics are updated every time a new section is completed. If this bit is set, total metrics since the last reset are outputted to the Datalynx bridge. After reset, this bit is not set.\\
+        2               & W             & \textbf{Counter reset:} Reset all internal counters of the Enlynx add-on. This bit will always return 0 when read. Setting the bit resets the counters once.\\
         \hline
     \end{tabular}
     \caption{\ac{CSR} layout for the enlynx control register}
@@ -130,7 +134,7 @@ The Delynx decoder is a simple program running on the \ac{PS} side of the \ac{So
 \begin{figure}
     \centering
     %\includesvg[width=0.6\columnwidth]{ri5cy_blockdiagram}
-    \includegraphics[width=\textwidth]{datalynx_bd.pdf}
+    \includegraphics[width=\textwidth]{img/datalynx_bd.pdf}
     \caption{Block diagram of the datalynx bridge}
     \label{fig:arch/comm/block}
 \end{figure}
