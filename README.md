@@ -19,7 +19,6 @@ This will append the bibliography and abbreviations list at the end of the chapt
 
 # TODO
 * change average to mean (done in write up, graphs pending)
-* first pass by supervisor
 * grammar check 
 * add cover
 * finish attributions
