@@ -41,6 +41,8 @@
 \usepackage{csquotes}
 %%% Package to maintain and use acronyms %%%
 \usepackage[printonlyused]{acronym}
+%% Float barriers
+\usepackage{placeins}
 
 \definecolor{tuwblue}{RGB}{00,102,153}
 \usepackage[colorlinks=true,
@@ -186,8 +188,8 @@
 \listoftables % Starred version, i.e., \listoftables*, removes the toc entry.
 
 % Use an optional list of alogrithms.
-\listofalgorithms
-\addcontentsline{toc}{chapter}{List of Algorithms}
+%\listofalgorithms
+%\addcontentsline{toc}{chapter}{List of Algorithms}
 
 % Add an index.
 \printindex
@@ -199,10 +201,11 @@
 \bibliographystyle{alpha}
 \bibliography{bibliography}
 
-    %%%%% APPENDIX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Add content here
-    \appendix
-    \subfile{content/A-how_to.tex}
-    \subfile{content/B-graphs.tex}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% APPENDIX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+\appendix
+\subfile{content/A-how_to.tex}
+\subfile{content/B-graphs.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
