@@ -16,11 +16,6 @@ When creating a new subfile, make sure to include this block at the end:
 ```
 This will append the bibliography and abbreviations list at the end of the chapter document if rendered as a standalone PDF file. `\issatndalone` is a self defined switch and not part of the `subfiles` package! See the main file for the defines. If not appended, Latex will warn about undefined abbreviations and literature references. Make sure to run `bibtex chapter_name.aux` after a `make distclean` when compiling!
 
+# Building the thesis
 
-# TODO
-* change average to mean (done in write up, graphs pending)
-* grammar check 
-* add cover
-* finish attributions
-* write appendix (all graphs)
-* write appendix (how to set up)
+Execute the `build-class.sh` script to build the required Latex class files. After that call PDFLatex in your favorite Latex editor to build `bachelor_thesis.tex`. This project was set up for using SublimeText 3 employing the LaTeXTools plugin.
