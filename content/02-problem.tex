@@ -68,8 +68,8 @@ Lastly, several papers have been published about the issue of plagiarism detecti
 
 \section{Summary}
 	\label{ch:theo/simi/summ}
-A perfect model would be able to predict runtime of an arbitrary workload $\phi$ only by knowing its similarity to a different arbitrary workload $\mu$ and the runtime metrics of $\mathcal{A}$. In order to achieve this, we feel it to be important to observe more than just runtime.\\
-At the same time, we want to overcome the inherent overhead connected to instrumentation of binary files. Some applications might require production like hardware performance in order to collect data which faithfully represents the use case. We thus extend a RISC-V core implementation to report data from a live execution of an unmodified binary file in order to gather data detailed enough to characterize core utilization. We base the data points gathered on the papers presented especially in Section \ref{sec:prob/aware}. We design an architecture able to report core utilization, control flow behavior, and storage behavior, and garner insights into similarity of executables.
+A perfect model would be able to predict runtime of an arbitrary workload $\phi$ only by knowing its similarity to a different arbitrary workload $\mu$ and the runtime metrics of $\mathcal{A}$. Papers have shown that approaching this feat is possible using different approaches. Both black and whitebox approaches have shown promise in this regard, however blackbox assumptions do present some several downsides like obscuring potential changes in hardware design as outlined above.\\
+We have also observed that most whitebox approaches do measure similar if not identical data points to evaluate program similarity with some of them even using the data measured to generate synthetic benchmarks from template workloads. For this reason we have chosen a whitebox approach for this thesis further outlined in Chapter \ref{ch:arch}.
 
 
 
