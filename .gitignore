@@ -23,6 +23,7 @@
 **/*.fls
 **/*.fdb_latexmk
 **/*.synctex.gz
+**/*.synctex
 **/*.glsdefs
 **/*.bak
 **/*~

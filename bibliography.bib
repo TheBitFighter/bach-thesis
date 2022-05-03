@@ -19,13 +19,14 @@
   file = {/home/fabian/Zotero/storage/SBZYLG93/Barroso et al_1998_Memory system characterization of commercial workloads.pdf;/home/fabian/Zotero/storage/V8RWET4E/694758.html}
 }
 
-@article{BenchmarkComputing2021,
+@misc{BenchmarkComputing2021,
   title = {Benchmark (Computing)},
   year = {2021},
   month = mar,
   journal = {Wikipedia},
   abstract = {In computing, a benchmark is the act of running a computer program, a set of programs, or other operations, in order to assess the relative performance of an object, normally by running a number of standard tests and trials against it. The term benchmark is also commonly utilized for the purposes of elaborately designed benchmarking programs themselves. Benchmarking is usually associated with assessing performance characteristics of computer hardware, for example, the floating point operation performance of a CPU, but there are circumstances when the technique is also applicable to software. Software benchmarks are, for example, run against compilers or database management systems (DBMS). Benchmarks provide a method of comparing the performance of various subsystems across different chip/system architectures. Test suites are a type of system intended to assess the correctness of software.},
   copyright = {Creative Commons Attribution-ShareAlike License},
+  howpublished = {https://en.wikipedia.org/wiki/ Benchmark\_(computing)},
   langid = {english},
   annotation = {Page Version ID: 1011181898},
   file = {/home/fabian/Zotero/storage/U94RYPEK/index.html}
@@ -93,6 +94,15 @@
   abstract = {The recently released Rodinia benchmark suite enables users to evaluate heterogeneous systems including both accelerators, such as GPUs, and multicore CPUs. As Rodinia sees higher levels of acceptance, it becomes important that researchers understand this new set of benchmarks, especially in how they differ from previous work. In this paper, we present recent extensions to Rodinia and conduct a detailed characterization of the Rodinia benchmarks (including performance results on an NVIDIA GeForce GTX480, the first product released based on the Fermi architecture). We also compare and contrast Rodinia with Parsec to gain insights into the similarities and differences of the two benchmark collections; we apply principal component analysis to analyze the application space coverage of the two suites. Our analysis shows that many of the workloads in Rodinia and Parsec are complementary, capturing different aspects of certain performance metrics.},
   keywords = {Benchmark testing,Computational fluid dynamics,Computer architecture,Graphics processing unit,Heart,Instruction sets,Kernel},
   file = {/home/fabian/Zotero/storage/J3MDX9BP/Che et al_2010_A characterization of the Rodinia benchmark suite with comparison to.pdf;/home/fabian/Zotero/storage/XJ4Z3L8J/5650274.html}
+}
+
+@article{davidpattersonRecruitingLongOverdue2019,
+  title = {Recruiting for the {{Long Overdue}} and  {{Deserved Demise}} of {{Dhrystone}}},
+  author = {{David Patterson}},
+  year = {2019},
+  pages = {35},
+  langid = {english},
+  file = {/home/fabian/Zotero/storage/QNUCSP84/Lockwood - 1977 - Recruiting for the Long Overdue and  Deserved Demi.pdf}
 }
 
 @inproceedings{deckerRapidlyAdjustableNonintrusive2017,
@@ -205,9 +215,11 @@
   file = {/home/fabian/Zotero/storage/KHFHDEFJ/Eeckhout et al_2003_Designing computer architecture research workloads.pdf;/home/fabian/Zotero/storage/RDASW2LC/1178050.html}
 }
 
-@article{eeckhoutQuantifyingImpactInput,
+@article{eeckhoutQuantifyingImpactInput2003,
   title = {Quantifying the {{Impact}} of {{Input Data Sets}} on {{Program Behavior}} and Its {{Applications}}},
   author = {Eeckhout, Lieven and Vandierendonck, Hans},
+  year = {2003},
+  journal = {Journal of Instruction-Level Parallelism},
   pages = {33},
   abstract = {Having a representative workload of the target domain of a microprocessor is extremely important throughout its design. The composition of a workload involves two issues: (i) which benchmarks to select and (ii) which input data sets to select per benchmark. Unfortunately, it is impossible to select a huge number of benchmarks and respective input sets due to the large instruction counts per benchmark and due to limitations on the available simulation time. In this paper, we use statistical data analysis techniques such as principal components analysis (PCA) and cluster analysis to efficiently explore the workload space. Within this workload space, different input data sets for a given benchmark can be displayed, a distance can be measured between program-input pairs that gives us an idea about their mutual behavioral differences and representative input data sets can be selected for the given benchmark. This methodology is validated by showing that program-input pairs that are close to each other in this workload space indeed exhibit similar behavior. The final goal is to select a limited set of representative benchmark-input pairs that span the complete workload space. Next to workload composition, we discuss two other possible applications, namely getting insight in the impact of input data sets on program behavior and evaluating the representativeness of sampled traces.},
   langid = {english},
@@ -300,7 +312,7 @@
   month = apr,
   abstract = {This is the top-level project for the PULPissimo Platform. It instantiates a PULPissimo open-source system with a PULP SoC domain, but no cluster.},
   copyright = {View license         ,                 View license},
-  howpublished = {pulp-platform}
+  howpublished = {https://github.com/pulp-platform/pulpissimo}
 }
 
 @article{gouldNotePerformanceProfiles2016,
@@ -409,6 +421,7 @@
   year = {2022},
   month = mar,
   journal = {RISC-V International},
+  howpublished = {https://riscv.org/about/history/},
   langid = {american},
   file = {/home/fabian/Zotero/storage/L843QL43/history.html}
 }
@@ -499,18 +512,6 @@
   abstract = {This paper proposes a methodology for measuring the similarity between programs based on their inherent microarchitecture-independent characteristics, and demonstrates two applications for it: 1) finding a representative subset of programs from benchmark suites and 2) studying the evolution of four generations of SPEC CPU benchmark suites. Using the proposed methodology, we find a representative subset of programs from three popular benchmark suites - SPEC CPU2000, MediaBench, and MiBench. We show that this subset of representative programs can be effectively used to estimate the average benchmark suite IPC, L1 data cache miss-rates, and speedup on 11 machines with different ISAs and microarchitectures - this enables one to save simulation time with little loss in accuracy. From our study of the similarity between the four generations of SPEC CPU benchmark suites, we find that, other than a dramatic increase in the dynamic instruction count and increasingly poor temporal data locality, the inherent program characteristics have more or less remained unchanged.},
   keywords = {Measurement techniques,modeling techniques,performance attributes.,performance of systems,Software performance},
   file = {/home/fabian/Zotero/storage/8GRGLMXN/Joshi et al_2006_Measuring benchmark similarity using inherent program characteristics.pdf;/home/fabian/Zotero/storage/X8EBEGM6/1628963.html}
-}
-
-@misc{jun11EmbenchRecruitingLong2019,
-  title = {{{Embench}}\texttrademark : {{Recruiting}} for the {{Long Overdue}} and {{Deserved Demise}} of {{Dhrystone}} as a {{Benchmark}} for {{Embedded Computing}}},
-  shorttitle = {{{Embench}}\texttrademark},
-  author = {on Jun 11, David Patterson and {2019}},
-  year = {2019},
-  month = jun,
-  journal = {SIGARCH},
-  abstract = {I. Why a New Embedded Benchmark The world will soon be deluged by tens of billions or even hundreds of billions of Internet of Things (IoT) devices, but we still don't have a high quality, widely r\ldots},
-  langid = {american},
-  file = {/home/fabian/Zotero/storage/MWXK8N3S/embench-recruiting-for-the-long-overdue-and-deserved-demise-of-dhrystone-as-a-benchmark-for-emb.html}
 }
 
 @article{kaoHardwareApproachRealTime2007,
@@ -739,21 +740,6 @@
   title = {Wait of a {{Decade}}: {{Did SPEC CPU}} 2017 {{Broaden}} the {{Performance Horizon}}?},
   shorttitle = {Wait of a {{Decade}}},
   booktitle = {2018 {{IEEE International Symposium}} on {{High Performance Computer Architecture}} ({{HPCA}})},
-  author = {Panda, Reena and Song, Shuang and Dean, Joseph and John, Lizy K.},
-  year = {2018},
-  month = feb,
-  pages = {271--282},
-  issn = {2378-203X},
-  doi = {10.1109/HPCA.2018.00032},
-  abstract = {The recently released SPEC CPU2017 benchmark suite has already started receiving a lot of attention from both industry and academic communities. However, due to the significantly high size and complexity of the benchmarks, simulating all the CPU2017 benchmarks for design trade-off evaluation is likely to become extremely difficult. Simulating a randomly selected subset, or a random input set, may result in misleading conclusions. This paper analyzes the SPEC CPU2017 benchmarks using performance counter based experimentation from seven commercial systems, and uses statistical techniques such as principal component analysis and clustering to identify similarities among benchmarks. Such analysis can reveal benchmark redundancies and identify subsets for researchers who cannot use all benchmarks in pre-silicon design trade-off evaluations. Many of the SPEC CPU2006 benchmarks have been replaced with larger and complex workloads in the SPEC CPU2017 suite. However, compared to CPU2006, it is unknown whether SPEC CPU2017 benchmarks have different performance demands or whether they stress machines differently. Additionally, to evaluate the balance of CPU2017 benchmarks, we analyze the performance characteristics of CPU2017 workloads and compare them with emerging database, graph analytics and electronic design automation (EDA) workloads. This paper provides the first detailed analysis of SPEC CPU2017 benchmark suite for the architecture community.},
-  keywords = {Benchmark Redundancy Analysis,Benchmark testing,C++ languages,Industries,Measurement,Performance Evaluation,Principal component analysis,Redundancy,SPEC CPU2017,Stress},
-  file = {/home/fabian/Zotero/storage/XU9WDB3L/Panda et al_2018_Wait of a Decade.pdf;/home/fabian/Zotero/storage/TP7GCLV4/8327015.html}
-}
-
-@inproceedings{pandaWaitDecadeDid2018a,
-  title = {Wait of a {{Decade}}: {{Did SPEC CPU}} 2017 {{Broaden}} the {{Performance Horizon}}?},
-  shorttitle = {Wait of a {{Decade}}},
-  booktitle = {2018 {{IEEE International Symposium}} on {{High Performance Computer Architecture}} ({{HPCA}})},
   author = {Panda, R. and Song, S. and Dean, J. and John, L. K.},
   year = {2018},
   month = feb,
@@ -765,13 +751,31 @@
   file = {/home/fabian/Zotero/storage/IMKYFAYC/Panda et al_2018_Wait of a Decade.pdf;/home/fabian/Zotero/storage/73NW8BQQ/8327015.html}
 }
 
-@article{pattersonRecruitingLongOverdue2019,
-  title = {Recruiting for the {{Long Overdue}} and  {{Deserved Demise}} of {{Dhrystone}}},
+@inproceedings{pandaWaitDecadeDid2018a,
+  title = {Wait of a {{Decade}}: {{Did SPEC CPU}} 2017 {{Broaden}} the {{Performance Horizon}}?},
+  shorttitle = {Wait of a {{Decade}}},
+  booktitle = {2018 {{IEEE International Symposium}} on {{High Performance Computer Architecture}} ({{HPCA}})},
+  author = {Panda, Reena and Song, Shuang and Dean, Joseph and John, Lizy K.},
+  year = {2018},
+  month = feb,
+  pages = {271--282},
+  issn = {2378-203X},
+  doi = {10.1109/HPCA.2018.00032},
+  abstract = {The recently released SPEC CPU2017 benchmark suite has already started receiving a lot of attention from both industry and academic communities. However, due to the significantly high size and complexity of the benchmarks, simulating all the CPU2017 benchmarks for design trade-off evaluation is likely to become extremely difficult. Simulating a randomly selected subset, or a random input set, may result in misleading conclusions. This paper analyzes the SPEC CPU2017 benchmarks using performance counter based experimentation from seven commercial systems, and uses statistical techniques such as principal component analysis and clustering to identify similarities among benchmarks. Such analysis can reveal benchmark redundancies and identify subsets for researchers who cannot use all benchmarks in pre-silicon design trade-off evaluations. Many of the SPEC CPU2006 benchmarks have been replaced with larger and complex workloads in the SPEC CPU2017 suite. However, compared to CPU2006, it is unknown whether SPEC CPU2017 benchmarks have different performance demands or whether they stress machines differently. Additionally, to evaluate the balance of CPU2017 benchmarks, we analyze the performance characteristics of CPU2017 workloads and compare them with emerging database, graph analytics and electronic design automation (EDA) workloads. This paper provides the first detailed analysis of SPEC CPU2017 benchmark suite for the architecture community.},
+  keywords = {Benchmark Redundancy Analysis,Benchmark testing,C++ languages,Industries,Measurement,Performance Evaluation,Principal component analysis,Redundancy,SPEC CPU2017,Stress},
+  file = {/home/fabian/Zotero/storage/XU9WDB3L/Panda et al_2018_Wait of a Decade.pdf;/home/fabian/Zotero/storage/TP7GCLV4/8327015.html}
+}
+
+@misc{pattersonEmbenchRecruitingLong2019,
+  title = {{{Embench}}\texttrademark : {{Recruiting}} for the {{Long Overdue}} and {{Deserved Demise}} of {{Dhrystone}} as a {{Benchmark}} for {{Embedded Computing}}},
+  shorttitle = {{{Embench}}\texttrademark},
   author = {Patterson, David},
   year = {2019},
-  pages = {35},
-  langid = {english},
-  file = {/home/fabian/Zotero/storage/QNUCSP84/Lockwood - 1977 - Recruiting for the Long Overdue and  Deserved Demi.pdf}
+  month = jun,
+  journal = {SIGARCH},
+  howpublished = {https://www.sigarch.org/embench-recruiting-for-the-long-overdue-and-deserved-demise-of-dhrystone-as-a-benchmark-for-embedded-computing/},
+  langid = {american},
+  file = {/home/fabian/Zotero/storage/MWXK8N3S/embench-recruiting-for-the-long-overdue-and-deserved-demise-of-dhrystone-as-a-benchmark-for-emb.html}
 }
 
 @inproceedings{phansalkarMeasuringProgramSimilarity2005,
@@ -823,7 +827,7 @@
 }
 
 @misc{RISCVTechnicalSpecification,
-  title = {{{RISC-V Technical Specification}}},
+  title = {{{RISC-V Technical Specification}}, {{Volume}} 1, {{Unprivileged Spec}} v. 20191213},
   journal = {RISC-V International},
   howpublished = {https://riscv.org/technical/specifications/},
   langid = {american},
@@ -983,9 +987,11 @@
   file = {/home/fabian/Zotero/storage/YZ8MPDIB/Uhlig_Mudge_1997_Trace-driven memory simulation.pdf}
 }
 
-@article{vandierendonckManyBenchmarksStress,
+@article{vandierendonckManyBenchmarksStress2004,
   title = {Many {{Benchmarks Stress}} the {{Same Bottlenecks}}},
   author = {Vandierendonck, Hans and Bosschere, Koen De},
+  year = {2004},
+  journal = {Workshop on Computer Architecture Evaluation Using Commercial Workloads},
   pages = {9},
   abstract = {The performance of a microprocessor is determined by many factors, including the memory hierarchy, clock frequency, organization, etc. A different trade-off between these factors is made in each microprocessor design. The performance is determined on the one hand by the bottlenecks of the machine (e.g., memory accesses, mispredicted branches, etc.) and their associated penalties and on the other hand by the frequency by which the bottlenecks occur, which is largely a property of the executed program. It is therefore important that a benchmark suite stresses all major bottlenecks in a microprocessor. If not, the benchmark suite gives a skewed view on performance. A method is presented to determine the most important bottlenecks stressed by benchmarks by analyzing their execution times. This method is applied to the SPEC CPU2000 benchmarks and it is shown that these benchmarks stress only about 4 important bottlenecks.},
   langid = {english},
