@@ -21,6 +21,7 @@ Industrial Control, Network, Security, Consumer Devices, Office Automation, and 
 
 \begin{table}
     \centering
+    \caption{Applications contained in the different sub-suites of MiBench \cite{guthausMiBenchFreeCommercially2001}}
     \resizebox{\textwidth}{!}{%
     \begin{tabular}{llllll}
         \textbf{Auto./Industrial}   & \textbf{Consumer} & \textbf{Office}   & \textbf{Network}  & \textbf{Security}     & \textbf{Telecom.} \\
@@ -35,7 +36,6 @@ Industrial Control, Network, Security, Consumer Devices, Office Automation, and 
                             & typeset       &               &           &               &           \\
         \hline
     \end{tabular}}
-    \caption{Applications contained in the different sub-suites of MiBench \cite{guthausMiBenchFreeCommercially2001}}
     \label{tab:bench/mibench/apps}
 \end{table}
 
@@ -47,6 +47,7 @@ We only use a very limited subset of BEEBS due to availability of ports on the t
 
 \begin{table}
     \centering
+    \caption{Applications contained in BEEBS, their origins, and their categorization \cite{pallisterBEEBSOpenBenchmarks2013}}
     \begin{tabular}{lllllll}
     \textbf{Name}   & \textbf{Source}   & \textbf{B} & \textbf{M} & \textbf{I} & \textbf{FP}    & \textbf{Category} \\
     \hline\\[-0.9em]
@@ -62,7 +63,6 @@ We only use a very limited subset of BEEBS due to availability of ports on the t
     2D FIR          & DSPstone  & H & M & L & H & Automotive, consumer \\
     \hline
     \end{tabular}
-    \caption{Applications contained in BEEBS, their origins, and their categorization \cite{pallisterBEEBSOpenBenchmarks2013}}
     \label{tab:bench/beebs/apps}
 \end{table}
 
@@ -75,6 +75,7 @@ We use the benchmarking suites presented above to test our hardware framework. D
 
 \begin{table}
     \centering
+    \caption{Benchmarks run per suite}
     \begin{tabular}{llllll}
         \textbf{Coremark}   & \textbf{MiBench}  & \textbf{EmBench}  & \textbf{BEEBS}    & \textbf{Custom}   \\
         \hline\\[-0.9em]
@@ -98,7 +99,6 @@ We use the benchmarking suites presented above to test our hardware framework. D
                             &                   & ud                &                   &                   \\
                             &                   & wikisort          &                   &
     \end{tabular}
-    \caption{Benchmarks run per suite}
     \label{tab:bench/sum/run}
 \end{table}
 

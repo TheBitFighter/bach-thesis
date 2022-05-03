@@ -38,12 +38,13 @@ Apart from \ac{DSP} calculations, the inclusion of \acp{HWL} has also shown to p
 
 \subsection{Floating point support}
     \label{sub:plat/ip/fpu}
-The \ac{FPU} is enabled for the experiments in this thesis. RI5CY uses FPnew, a highly configurable open-source multiformat floating point unit \cite{machFPnewOpenSourceMultiformat2021}. FPnew is split into four different data paths, each of them having configurable datapath depth and width, and supports transprecision computing \cite{malossiTransprecisionComputingParadigm2018}. In addition to 32 bit single precision (FP32), and 64 bit double precision (FP64) it supports half-precision (FP16), 16 bit bfloats (FP16alt), as well as an 8 bit custom format (FP8). For RI5CY, only support for FP32, FP16, and FP16alt is enabled. The four data paths implement the functions \ac{ADDMUL}, \ac{DIVSQRT}, \ac{COMP}, and \ac{CONV} respectively. These datapaths can be either generated in parallel to support one data format per lane or merged to be multiformat. They can also be disabled completely, if required. For RI5CY, \ac{ADDMUL} and \ac{COMP} are enabled in merged mode to save power and area allowing one FP32 operation or a packed vector of either 2 FP16 or FP16alt, \ac{COMP} is implemented in parallel mode allowing for one FP32 operation or a packed vector of either 2 FP16 or FP16alt, and \ac{DIVSQRT} is disabled outright (as seen in Table \ref{tab:plat/base/fpu}). All pipelines have a depth of 1 as clock requirements are relatively relaxed for smaller \acp{MCU} like RI5CY, so floating point operations can complete within a single cycle. The \ac{FPU} is integrated into the \ac{APU} port of the execution stage.
+The \ac{FPU} is enabled for the experiments in this thesis. RI5CY uses FPnew, a highly configurable open-source multiformat floating point unit \cite{machFPnewOpenSourceMultiformat2021}. FPnew is split into four different data paths, each of them having configurable datapath depth and width, and supports transprecision computing \cite{malossiTransprecisionComputingParadigm2018}. In addition to 32 bit single precision (FP32), and 64 bit double precision (FP64) it supports half-precision (FP16), 16 bit bfloats (FP16alt), as well as an 8 bit custom format (FP8). For RI5CY, only support for FP32, FP16, and FP16alt is enabled. The four data paths implement the functions \ac{ADDMUL}, \ac{DIVSQRT}, \ac{COMP}, and \ac{CONV} respectively. These datapaths can be either generated in parallel to support one data format per lane or merged to be multiformat. They can also be disabled completely, if required. For RI5CY, \ac{ADDMUL} and \ac{COMP} are enabled in merged mode to save power and area allowing one FP32 operation or a packed vector of either 2 FP16 or FP16alt, \ac{COMP} is implemented in parallel mode allowing for one FP32 operation or a packed vector of either 2 FP16 or FP16alt, and \ac{DIVSQRT} is disabled outright (as seen in Table \ref{tab:plat/base/fpu}). All pipelines have a depth of 1 as clock requirements are relatively relaxed for smaller \acp{MCU} like RI5CY, so floating point operations can complete within a single cycle. The \ac{FPU} is integrated into the \ac{APU} port of the execution stage. These details are important for Chapter \ref{ch:arch}, as this configuration means all FPU operations on RI5CY complete within a single cycle and thus only the percentage of FPU instructions has to be measured.
 
 The \ac{FPU} is integrated into RI5CY using the cores \acl{APU} interface.
 
 \begin{table}
     \centering
+    \caption{Configuration of the FPU for RI5CY \cite{machFPnewOpenSourceMultiformat2021}}
     \begin{tabular}{lllll}
         \hline \\[-0.9em]
         \textbf{Format} & \multicolumn{4}{l}{\textbf{Implementation} (number of cycles, number of lanes)}   \\
@@ -54,7 +55,6 @@ The \ac{FPU} is integrated into RI5CY using the cores \acl{APU} interface.
         FP16alt         & merged (1,2)  & disabled (-,-)& parallel (1,2)& merged (1,2)  \\
         \hline
     \end{tabular}
-    \caption{Configuration of the FPU for RI5CY \cite{machFPnewOpenSourceMultiformat2021}}
     \label{tab:plat/base/fpu}
 \end{table}
 

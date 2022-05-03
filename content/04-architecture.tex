@@ -41,7 +41,7 @@ We have decided to split multiplication instructions from other arithmetic instr
 
 A branching instruction is registered when a branching instruction reaches the execution stage and the decode stage marks the instruction as valid. A branch taken is registered when a branching instruction reaches the execution stage, the decode stage marks the instruction as valid, and the execution stage marks a positive branching decision. A jump instruction is recorded when the decode stage encounters a jump instruction and the decode stage marks the instruction as valid. A hardware loop initialization is recorded when the write enable for the iteration counter is raised and the decode stage marks the instruction as valid. 
 
-An \ac{FPU} instruction is recorded when the \ac{APU} enabled signal is raised by the execution stage and the decode stage marks the instruction as valid.
+An \ac{FPU} instruction is recorded when the \ac{APU}'s enable signal is raised by the execution stage and the decode stage marks the instruction as valid.
 
 \subsection{Control Flow Behavior}
     \label{sub:arch/feat/ctrl}
@@ -78,6 +78,7 @@ Events are registered via the Enlynx add-on integrated into the \ac{CSR} unit. I
 
 \begin{table}
     \centering
+    \caption{Memory map for the event counters in Linux}
     \resizebox{\textwidth}{!}{%
     \begin{tabular}{lp{0.087\textwidth}p{0.18\textwidth}p{0.6\textwidth}}
         \hline \\[-0.9em]
@@ -101,7 +102,6 @@ Events are registered via the Enlynx add-on integrated into the \ac{CSR} unit. I
         \texttt{overflow}   & 7.2                   & \texttt{0x4127\_0002}     & Overflow vector \\
         \hline
     \end{tabular}}
-    \caption{Memory map for the event counters in Linux}
     \label{tab:arch/enl/memmap}
 \end{table}
 
@@ -109,6 +109,7 @@ Like the \ac{PC} module, the counter can be enabled and disabled via a write to 
 
 \begin{table}
     \centering
+    \caption{\ac{CSR} layout for the enlynx control register}
     \resizebox{\textwidth}{!}{%
     \begin{tabular}{|*{32}{>{\centering\arraybackslash}p{0.004\linewidth}|}}
         \multicolumn{1}{c}{\tiny{31}} & \multicolumn{28}{c}{} & \multicolumn{1}{c}{\tiny{2}} & \multicolumn{1}{c}{\tiny{1}} & \multicolumn{1}{c}{\tiny{0}} \\
@@ -128,7 +129,6 @@ Like the \ac{PC} module, the counter can be enabled and disabled via a write to 
         2               & W             & \textbf{Counter reset:} Reset all internal counters of the Enlynx add-on. This bit will always return 0 when read. Setting the bit resets the counters once.\\
         \hline
     \end{tabular}
-    \caption{\ac{CSR} layout for the enlynx control register}
     \label{tab:arch/enl/csrlayout}
 \end{table}
 
