@@ -44,6 +44,9 @@
 %% Float barriers
 \usepackage{placeins}
 
+\usepackage[style=alphabetic, backend=biber]{biblatex}
+\addbibresource{bibliography.bib}
+
 \definecolor{tuwblue}{RGB}{00,102,153}
 \usepackage[colorlinks=true,
     linkcolor=black,
@@ -54,6 +57,9 @@
     bookmarksopenlevel=3,
     plainpages=false,
     pdfpagelabels=true]{hyperref}
+
+%% DOI
+\usepackage{doi}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -198,13 +204,14 @@
 \subfile{abbreviations.tex}
 
 % Add a bibliography.
-\bibliographystyle{alpha}
-\bibliography{bibliography}
+%\bibliographystyle{alpha}
+%\bibliography{bibliography}
+\printbibliography
 
 %%%%% APPENDIX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
 \appendix
-\setcounter{page}{57}
+\setcounter{page}{55}
 \subfile{content/A-how_to.tex}
 \subfile{content/B-graphs.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
